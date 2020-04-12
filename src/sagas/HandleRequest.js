@@ -4,12 +4,14 @@ import { push } from "connected-react-router";
 import {
   succeededFetch,
   failedFetch,
+  succeededSearch,
+  failedSearch,
   succeededCreateUser,
   failedCreate,
   succeededDelete,
-  failedDelete
+  failedDelete,
 } from "../actions";
-import { fetchItem, createUser, deleteItem } from "../api/Request";
+import { fetchItem, search, createUser, deleteItem } from "../api/Request";
 
 export function* fetchData() {
   try {
@@ -19,6 +21,37 @@ export function* fetchData() {
     yield put(succeededFetch(response.data));
   } catch (e) {
     yield put(failedFetch(e.message));
+  }
+}
+
+export function* searchData(action) {
+  const { params } = action.formValue;
+
+  // action.formDataのpropsを使用する場合は、
+  // 以下のように、定数としてオブジェクトのプロパティを指定し、分割代入すると良い。
+  // 必要であれば、formDataにapiのメソッド名や処理後の遷移先のパス名
+  // を追加することで、このメソッドを複数の用途で使いまわせそう。
+  const { form } = action.formProp;
+
+  console.log("フォームの送信処理を開始。(HandleRequest.js)");
+
+  // フォームの送信処理を開始する。
+  yield put(startSubmit(form));
+
+  const response = yield call(search, params);
+
+  if (response.data) {
+    yield put(stopSubmit(form));
+
+    console.log("サーバー側との通信成功。(HandleRequest.js)");
+    yield put(succeededSearch(response.data));
+    console.log(response.data);
+
+    yield put(push("/"));
+  } else {
+    console.log("サーバー側との通信エラー。(HandleRequest.js)");
+    yield put(failedSearch("エラー"));
+    // yield put(stopSubmit("login", error));
   }
 }
 

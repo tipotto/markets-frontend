@@ -1,31 +1,43 @@
 const NameParam = {
-  NAME_ATTR: "username",
-  TYPE: "text",
-  LABEL: "ユーザー名"
+  nameAttr: "username",
+  label: "ユーザー名",
+  type: "text",
+  placeholder: "",
 };
 
 const EmailParam = {
-  NAME_ATTR: "email",
-  TYPE: "text",
-  LABEL: "メールアドレス"
+  nameAttr: "email",
+  label: "メールアドレス",
+  type: "text",
+  placeholder: "",
 };
 
 const PasswordParam = {
-  NAME_ATTR: "password",
-  TYPE: "password",
-  LABEL: "パスワード"
+  nameAttr: "password",
+  label: "パスワード",
+  type: "password",
+  placeholder: "",
 };
 
 const TitleParam = {
-  NAME_ATTR: "title",
-  TYPE: "text",
-  LABEL: "タイトル"
+  nameAttr: "title",
+  label: "タイトル",
+  type: "text",
+  placeholder: "",
 };
 
 const DescriptionParam = {
-  NAME_ATTR: "description",
-  TYPE: "text",
-  LABEL: "説明文"
+  nameAttr: "description",
+  label: "説明文",
+  type: "text",
+  placeholder: "",
+};
+
+const KeywordParam = {
+  nameAttr: "keyword",
+  label: "検索ワード",
+  type: "text",
+  placeholder: "日向坂46　渡邉美穂　写真集",
 };
 
 const FormInputParam = {
@@ -33,7 +45,8 @@ const FormInputParam = {
   EMAIL: EmailParam,
   PASSWORD: PasswordParam,
   TITLE: TitleParam,
-  DESCRIPTION: DescriptionParam
+  DESCRIPTION: DescriptionParam,
+  KEYWORD: KeywordParam,
 };
 
 export default FormInputParam;

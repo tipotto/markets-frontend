@@ -1,15 +1,18 @@
 const initState = {
   user: {
-    loginUser: {}
+    loginUser: {},
   },
   item: {
-    items: []
+    items: [],
+  },
+  search: {
+    items: [],
   },
   state: {
     isSigned: false,
     isLoading: false,
-    hasError: false
-  }
+    hasError: false,
+  },
   //   error: null
 };
 

@@ -1,5 +1,5 @@
 import React from "react";
-import Top from "./pages/Top";
+import Top from "./pages/_Top";
 import List from "./pages/ItemList";
 import { BrowserRouter, Route } from "react-router-dom";
 
