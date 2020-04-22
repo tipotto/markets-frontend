@@ -112,7 +112,7 @@ export const search = async (params) => {
   return await axios.post("/api/search/", params).then(
     (res) => {
       console.log("サーバー側からレスポンスを取得。(Request.js)");
-      return { data: res };
+      return { data: res.data };
     },
     (error) => {
       console.log("サーバー側からエラーを取得。(Request.js)");

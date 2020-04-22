@@ -1,20 +1,19 @@
 import { combineReducers } from "redux";
 import { reducer as formReducer } from "redux-form";
 import { connectRouter } from "connected-react-router";
-// import fetchUserData from "./Fetch";
-import userReducer from "./domainState/user";
-import itemReducer from "./domainState/item";
-import searchReducer from "./domainState/search";
-import stateReducer from "./appState/state";
+import userReducer from "./domain/user";
+import itemReducer from "./domain/item";
+import searchReducer from "./domain/search";
+import stateReducer from "./app/state";
 
 const createRootReducer = (history) =>
   combineReducers({
     form: formReducer,
     router: connectRouter(history),
-    userReducer,
-    itemReducer,
-    searchReducer,
-    stateReducer,
+    user: userReducer,
+    item: itemReducer,
+    search: searchReducer,
+    state: stateReducer,
   });
 
 export default createRootReducer;

@@ -5,7 +5,7 @@ class Header extends Component {
   render() {
     return (
       <AppBar
-        title="React Example"
+        title="Market Explorer"
         iconClassNameRight="muidocs-icon-navigation-expand-more"
       />
     );

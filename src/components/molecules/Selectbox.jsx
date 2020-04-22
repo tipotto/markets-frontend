@@ -30,6 +30,9 @@ export default class SelectboxGroup extends Component {
             onFieldChange && onFieldChange(e.target.value);
           }}
         >
+          <option value="" selected>
+            --
+          </option>
           {checkboxes}
         </select>
         {touched && error && <p className="error">{error}</p>}

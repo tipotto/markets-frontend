@@ -85,7 +85,7 @@ ReactDOM.render(
       </Switch>
     </Router>
   </Provider>,
-  // </MuiThemeProvider>
+  // </MuiThemeProvider>,
   document.getElementById("root")
 );
 
