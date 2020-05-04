@@ -1,38 +1,3 @@
-const NameParam = {
-  nameAttr: "username",
-  label: "ユーザー名",
-  type: "text",
-  placeholder: "",
-};
-
-const EmailParam = {
-  nameAttr: "email",
-  label: "メールアドレス",
-  type: "text",
-  placeholder: "",
-};
-
-const PasswordParam = {
-  nameAttr: "password",
-  label: "パスワード",
-  type: "password",
-  placeholder: "",
-};
-
-const TitleParam = {
-  nameAttr: "title",
-  label: "タイトル",
-  type: "text",
-  placeholder: "",
-};
-
-const DescriptionParam = {
-  nameAttr: "description",
-  label: "説明文",
-  type: "text",
-  placeholder: "",
-};
-
 const KeywordParam = {
   nameAttr: "keyword",
   label: "検索ワード",
@@ -41,11 +6,6 @@ const KeywordParam = {
 };
 
 const FormInputParam = {
-  NAME: NameParam,
-  EMAIL: EmailParam,
-  PASSWORD: PasswordParam,
-  TITLE: TitleParam,
-  DESCRIPTION: DescriptionParam,
   KEYWORD: KeywordParam,
 };
 

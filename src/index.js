@@ -1,15 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
-import storeCreator from "./store/";
 import history from "./history";
 import { Provider } from "react-redux";
 import * as serviceWorker from "./serviceWorker";
 import { Route, Switch } from "react-router";
 import { ConnectedRouter as Router } from "connected-react-router";
+import storeCreator from "./store/";
 import Top from "./components/pages/Top";
-import ItemList from "./components/pages/ItemList";
-import ItemForm from "./components/pages/ItemForm";
+import "./index.css";
 // import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
 const store = storeCreator();
@@ -80,8 +78,6 @@ ReactDOM.render(
     <Router history={history}>
       <Switch>
         <Route exact path="/" component={Top} />
-        <Route path="/list/" component={ItemList} />
-        <Route path="/add/" component={ItemForm} />
       </Switch>
     </Router>
   </Provider>,
