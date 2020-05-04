@@ -1,26 +1,35 @@
 import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
 
-class Footer extends React.Component {
-  render() {
-    return (
-      <div className="footer">
-        <div className="footer-inner">
-          <div className="footer-logo">
-            <img
-              src="https://s3-ap-northeast-1.amazonaws.com/progate/shared/images/lesson/react/type_logo.png"
-              alt=""
-            />
-            <p>Learn to code, learn to creative.</p>
-          </div>
-          <ul className="footer-list">
-            <li>会社概要</li>
-            <li>採用</li>
-            <li>お問い合わせ</li>
-          </ul>
-        </div>
-      </div>
-    );
-  }
-}
+const useStyles = makeStyles((theme) => ({
+  appBar: {
+    backgroundColor: "#57C5B6",
+    padding: "20px",
+    flexGrow: 1,
+  },
+  text: {
+    fontSize: "1.0rem",
+    fontWeight: "200",
+    letterSpacing: "0.12em",
+    textAlign: "center",
+    flexGrow: 1,
+  },
+}));
 
-export default Footer;
+const Header = (props) => {
+  const classes = useStyles();
+  return (
+    <AppBar className={classes.appBar} position="static">
+      <Toolbar>
+        <Typography variant="h6" className={classes.text}>
+          ©︎ markets.jp
+        </Typography>
+      </Toolbar>
+    </AppBar>
+  );
+};
+
+export default Header;

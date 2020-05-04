@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import { reduxForm, Field, reset } from "redux-form";
 import PropTypes from "prop-types";
 import { requestSearch } from "../../actions";
-// import { withStyles } from "@material-ui/core";
-import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
+import $ from "jquery";
+import { makeStyles, createStyles, withStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormGroup from "@material-ui/core/FormGroup";
@@ -18,24 +18,36 @@ import Checkbox from "@material-ui/core/Checkbox";
 import Button from "@material-ui/core/Button";
 
 const submit = (value, dispatch, props) => {
-  // const params = new FormData();
-  // params.append("keyword", values.keyword);
-  // params.append("platform", values.platform);
-  // params.append("resultNum", values.resultNum);
-  // params.append("sortIndex", values.sortIndex);
-  // params.append("sortOrder", values.sortOrder);
-
-  // dispatch(requestSearch(params, props));
   dispatch(requestSearch(value, props));
   dispatch(reset(props.form));
-  console.log("value: " + value);
-  // console.log("params: " + params);
+  scrollWindow();
 };
 
-// const renderFromHelper = ({ touched, error }) => {
-//   if (!(touched && error)) return;
-//   return <FormHelperText>{touched && error}</FormHelperText>;
-// };
+const scrollWindow = () => {
+  var speed = 1000;
+  var position = $("#result").offset().top;
+  $("body,html").animate({ scrollTop: position }, speed, "swing");
+};
+
+const GreenCheckbox = withStyles({
+  root: {
+    color: "#57C5B6",
+    "&$checked": {
+      color: "#57C5B6",
+    },
+  },
+  checked: {},
+})((props) => <Checkbox color="default" {...props} />);
+
+const GreenRadio = withStyles({
+  root: {
+    color: "#57C5B6",
+    "&$checked": {
+      color: "#57C5B6",
+    },
+  },
+  checked: {},
+})((props) => <Radio color="default" {...props} />);
 
 const renderTextField = ({
   input,
@@ -44,7 +56,7 @@ const renderTextField = ({
   type = "text",
   required = true,
   rootClass = "",
-  subClass = "",
+  // subClass = "",
 }) => (
   <TextField
     required={required}
@@ -62,32 +74,36 @@ const renderTextField = ({
 );
 
 const renderSelect = ({
-  input: { value, onChange },
+  input,
   label,
   children,
   meta: { touched, invalid, error },
   onFieldChange,
-  required = false,
+  required = true,
   rootClass = "",
-}) => (
-  <TextField
-    required={required}
-    classes={{ root: rootClass }}
-    select
-    label={label}
-    fullWidth
-    variant="outlined"
-    value={value}
-    onChange={(e) => {
-      onChange(e.target.value);
-      onFieldChange && onFieldChange(e.target.value);
-    }}
-    error={touched && invalid}
-    helperText={touched && error}
-  >
-    {children}
-  </TextField>
-);
+}) => {
+  const { value, onChange } = input;
+  return (
+    <TextField
+      required={required}
+      classes={{ root: rootClass }}
+      select
+      label={label}
+      fullWidth
+      variant="outlined"
+      value={value}
+      onChange={(e) => {
+        onChange(e.target.value);
+        onFieldChange && onFieldChange(e.target.value);
+      }}
+      error={touched && invalid}
+      helperText={touched && error}
+      {...input}
+    >
+      {children}
+    </TextField>
+  );
+};
 
 const renderRadio = ({
   input: { value, onChange },
@@ -96,7 +112,7 @@ const renderRadio = ({
   meta: { touched, error },
   onFieldChange,
   row = true,
-  required = false,
+  required = true,
   rootClass = "",
 }) => (
   <FormControl
@@ -123,20 +139,20 @@ const renderRadio = ({
 const renderCheckBox = ({
   input: { value, onChange },
   label,
-  children,
   meta: { touched, error },
+  onFieldChange,
   row = true,
-  required = false,
+  required = true,
   rootClass = "",
 }) => {
-  const arr = [...value];
-
+  var arr = [...value];
   const handleChange = (e) => {
     if (e.target.checked) {
       arr.push(e.target.value);
     } else {
       arr.splice(arr.indexOf(e.target.value), 1);
     }
+    if (arr.length === 0) arr = "";
     return onChange(arr);
   };
 
@@ -148,38 +164,54 @@ const renderCheckBox = ({
       error={!!(touched && error)}
     >
       <FormLabel component="legend">{label}</FormLabel>
-      <FormGroup row={row} value={value} onChange={handleChange}>
-        {children}
+      <FormGroup
+        row={row}
+        value={value}
+        onChange={(e) => {
+          handleChange(e);
+          onFieldChange && onFieldChange(e.target.value);
+        }}
+      >
+        <FormControlLabel
+          value="mercari"
+          control={<GreenCheckbox />}
+          label="メルカリ"
+          checked={arr.includes("mercari") ? true : false}
+        />
+        <FormControlLabel
+          value="rakuten"
+          control={<GreenCheckbox />}
+          label="ラクマ"
+          checked={arr.includes("rakuten") ? true : false}
+        />
+        <FormControlLabel
+          value="paypay"
+          control={<GreenCheckbox />}
+          label="PayPayフリマ"
+          checked={arr.includes("paypay") ? true : false}
+        />
       </FormGroup>
       {touched && error && <FormHelperText>{error}</FormHelperText>}
     </FormControl>
   );
 };
 
-// const styles = {
-//   formControl: {
-//     marginTop: 30,
-//     marginBottom: 30,
-//     display: "block",
-//   },
-//   select: {},
-// };
-
 const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
       width: "40%",
-      // marginRight: "auto",
-      // marginLeft: "30px",
     },
     items: {
       marginTop: 30,
       marginBottom: 30,
       display: "block",
     },
-    // textField: {
-    //   width: "50px",
-    // },
+    button: {
+      backgroundColor: "#57C5B6",
+      "&:hover": {
+        backgroundColor: "#57C5B6",
+      },
+    },
   })
 );
 
@@ -187,16 +219,12 @@ const Form = (props) => {
   const {
     handleSubmit,
     submitting,
-    // submitSucceeded,
-    pristine,
-    reset,
-    error,
+    invalid,
+    // pristine,
     // classes,
   } = props;
 
   const classes = useStyles();
-
-  console.log(props);
 
   return (
     <form
@@ -218,18 +246,7 @@ const Form = (props) => {
         component={renderCheckBox}
         rootClass={classes.items}
         required
-      >
-        <FormControlLabel
-          value="mercari"
-          control={<Checkbox />}
-          label="メルカリ"
-        />
-        <FormControlLabel
-          value="rakuten"
-          control={<Checkbox />}
-          label="ラクマ"
-        />
-      </Field>
+      />
       <Field
         name="resultNum"
         label="検索結果の表示数"
@@ -261,38 +278,20 @@ const Form = (props) => {
         rootClass={classes.items}
         required
       >
-        <FormControlLabel value="ASC" control={<Radio />} label="昇順" />
-        <FormControlLabel value="DESC" control={<Radio />} label="降順" />
+        <FormControlLabel value="ASC" control={<GreenRadio />} label="昇順" />
+        <FormControlLabel value="DESC" control={<GreenRadio />} label="降順" />
       </Field>
       <Button
+        className={classes.button}
         type="submit"
         size="medium"
         variant="contained"
         color="secondary"
         fullWidth
-        disabled={pristine || submitting}
+        disabled={invalid || submitting}
       >
         送信する
       </Button>
-
-      {/* {error && (
-        <div>
-          <strong>{error}</strong>
-        </div>
-      )}
-      {submitting && (
-        <div>
-          <strong>submitting</strong>
-        </div>
-      )} */}
-      {/* <div>
-        <button type="submit" disabled={pristine || submitting}>
-          Submit
-        </button>
-        <button type="button" disabled={pristine || submitting} onClick={reset}>
-          Clear Values
-        </button>
-      </div> */}
     </form>
   );
 };

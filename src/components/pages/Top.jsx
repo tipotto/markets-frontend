@@ -1,7 +1,12 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import { withStyles, makeStyles, createStyles } from "@material-ui/core/styles";
+import {
+  MuiThemeProvider,
+  withStyles,
+  makeStyles,
+  createStyles,
+} from "@material-ui/core/styles";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import clsx from "clsx";
 import { commonStyle } from "../../style/common";
 import Header from "../organisms/Header";
@@ -22,17 +27,27 @@ const useStyles = makeStyles((theme) =>
       display: "flex",
       flexWrap: "wrap",
     },
-    h1: {
+    loading: {
+      width: "100%",
+      textAlign: "center",
+      paddingTop: "30px",
+    },
+    loadingText: {
+      fontSize: "18px",
+      marginTop: "23px",
+    },
+    serviceName: {
       fontFamily: "Avenir Next",
       fontSize: "56px",
       fontWeight: 400,
       color: "#0bc8b6",
+      letterSpacing: "0.035em",
     },
-    h2: {
+    description: {
       fontSize: "24px",
       marginTop: "8px",
     },
-    h3: {
+    sectionTitle: {
       fontSize: "20px",
       borderBottom: "1px solid #e1e6ec",
       lineHeight: "64px",
@@ -53,10 +68,21 @@ const Main = (props) => {
 
   let content;
   if (loading) {
-    content = <div className="contact-submit-message">検索しています...</div>;
+    content = (
+      <div className={classes.loading}>
+        <CircularProgress color="secondary" />
+        <div className={clsx(classes.loadingText, classes.common)}>
+          ただいま検索しています...
+        </div>
+      </div>
+    );
   } else if (!loading && items.length === 0) {
     content = (
-      <div className="contact-submit-message">検索結果はありません。</div>
+      <div className={classes.loading}>
+        <div className={clsx(classes.loadingText, classes.common)}>
+          検索結果はありません。
+        </div>
+      </div>
     );
   } else {
     content = items.map((item) => (
@@ -77,17 +103,19 @@ const Main = (props) => {
         <div className={common.wrapper}>
           <div className={common.main}>
             <div>
-              <h1 className={classes.h1}>Market Explorer</h1>
-              <h2 className={clsx(classes.h2, classes.common)}>
-                フリマを一括検索することができます。
+              <h1 className={classes.serviceName}>markets.jp</h1>
+              <h2 className={clsx(classes.description, classes.common)}>
+                フリマサイトを一括検索することができます。
               </h2>
             </div>
             <div className={classes.formContainer}>
-              <h3 className={clsx(classes.h3, classes.common)}>検索フォーム</h3>
+              <h3 className={clsx(classes.sectionTitle, classes.common)}>
+                検索フォーム
+              </h3>
               <FormContainer form={FormData.SEARCH} />
             </div>
-            <div className={classes.resultContainer}>
-              <h3 className={clsx(classes.h3, classes.common)}>
+            <div id="result" className={classes.resultContainer}>
+              <h3 className={clsx(classes.sectionTitle, classes.common)}>
                 あなたの検索結果
               </h3>
               <div className={classes.results}>{content}</div>

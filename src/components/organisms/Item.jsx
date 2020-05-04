@@ -36,6 +36,16 @@ const Item = (props) => {
   const classes = useStyles();
   const { title, price, image, detail, platform } = props;
 
+  const moldTitle = (title) => {
+    const MAX_LENGTH = 30;
+    if (title.length <= MAX_LENGTH) return title;
+    return title.substr(0, MAX_LENGTH) + "...";
+  };
+
+  const moldPrice = (price) => {
+    return String(price).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+  };
+
   return (
     <a href={detail} target="_blank" rel="noopener noreferrer">
       <Card className={classes.root}>
@@ -45,7 +55,7 @@ const Item = (props) => {
               {platform}
             </Avatar>
           }
-          title={title}
+          title={moldTitle(title)}
         />
         <CardMedia
           className={classes.media}
@@ -59,7 +69,7 @@ const Item = (props) => {
             color="textSecondary"
             component="p"
           >
-            ¥{price}
+            ¥{moldPrice(price)}
           </Typography>
         </CardContent>
       </Card>
