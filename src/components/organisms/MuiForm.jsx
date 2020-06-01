@@ -199,10 +199,12 @@ const renderCheckBox = ({
 const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
-      width: "40%",
+      [theme.breakpoints.up("md")]: {
+        width: "40%",
+      },
     },
     items: {
-      marginTop: 30,
+      // marginTop: 30,
       marginBottom: 30,
       display: "block",
     },

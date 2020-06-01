@@ -1,11 +1,6 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import {
-  MuiThemeProvider,
-  withStyles,
-  makeStyles,
-  createStyles,
-} from "@material-ui/core/styles";
+import { useDispatch, useSelector } from "react-redux";
+import { withStyles, makeStyles, createStyles } from "@material-ui/core/styles";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import clsx from "clsx";
 import { commonStyle } from "../../style/common";
@@ -14,14 +9,24 @@ import Footer from "../organisms/Footer";
 import Item from "../organisms/Item";
 import FormContainer from "../organisms/MuiForm";
 import FormData from "../../constants/FormData";
+import InfiniteScroll from "react-infinite-scroller";
+import { loadItems } from "../../actions";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
+    main: {
+      maxWidth: "1040px",
+      margin: "0 auto",
+      padding: "96px 0",
+      [theme.breakpoints.down("sm")]: {
+        maxWidth: "700px",
+      },
+    },
     formContainer: {
       marginTop: "96px",
     },
     resultContainer: {
-      marginTop: "96px",
+      margin: "96px 0 80px",
     },
     results: {
       display: "flex",
@@ -42,10 +47,16 @@ const useStyles = makeStyles((theme) =>
       fontWeight: 400,
       color: "#0bc8b6",
       letterSpacing: "0.035em",
+      [theme.breakpoints.down("sm")]: {
+        fontSize: "80px",
+      },
     },
     description: {
       fontSize: "24px",
       marginTop: "8px",
+      [theme.breakpoints.down("sm")]: {
+        fontSize: "30px",
+      },
     },
     sectionTitle: {
       fontSize: "20px",
@@ -63,8 +74,28 @@ const useStyles = makeStyles((theme) =>
 const Main = (props) => {
   const common = props.classes;
   const classes = useStyles();
-  const items = useSelector((state) => state.search.items);
+  const dispatch = useDispatch();
+  const fetchItems = useSelector((state) => state.search.items);
+  const loadedItems = useSelector((state) => state.search.loaded);
   const loading = useSelector((state) => state.state.isLoading);
+  // const fetchItemNum = useSelector((state) => state.search.fetchItemNum);
+  // const loadItemNum = useSelector((state) => state.search.loadItemNum);
+
+  const _renderItems = (items) => {
+    return items.map((item) => (
+      <Item
+        title={item.title}
+        price={item.price}
+        image={item.imageUrl}
+        detail={item.detailUrl}
+        platform={item.platform}
+      />
+    ));
+  };
+
+  const _loadMore = () => {
+    dispatch(loadItems(fetchItems));
+  };
 
   let content;
   if (loading) {
@@ -76,7 +107,7 @@ const Main = (props) => {
         </div>
       </div>
     );
-  } else if (!loading && items.length === 0) {
+  } else if (!loading && loadedItems.length === 0) {
     content = (
       <div className={classes.loading}>
         <div className={clsx(classes.loadingText, classes.common)}>
@@ -85,45 +116,50 @@ const Main = (props) => {
       </div>
     );
   } else {
-    content = items.map((item) => (
-      <Item
-        title={item.title}
-        price={item.price}
-        image={item.imageUrl}
-        detail={item.detailUrl}
-        platform={item.platform}
-      />
-    ));
+    content = (
+      <InfiniteScroll
+        pageStart={0}
+        loadMore={_loadMore}
+        hasMore={fetchItems.length > 0 ? true : false}
+        loader={
+          <div className="loader" key={0}>
+            Loading ...
+          </div>
+        }
+        initialLoad={false}
+        // useWindow={false}
+      >
+        {_renderItems(loadedItems)}
+      </InfiniteScroll>
+    );
   }
 
   return (
     <React.Fragment>
-      <MuiThemeProvider>
-        <Header />
-        <div className={common.wrapper}>
-          <div className={common.main}>
-            <div>
-              <h1 className={classes.serviceName}>markets.jp</h1>
-              <h2 className={clsx(classes.description, classes.common)}>
-                フリマサイトを一括検索することができます。
-              </h2>
-            </div>
-            <div className={classes.formContainer}>
-              <h3 className={clsx(classes.sectionTitle, classes.common)}>
-                検索フォーム
-              </h3>
-              <FormContainer form={FormData.SEARCH} />
-            </div>
-            <div id="result" className={classes.resultContainer}>
-              <h3 className={clsx(classes.sectionTitle, classes.common)}>
-                あなたの検索結果
-              </h3>
-              <div className={classes.results}>{content}</div>
-            </div>
+      <Header />
+      <div className={common.wrapper}>
+        <div className={classes.main}>
+          <div>
+            <h1 className={classes.serviceName}>markets.jp</h1>
+            <h2 className={clsx(classes.description, classes.common)}>
+              フリマサイトを一括検索することができます。
+            </h2>
+          </div>
+          <div className={classes.formContainer}>
+            <h3 className={clsx(classes.sectionTitle, classes.common)}>
+              検索フォーム
+            </h3>
+            <FormContainer form={FormData.SEARCH} />
+          </div>
+          <div id="result" className={classes.resultContainer}>
+            <h3 className={clsx(classes.sectionTitle, classes.common)}>
+              あなたの検索結果
+            </h3>
+            <div className={classes.results}>{content}</div>
           </div>
         </div>
-        <Footer />
-      </MuiThemeProvider>
+      </div>
+      <Footer />
     </React.Fragment>
   );
 };

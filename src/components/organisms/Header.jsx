@@ -8,11 +8,22 @@ const useStyles = makeStyles((theme) => ({
   appBar: {
     backgroundColor: "#57C5B6",
     flexGrow: 1,
+    [theme.breakpoints.down("sm")]: {
+      height: "100px",
+    },
+  },
+  toolBar: {
+    [theme.breakpoints.down("sm")]: {
+      height: "100%",
+    },
   },
   title: {
     fontWeight: "300",
     letterSpacing: "0.1em",
     flexGrow: 1,
+    [theme.breakpoints.down("sm")]: {
+      fontSize: 30,
+    },
   },
 }));
 
@@ -20,7 +31,7 @@ const Header = (props) => {
   const classes = useStyles();
   return (
     <AppBar className={classes.appBar} position="static">
-      <Toolbar>
+      <Toolbar className={classes.toolBar}>
         <Typography variant="h6" className={classes.title}>
           markets.jp
         </Typography>

@@ -1,12 +1,14 @@
 export const REQUEST_SEARCH = "REQUEST_SEARCH";
 export const SUCCEEDED_SEARCH = "SUCCEEDED_SEARCH";
 export const FAILED_SEARCH = "FAILED_SEARCH";
+export const LOAD_ITEMS = "LOAD_ITEMS";
+export const LOAD_ITEM_NUMBER = 15;
 
-// export const ActionType = {
-//   REQUEST_SEARCH: "REQUEST_SEARCH",
-//   SUCCEEDED_SEARCH: "SUCCEEDED_SEARCH",
-//   FAILED_SEARCH: "FAILED_SEARCH",
-// };
+export const _spliceArr = (array) => {
+  var itemsArr = array;
+  var loadedArr = itemsArr.splice(0, LOAD_ITEM_NUMBER);
+  return { items: itemsArr, loaded: loadedArr };
+};
 
 export const requestSearch = (params, props) => ({
   type: REQUEST_SEARCH,
@@ -18,6 +20,14 @@ export const requestSearch = (params, props) => ({
 });
 export const succeededSearch = (resData) => ({
   type: SUCCEEDED_SEARCH,
-  resData,
+  resData: _spliceArr(resData),
 });
-export const failedSearch = (message) => ({ type: FAILED_SEARCH, message });
+export const failedSearch = (message) => ({
+  type: FAILED_SEARCH,
+  message,
+});
+
+export const loadItems = (params) => ({
+  type: LOAD_ITEMS,
+  moldedData: _spliceArr(params),
+});
