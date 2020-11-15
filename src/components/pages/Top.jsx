@@ -1,78 +1,78 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { withStyles, makeStyles, createStyles } from "@material-ui/core/styles";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import clsx from "clsx";
-import { commonStyle } from "../../style/common";
-import Header from "../organisms/Header";
-import Footer from "../organisms/Footer";
-import Item from "../organisms/Item";
-import FormContainer from "../organisms/MuiForm";
-import FormData from "../../constants/FormData";
-import InfiniteScroll from "react-infinite-scroller";
-import { loadItems } from "../../actions";
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { withStyles, makeStyles, createStyles } from '@material-ui/core/styles';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import clsx from 'clsx';
+import InfiniteScroll from 'react-infinite-scroller';
+import commonStyle from '../../style/common';
+import Header from '../organisms/Header';
+import Footer from '../organisms/Footer';
+import Item from '../organisms/Item';
+import FormContainer from '../organisms/MuiForm';
+import FormData from '../../constants/FormData';
+import { loadItems } from '../../actions';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
     main: {
-      maxWidth: "1040px",
-      margin: "0 auto",
-      padding: "96px 0",
-      [theme.breakpoints.down("sm")]: {
-        maxWidth: "700px",
+      maxWidth: '1040px',
+      margin: '0 auto',
+      padding: '96px 0',
+      [theme.breakpoints.down('sm')]: {
+        maxWidth: '700px',
       },
     },
     formContainer: {
-      marginTop: "96px",
+      marginTop: '96px',
     },
     resultContainer: {
-      margin: "96px 0 80px",
+      margin: '96px 0 80px',
     },
     results: {
-      display: "flex",
-      flexWrap: "wrap",
+      display: 'flex',
+      flexWrap: 'wrap',
     },
     loading: {
-      width: "100%",
-      textAlign: "center",
-      paddingTop: "30px",
+      width: '100%',
+      textAlign: 'center',
+      paddingTop: '30px',
     },
     loadingText: {
-      fontSize: "18px",
-      marginTop: "23px",
+      fontSize: '18px',
+      marginTop: '23px',
     },
     serviceName: {
-      fontFamily: "Avenir Next",
-      fontSize: "56px",
+      fontFamily: 'Avenir Next',
+      fontSize: '56px',
       fontWeight: 400,
-      color: "#0bc8b6",
-      letterSpacing: "0.035em",
-      [theme.breakpoints.down("sm")]: {
-        fontSize: "80px",
+      color: '#0bc8b6',
+      letterSpacing: '0.035em',
+      [theme.breakpoints.down('sm')]: {
+        fontSize: '80px',
       },
     },
     description: {
-      fontSize: "24px",
-      marginTop: "8px",
-      [theme.breakpoints.down("sm")]: {
-        fontSize: "30px",
+      fontSize: '24px',
+      marginTop: '8px',
+      [theme.breakpoints.down('sm')]: {
+        fontSize: '30px',
       },
     },
     sectionTitle: {
-      fontSize: "20px",
-      borderBottom: "1px solid #e1e6ec",
-      lineHeight: "64px",
+      fontSize: '20px',
+      borderBottom: '1px solid #e1e6ec',
+      lineHeight: '64px',
     },
     common: {
-      fontFamily: "Lato",
-      color: "#2b546a",
+      fontFamily: 'Lato',
+      color: '#2b546a',
       fontWeight: 300,
     },
   })
 );
 
 const Main = (props) => {
-  const common = props.classes;
+  const { wrapper } = props.classes;
   const classes = useStyles();
   const dispatch = useDispatch();
   const fetchItems = useSelector((state) => state.search.items);
@@ -84,6 +84,7 @@ const Main = (props) => {
   const _renderItems = (items) => {
     return items.map((item) => (
       <Item
+        key={item.id}
         title={item.title}
         price={item.price}
         image={item.imageUrl}
@@ -120,7 +121,7 @@ const Main = (props) => {
       <InfiniteScroll
         pageStart={0}
         loadMore={_loadMore}
-        hasMore={fetchItems.length > 0 ? true : false}
+        hasMore={fetchItems.length > 0}
         loader={
           <div className="loader" key={0}>
             Loading ...
@@ -135,9 +136,9 @@ const Main = (props) => {
   }
 
   return (
-    <React.Fragment>
+    <>
       <Header />
-      <div className={common.wrapper}>
+      <div className={wrapper}>
         <div className={classes.main}>
           <div>
             <h1 className={classes.serviceName}>markets.jp</h1>
@@ -160,7 +161,7 @@ const Main = (props) => {
         </div>
       </div>
       <Footer />
-    </React.Fragment>
+    </>
   );
 };
 

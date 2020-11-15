@@ -1,21 +1,27 @@
-import React from "react";
-import { connect } from "react-redux";
-import { reduxForm, Field, reset } from "redux-form";
-import PropTypes from "prop-types";
-import { requestSearch } from "../../actions";
-import $ from "jquery";
-import { makeStyles, createStyles, withStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormGroup from "@material-ui/core/FormGroup";
-import FormLabel from "@material-ui/core/FormLabel";
-import FormControl from "@material-ui/core/FormControl";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import Radio from "@material-ui/core/Radio";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import Checkbox from "@material-ui/core/Checkbox";
-import Button from "@material-ui/core/Button";
+import React from 'react';
+import { connect } from 'react-redux';
+import { reduxForm, Field, reset } from 'redux-form';
+// import PropTypes from "prop-types";
+import $ from 'jquery';
+import { makeStyles, createStyles, withStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormLabel from '@material-ui/core/FormLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import Checkbox from '@material-ui/core/Checkbox';
+import Button from '@material-ui/core/Button';
+import { requestSearch } from '../../actions';
+
+const scrollWindow = () => {
+  const speed = 1000;
+  const position = $('#result').offset().top;
+  $('body,html').animate({ scrollTop: position }, speed, 'swing');
+};
 
 const submit = (value, dispatch, props) => {
   dispatch(requestSearch(value, props));
@@ -23,17 +29,11 @@ const submit = (value, dispatch, props) => {
   scrollWindow();
 };
 
-const scrollWindow = () => {
-  var speed = 1000;
-  var position = $("#result").offset().top;
-  $("body,html").animate({ scrollTop: position }, speed, "swing");
-};
-
 const GreenCheckbox = withStyles({
   root: {
-    color: "#57C5B6",
-    "&$checked": {
-      color: "#57C5B6",
+    color: '#57C5B6',
+    '&$checked': {
+      color: '#57C5B6',
     },
   },
   checked: {},
@@ -41,9 +41,9 @@ const GreenCheckbox = withStyles({
 
 const GreenRadio = withStyles({
   root: {
-    color: "#57C5B6",
-    "&$checked": {
-      color: "#57C5B6",
+    color: '#57C5B6',
+    '&$checked': {
+      color: '#57C5B6',
     },
   },
   checked: {},
@@ -53,9 +53,9 @@ const renderTextField = ({
   input,
   label,
   meta: { touched, invalid, error },
-  type = "text",
+  type = 'text',
   required = true,
-  rootClass = "",
+  rootClass = '',
   // subClass = "",
 }) => (
   <TextField
@@ -78,9 +78,8 @@ const renderSelect = ({
   label,
   children,
   meta: { touched, invalid, error },
-  onFieldChange,
   required = true,
-  rootClass = "",
+  rootClass = '',
 }) => {
   const { value, onChange } = input;
   return (
@@ -94,7 +93,6 @@ const renderSelect = ({
       value={value}
       onChange={(e) => {
         onChange(e.target.value);
-        onFieldChange && onFieldChange(e.target.value);
       }}
       error={touched && invalid}
       helperText={touched && error}
@@ -110,10 +108,9 @@ const renderRadio = ({
   label,
   children,
   meta: { touched, error },
-  onFieldChange,
   row = true,
   required = true,
-  rootClass = "",
+  rootClass = '',
 }) => (
   <FormControl
     classes={{ root: rootClass }}
@@ -127,7 +124,6 @@ const renderRadio = ({
       value={value}
       onChange={(e) => {
         onChange(e.target.value);
-        onFieldChange && onFieldChange(e.target.value);
       }}
     >
       {children}
@@ -140,19 +136,18 @@ const renderCheckBox = ({
   input: { value, onChange },
   label,
   meta: { touched, error },
-  onFieldChange,
   row = true,
   required = true,
-  rootClass = "",
+  rootClass = '',
 }) => {
-  var arr = [...value];
+  let arr = [...value];
   const handleChange = (e) => {
     if (e.target.checked) {
       arr.push(e.target.value);
     } else {
       arr.splice(arr.indexOf(e.target.value), 1);
     }
-    if (arr.length === 0) arr = "";
+    if (arr.length === 0) arr = '';
     return onChange(arr);
   };
 
@@ -169,26 +164,25 @@ const renderCheckBox = ({
         value={value}
         onChange={(e) => {
           handleChange(e);
-          onFieldChange && onFieldChange(e.target.value);
         }}
       >
         <FormControlLabel
           value="mercari"
           control={<GreenCheckbox />}
           label="メルカリ"
-          checked={arr.includes("mercari") ? true : false}
+          checked={!!arr.includes('mercari')}
         />
         <FormControlLabel
           value="rakuten"
           control={<GreenCheckbox />}
           label="ラクマ"
-          checked={arr.includes("rakuten") ? true : false}
+          checked={!!arr.includes('rakuten')}
         />
         <FormControlLabel
           value="paypay"
           control={<GreenCheckbox />}
           label="PayPayフリマ"
-          checked={arr.includes("paypay") ? true : false}
+          checked={!!arr.includes('paypay')}
         />
       </FormGroup>
       {touched && error && <FormHelperText>{error}</FormHelperText>}
@@ -199,19 +193,19 @@ const renderCheckBox = ({
 const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
-      [theme.breakpoints.up("md")]: {
-        width: "40%",
+      [theme.breakpoints.up('md')]: {
+        width: '40%',
       },
     },
     items: {
       // marginTop: 30,
       marginBottom: 30,
-      display: "block",
+      display: 'block',
     },
     button: {
-      backgroundColor: "#57C5B6",
-      "&:hover": {
-        backgroundColor: "#57C5B6",
+      backgroundColor: '#57C5B6',
+      '&:hover': {
+        backgroundColor: '#57C5B6',
       },
     },
   })
@@ -297,13 +291,13 @@ const Form = (props) => {
     </form>
   );
 };
-Form.propTypes = {
-  handleSubmit: PropTypes.func.isRequired,
-  submitting: PropTypes.bool.isRequired,
-  pristine: PropTypes.bool.isRequired,
-  reset: PropTypes.func.isRequired,
-  error: PropTypes.string,
-};
+// Form.propTypes = {
+//   handleSubmit: PropTypes.func.isRequired,
+//   submitting: PropTypes.bool.isRequired,
+//   pristine: PropTypes.bool.isRequired,
+//   reset: PropTypes.func.isRequired,
+//   error: PropTypes.string,
+// };
 
 const formOption = reduxForm({
   destroyOnUnmount: false,
@@ -311,7 +305,7 @@ const formOption = reduxForm({
 })(Form);
 
 const formParam = (_, { form }) => ({
-  form: form.name || "leetName",
+  form: form.name || 'leetName',
   validate: form.validater,
   formData: form,
 });

@@ -1,5 +1,5 @@
-import initState from "../initState";
-import { REQUEST_SEARCH, SUCCEEDED_SEARCH, FAILED_SEARCH } from "../../actions";
+import initState from '../initState';
+import { REQUEST_SEARCH, SUCCEEDED_SEARCH, FAILED_SEARCH } from '../../actions';
 
 const stateReducer = (state = initState.state, action) => {
   switch (action.type) {

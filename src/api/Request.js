@@ -1,7 +1,7 @@
-import axios from "axios";
+import axios from 'axios';
 
-export const search = async (params) => {
-  return await axios.post("/api/search/", params).then(
+const search = async (params) => {
+  return axios.post('/api/search/', params).then(
     (res) => {
       return { data: res.data };
     },
@@ -10,3 +10,5 @@ export const search = async (params) => {
     }
   );
 };
+
+export default search;

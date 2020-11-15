@@ -1,33 +1,33 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
-    backgroundColor: "#57C5B6",
+    backgroundColor: '#57C5B6',
     flexGrow: 1,
-    [theme.breakpoints.down("sm")]: {
-      height: "100px",
+    [theme.breakpoints.down('sm')]: {
+      height: '100px',
     },
   },
   toolBar: {
-    [theme.breakpoints.down("sm")]: {
-      height: "100%",
+    [theme.breakpoints.down('sm')]: {
+      height: '100%',
     },
   },
   title: {
-    fontWeight: "300",
-    letterSpacing: "0.1em",
+    fontWeight: '300',
+    letterSpacing: '0.1em',
     flexGrow: 1,
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: 30,
     },
   },
 }));
 
-const Header = (props) => {
+const Header = () => {
   const classes = useStyles();
   return (
     <AppBar className={classes.appBar} position="static">

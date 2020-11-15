@@ -1,5 +1,5 @@
 const FormName = {
-  SEARCH: "Search",
+  SEARCH: 'Search',
 };
 
 export default FormName;

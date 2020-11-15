@@ -1,8 +1,8 @@
-import { combineReducers } from "redux";
-import { reducer as formReducer } from "redux-form";
-import { connectRouter } from "connected-react-router";
-import searchReducer from "./domain/search";
-import stateReducer from "./app/state";
+import { combineReducers } from 'redux';
+import { reducer as formReducer } from 'redux-form';
+import { connectRouter } from 'connected-react-router';
+import searchReducer from './domain/search';
+import stateReducer from './app/state';
 
 const createRootReducer = (history) =>
   combineReducers({

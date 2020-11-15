@@ -1,10 +1,10 @@
-import { put, call } from "redux-saga/effects";
-import { startSubmit, stopSubmit } from "redux-form";
-import { push } from "connected-react-router";
-import { succeededSearch, failedSearch } from "../actions";
-import { search } from "../api/Request";
+import { put, call } from 'redux-saga/effects';
+import { startSubmit, stopSubmit } from 'redux-form';
+import { push } from 'connected-react-router';
+import { succeededSearch, failedSearch } from '../actions';
+import search from '../api/Request';
 
-export function* searchData(action) {
+function* searchData(action) {
   const { params } = action.formValue;
 
   // action.formDataのpropsを使用する場合は、
@@ -21,8 +21,10 @@ export function* searchData(action) {
   if (res.data) {
     yield put(stopSubmit(form));
     yield put(succeededSearch(res.data));
-    yield put(push("/"));
+    yield put(push('/'));
   } else {
-    yield put(failedSearch("エラー"));
+    yield put(failedSearch('エラー'));
   }
 }
+
+export default searchData;

@@ -1,6 +1,6 @@
-import { fork, takeEvery } from "redux-saga/effects";
-import { REQUEST_SEARCH } from "../actions";
-import { searchData } from "./HandleRequest";
+import { fork, takeEvery } from 'redux-saga/effects';
+import { REQUEST_SEARCH } from '../actions';
+import searchData from './HandleRequest';
 
 function* handleRequest() {
   yield takeEvery(REQUEST_SEARCH, searchData);

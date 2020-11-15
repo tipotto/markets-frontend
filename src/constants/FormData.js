@@ -1,7 +1,7 @@
-import searchValidater from "../components/validater/Search";
-import FormName from "./FormName";
-import FormInputParam from "./FormInputParam";
-import FormItemParam from "./FormItemParam";
+import searchValidater from '../components/validater/Search';
+import FormName from './FormName';
+import FormInputParam from './FormInputParam';
+import FormItemParam from './FormItemParam';
 
 const { SEARCH } = FormName;
 const { KEYWORD } = FormInputParam;

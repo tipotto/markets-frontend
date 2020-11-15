@@ -1,5 +1,7 @@
-export const commonStyle = {
+const commonStyle = {
   wrapper: {
-    backgroundColor: "#f4fafa",
+    backgroundColor: '#f4fafa',
   },
 };
+
+export default commonStyle;

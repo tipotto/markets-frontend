@@ -1,4 +1,4 @@
-import Validator from "../../constants/Validator";
+import Validator from '../../constants/Validator';
 
 const searchValidater = (values) => {
   const errors = {};

@@ -1,5 +1,5 @@
-import initState from "../initState";
-import { SUCCEEDED_SEARCH, LOAD_ITEMS, LOAD_ITEM_NUMBER } from "../../actions";
+import initState from '../initState';
+import { SUCCEEDED_SEARCH, LOAD_ITEMS, LOAD_ITEM_NUMBER } from '../../actions';
 
 const searchReducer = (
   state = initState.search,
