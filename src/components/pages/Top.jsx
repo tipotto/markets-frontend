@@ -8,7 +8,7 @@ import commonStyle from '../../style/common';
 import Header from '../organisms/Header';
 import Footer from '../organisms/Footer';
 import Item from '../organisms/Item';
-import FormContainer from '../organisms/MuiForm';
+import Form from '../organisms/Form';
 import FormData from '../../constants/FormData';
 import { loadItems } from '../../actions';
 
@@ -82,9 +82,10 @@ const Main = (props) => {
   // const loadItemNum = useSelector((state) => state.search.loadItemNum);
 
   const _renderItems = (items) => {
-    return items.map((item) => (
+    return items.map((item, index) => (
       <Item
-        key={item.id}
+        // eslint-disable-next-line react/no-array-index-key
+        key={index}
         title={item.title}
         price={item.price}
         image={item.imageUrl}
@@ -150,7 +151,7 @@ const Main = (props) => {
             <h3 className={clsx(classes.sectionTitle, classes.common)}>
               検索フォーム
             </h3>
-            <FormContainer form={FormData.SEARCH} />
+            <Form form={FormData.SEARCH} />
           </div>
           <div id="result" className={classes.resultContainer}>
             <h3 className={clsx(classes.sectionTitle, classes.common)}>

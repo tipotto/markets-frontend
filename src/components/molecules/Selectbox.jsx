@@ -1,46 +1,32 @@
-import React, { Component } from "react";
-import { Field } from "redux-form";
-import PropTypes from "prop-types";
+import React from 'react';
+import TextField from '@material-ui/core/TextField';
 
-export default class SelectboxGroup extends Component {
-  static propTypes = {
-    options: PropTypes.arrayOf(
-      PropTypes.shape({
-        label: PropTypes.string.isRequired,
-        value: PropTypes.string.isRequired,
-      })
-    ).isRequired,
-  };
+const Selectbox = ({
+  input,
+  label,
+  children,
+  meta: { touched, invalid, error },
+  required,
+  rootClass = '',
+}) => {
+  const { value } = input;
 
-  field = ({ input, meta, options, label, onFieldChange }) => {
-    const { name, onChange, onBlur, onFocus } = input;
-    const { touched, error } = meta;
+  return (
+    <TextField
+      required={required}
+      classes={{ root: rootClass }}
+      select
+      label={label}
+      fullWidth
+      variant="outlined"
+      value={value}
+      error={touched && invalid}
+      helperText={touched && error}
+      {...input}
+    >
+      {children}
+    </TextField>
+  );
+};
 
-    const checkboxes = options.map(({ label, value }, index) => {
-      return <option value={value}>{label}</option>;
-    });
-
-    return (
-      <div>
-        <p>{label}</p>
-        <select
-          name={name}
-          onChange={(e) => {
-            onChange(e.target.value);
-            onFieldChange && onFieldChange(e.target.value);
-          }}
-        >
-          <option value="" selected>
-            --
-          </option>
-          {checkboxes}
-        </select>
-        {touched && error && <p className="error">{error}</p>}
-      </div>
-    );
-  };
-
-  render() {
-    return <Field {...this.props} component={this.field} />;
-  }
-}
+export default Selectbox;
