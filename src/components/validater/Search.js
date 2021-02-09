@@ -1,30 +1,19 @@
-import Validator from '../../constants/Validator';
+import ErrorMessage from '../../constants/ErrorMessage';
 
 const searchValidater = (values) => {
   const errors = {};
-  const {
-    KEYWORD_REQUIRED,
-    PLATFORM_REQUIRED,
-    RESULT_NUM_REQUIRED,
-    SORT_INDEX_REQUIRED,
-    SORT_ORDER_REQUIRED,
-  } = Validator;
+  const { KEYWORD_REQUIRED, PLATFORMS_REQUIRED } = ErrorMessage;
 
-  if (!values.keyword) {
+  const { keyword, platforms } = values;
+
+  if (!keyword) {
     errors.keyword = KEYWORD_REQUIRED;
   }
-  if (!values.platform) {
-    errors.platform = PLATFORM_REQUIRED;
+
+  if (!platforms) {
+    errors.platforms = PLATFORMS_REQUIRED;
   }
-  if (!values.resultNum) {
-    errors.resultNum = RESULT_NUM_REQUIRED;
-  }
-  if (!values.sortIndex) {
-    errors.sortIndex = SORT_INDEX_REQUIRED;
-  }
-  if (!values.sortOrder) {
-    errors.sortOrder = SORT_ORDER_REQUIRED;
-  }
+
   return errors;
 };
 

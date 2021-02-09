@@ -38,6 +38,7 @@ const Item = (props) => {
 
   const moldTitle = () => {
     const MAX_LENGTH = 30;
+    if (!title) return '';
     if (title.length <= MAX_LENGTH) return title;
     return `${title.substr(0, MAX_LENGTH)}...`;
   };
