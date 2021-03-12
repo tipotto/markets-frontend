@@ -1,68 +1,73 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# markets.jp
 
-## Available Scripts
+<img width="733" alt="markets-top" src="https://user-images.githubusercontent.com/39334151/110884340-500ea680-8328-11eb-8204-f5ef578e989d.png">
 
-In the project directory, you can run:
+![markets5](https://user-images.githubusercontent.com/39334151/110884366-5c92ff00-8328-11eb-8599-73a725972cb8.png)
 
-### `yarn start`
+## サービス概要
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+フリマサイトの一括検索サービス。現在は大手 3 社のサービスに対応。
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## 主な使用技術
 
-### `yarn test`
+- フロントエンド  
+  言語：Javascript  
+  ライブラリ：React, Redux, Redux-Saga, Redux-Form, React-Router, Material-UI etc.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- バックエンド  
+  言語：Node.js, Python  
+  フレームワーク：Express  
+  モジュール：asyncio, aiohttp etc.
 
-### `yarn build`
+## 開発の背景
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+今後追加する。
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## サービスの特徴
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 対応プラットフォーム
 
-### `yarn eject`
+主要な大手 3 社のフリマサービスに対応。
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- メルカリ
+- ラクマ
+- PayPay フリマ
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 豊富な検索オプション
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+ユーザーのニーズにマッチする、精度の高い検索結果を提供。
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- 商品カテゴリ（メインカテゴリ、サブカテゴリ）
+- 価格
+- 商品の状態
+- 販売状況
+- 配送料の有無
+- 検索結果の並び順
 
-## Learn More
+### シンプルな購入導線
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+検索結果から魅力的な商品を見つけたら、ワンクリックで各フリマサイトの商品ページへ遷移。  
+アクセス先のページで詳細情報の確認や購入が可能。
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 技術的観点での特徴
 
-### Code Splitting
+### ノンブロッキング I/O によるスクレイピング
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+asyncio, aiohttp といったノンブロッキング I/O に対応したモジュールを採用。  
+それにより、CPU のリソースを有効活用しつつ、コルーチンやイベントループを利用することで複数サイトへのスクレイピングを高速化。
 
-### Analyzing the Bundle Size
+### アクセス元 IP の秘匿
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+リクエストの度に、各ターゲットサイトごとにプロキシプールからプロキシ（SOCKS プロキシ）をランダムに選択。  
+プロキシ経由でのアクセスにより、markets.jp の IP アドレスを秘匿。
 
-### Making a Progressive Web App
+### ブラウザ経由の人的アクセスを再現
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+HTTP リクエストヘッダーの項目や値は、ユーザーが使用する OS やブラウザによって異なる。  
+そのためリクエストの度に OS、ブラウザをランダムに選択し、その組み合わせに適したリクエストヘッダーを生成することで、  
+ブラウザ経由での人的アクセスを再現。
 
-### Advanced Configuration
+### クラスタリングによるマルチスレッド化
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+マルチコア環境でのマルチスレッド化により、大量のリクエストを並列処理。  
+それによりパフォーマンスの高速化、スループットの向上を実現。
