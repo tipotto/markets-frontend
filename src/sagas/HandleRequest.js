@@ -1,11 +1,11 @@
-import { put, call } from 'redux-saga/effects';
-import { startSubmit, stopSubmit } from 'redux-form';
-import { push } from 'connected-react-router';
-import { succeededSearch, failedSearch } from '../actions';
-import search from '../api/Request';
+import { put, call } from "redux-saga/effects";
+import { startSubmit, stopSubmit } from "redux-form";
+import { push } from "connected-react-router";
+import { succeededSearch, failedSearch } from "../actions";
+import search from "../api/Request";
 
 function* searchData(action) {
-  const { params } = action.formValue;
+  const params = action.formValue;
 
   // action.formDataのpropsを使用する場合は、
   // 以下のように、定数としてオブジェクトのプロパティを指定し、分割代入すると良い。
@@ -16,14 +16,15 @@ function* searchData(action) {
   // フォームの送信処理を開始する。
   yield put(startSubmit(form));
 
-  const res = yield call(search, params);
-
-  if (res.data) {
+  try {
+    const res = yield call(search, params);
+    console.log("response", res);
     yield put(stopSubmit(form));
-    yield put(succeededSearch(res.data));
-    yield put(push('/'));
-  } else {
-    yield put(failedSearch('エラー'));
+    yield put(succeededSearch(res));
+    yield put(push("/"));
+  } catch (e) {
+    console.log("Error occurred:", e);
+    yield put(failedSearch());
   }
 }
 

@@ -7,7 +7,7 @@ const initState = {
   },
   state: {
     isLoading: false,
-    hasError: false,
+    // hasError: false,
   },
   //   error: null
 };

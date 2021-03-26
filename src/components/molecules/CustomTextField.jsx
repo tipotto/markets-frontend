@@ -1,13 +1,13 @@
-import React from 'react';
-import TextField from '@material-ui/core/TextField';
+import React from "react";
+import TextField from "@material-ui/core/TextField";
 
 const CustomTextField = ({
   input,
   label,
   meta: { touched, invalid, error },
-  type = 'text',
+  type = "text",
   required,
-  rootClass = '',
+  rootClass = "",
   // subClass = "",
 }) => (
   <TextField

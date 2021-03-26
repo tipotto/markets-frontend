@@ -1,27 +1,27 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import { reduxForm, Field, reset, FieldArray } from 'redux-form';
-import $ from 'jquery';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
-import MenuItem from '@material-ui/core/MenuItem';
-import { requestSearch } from '../../actions';
+import React, { useState } from "react";
+import { connect } from "react-redux";
+import { reduxForm, Field, reset, FieldArray } from "redux-form";
+import $ from "jquery";
+import { makeStyles, createStyles } from "@material-ui/core/styles";
+import MenuItem from "@material-ui/core/MenuItem";
+import { requestSearch } from "../../actions";
 import {
   mainCategoryArray,
   subCategoryObject,
-} from '../../constants/SelectOptions';
-import Selectbox from '../molecules/Selectbox';
-import CustomTextField from '../molecules/CustomTextField';
-import PlatformCheckbox from '../molecules/PlatformCheckbox';
-import ProductStatusCheckbox from '../molecules/ProductStatusCheckbox';
-import RadioButton from '../molecules/RadioButton';
-import RadioOptions from '../molecules/RadioOptions';
-import SubmitButton from '../molecules/SubmitButton';
-import radioOptionsObject from '../../constants/RadioOptions';
+} from "../../constants/SelectOptions";
+import Selectbox from "../molecules/Selectbox";
+import CustomTextField from "../molecules/CustomTextField";
+import PlatformCheckbox from "../molecules/PlatformCheckbox";
+import ProductStatusCheckbox from "../molecules/ProductStatusCheckbox";
+import RadioButton from "../molecules/RadioButton";
+import RadioOptions from "../molecules/RadioOptions";
+import SubmitButton from "../molecules/SubmitButton";
+import radioOptionsObject from "../../constants/RadioOptions";
 
 const scrollWindow = () => {
   const speed = 1000;
-  const position = $('#result').offset().top;
-  $('body,html').animate({ scrollTop: position }, speed, 'swing');
+  const position = $("#result").offset().top;
+  $("body,html").animate({ scrollTop: position }, speed, "swing");
 };
 
 const submit = (values, dispatch, props) => {
@@ -33,25 +33,26 @@ const submit = (values, dispatch, props) => {
 const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
-      [theme.breakpoints.up('md')]: {
-        width: '40%',
+      width: "100%",
+      [theme.breakpoints.up("md")]: {
+        width: "40%",
       },
     },
     items: {
       marginBottom: 30,
-      display: 'block',
+      display: "block",
     },
     priceContainer: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      marginBottom: '40px',
+      display: "flex",
+      justifyContent: "space-between",
+      marginBottom: "2.5rem",
     },
     price: {
-      width: '45%',
+      width: "45%",
     },
     hyphen: {
-      display: 'inline-block',
-      paddingTop: '15px',
+      display: "inline-block",
+      paddingTop: "1rem",
     },
   })
 );
@@ -78,7 +79,7 @@ const Form = (props) => {
   const handleChange = (e, category) => {
     const subCategoryArr = subCategoryObject[e.target.value];
     if (subCategoryArr.length <= 0) {
-      change(`${category}.sub`, null);
+      change(`${category}.sub`, "");
       handleSubCategory([], false);
       return;
     }
@@ -136,7 +137,7 @@ const Form = (props) => {
       />
       <Field
         name="platforms"
-        label="プラットフォーム"
+        label="フリマサイト"
         component={PlatformCheckbox}
         rootClass={classes.items}
         required
@@ -197,8 +198,9 @@ const formOption = reduxForm({
 })(Form);
 
 const formParam = (_, { form }) => ({
-  form: form.name || 'leetName',
+  form: form.name || "leetName",
   validate: form.validater,
+  initialValues: form.initialValues,
 });
 
 export default connect(formParam)(formOption);

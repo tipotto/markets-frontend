@@ -1,8 +1,8 @@
-import React from 'react';
-import FormLabel from '@material-ui/core/FormLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import RadioGroup from '@material-ui/core/RadioGroup';
+import React from "react";
+import FormLabel from "@material-ui/core/FormLabel";
+import FormControl from "@material-ui/core/FormControl";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import RadioGroup from "@material-ui/core/RadioGroup";
 
 const RadioButton = ({
   input: { value, onChange },
@@ -11,7 +11,7 @@ const RadioButton = ({
   meta: { touched, error },
   row = true,
   required,
-  rootClass = '',
+  rootClass = "",
 }) => (
   <FormControl
     classes={{ root: rootClass }}

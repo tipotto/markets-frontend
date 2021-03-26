@@ -1,5 +1,5 @@
-import initState from '../initState';
-import { REQUEST_SEARCH, SUCCEEDED_SEARCH, FAILED_SEARCH } from '../../actions';
+import initState from "../initState";
+import { REQUEST_SEARCH, SUCCEEDED_SEARCH, FAILED_SEARCH } from "../../actions";
 
 const stateReducer = (state = initState.state, action) => {
   switch (action.type) {
@@ -10,7 +10,8 @@ const stateReducer = (state = initState.state, action) => {
       return { ...state, isLoading: false };
 
     case FAILED_SEARCH:
-      return { ...state, isLoading: false, hasError: true };
+      return { ...state, isLoading: false };
+    // return { ...state, isLoading: false, hasError: true };
 
     default:
       return state;
