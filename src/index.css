@@ -1,9 +1,10 @@
-/* html {
+html {
+  /* 16px */
   font-size: 100%;
-  font-family: "Hiragino Sans", sans-serif;
+  /* font-family: "Hiragino Sans", sans-serif;
   line-height: 1.7;
-  letter-spacing: 1px;
-} */
+  letter-spacing: 1px; */
+}
 
 body {
   margin: 0;
@@ -12,3 +13,10 @@ body {
   width: 100%;
   /* min-width: 1280px; */
 }
+
+/* div.MuiPopover-root
+  > div.MuiPaper-root
+  > ul.MuiList-root
+  > li.MuiButtonBase-root {
+  font-size: 1.5rem;
+} */

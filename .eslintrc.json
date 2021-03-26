@@ -7,6 +7,7 @@
       "airbnb",  
       "eslint:recommended",
       "plugin:react/recommended",
+      "plugin:react-hooks/recommended",
       "plugin:prettier/recommended",
       "prettier/react"
     ],
@@ -29,7 +30,7 @@
         "json/sort-package-json": "standard"
     },
     "rules": {
-      "prettier/prettier": ["error", { "singleQuote": true, "trailingComma": "es5" }],
+      "prettier/prettier": ["error", { "singleQuote": false, "trailingComma": "es5" }],
       "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
       "react/prop-types": [0],
       "react/jsx-props-no-spreading": "off",

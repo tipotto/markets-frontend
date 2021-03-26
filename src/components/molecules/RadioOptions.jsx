@@ -1,13 +1,13 @@
-import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import Radio from '@material-ui/core/Radio';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
+import React from "react";
+import { withStyles } from "@material-ui/core/styles";
+import Radio from "@material-ui/core/Radio";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
 
 const GreenRadio = withStyles({
   root: {
-    color: '#57C5B6',
-    '&$checked': {
-      color: '#57C5B6',
+    color: "#57C5B6",
+    "&$checked": {
+      color: "#57C5B6",
     },
   },
   checked: {},

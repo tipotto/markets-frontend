@@ -1,13 +1,13 @@
-import React from 'react';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
+import React from "react";
+import { createStyles, makeStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles(() =>
   createStyles({
     button: {
-      backgroundColor: '#57C5B6',
-      '&:hover': {
-        backgroundColor: '#57C5B6',
+      backgroundColor: "#57C5B6",
+      "&:hover": {
+        backgroundColor: "#57C5B6",
       },
     },
   })
@@ -25,7 +25,7 @@ const RadioButton = ({ disabled }) => {
       fullWidth
       disabled={disabled}
     >
-      送信する
+      検索する
     </Button>
   );
 };

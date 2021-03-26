@@ -1,17 +1,17 @@
-import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormLabel from '@material-ui/core/FormLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import Checkbox from '@material-ui/core/Checkbox';
+import React from "react";
+import { withStyles } from "@material-ui/core/styles";
+import FormGroup from "@material-ui/core/FormGroup";
+import FormLabel from "@material-ui/core/FormLabel";
+import FormControl from "@material-ui/core/FormControl";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import Checkbox from "@material-ui/core/Checkbox";
 
 const GreenCheckbox = withStyles({
   root: {
-    color: '#57C5B6',
-    '&$checked': {
-      color: '#57C5B6',
+    color: "#57C5B6",
+    "&$checked": {
+      color: "#57C5B6",
     },
   },
   checked: {},
@@ -23,7 +23,7 @@ const ProductStatusCheckbox = ({
   meta: { touched, error },
   row = true,
   required,
-  rootClass = '',
+  rootClass = "",
 }) => {
   let arr = [...value];
   const handleChange = (e) => {
@@ -32,7 +32,7 @@ const ProductStatusCheckbox = ({
     } else {
       arr.splice(arr.indexOf(e.target.value), 1);
     }
-    if (arr.length === 0) arr = '';
+    if (arr.length === 0) arr = "";
     return onChange(arr);
   };
 
@@ -55,26 +55,26 @@ const ProductStatusCheckbox = ({
           value="all"
           control={<GreenCheckbox />}
           label="すべて"
-          checked={!!arr.includes('all')}
+          checked={!!arr.includes("all")}
         />
         <FormControlLabel
           value="brand_new"
           control={<GreenCheckbox />}
           label="新品・未使用"
-          checked={!!(arr.includes('brand_new') || arr.includes('all'))}
+          checked={!!(arr.includes("brand_new") || arr.includes("all"))}
         />
         <FormControlLabel
           value="almost_unused"
           control={<GreenCheckbox />}
           label="未使用に近い"
-          checked={!!(arr.includes('almost_unused') || arr.includes('all'))}
+          checked={!!(arr.includes("almost_unused") || arr.includes("all"))}
         />
         <FormControlLabel
           value="no_scratches_or_stains"
           control={<GreenCheckbox />}
           label="目立った傷・汚れなし"
           checked={
-            !!(arr.includes('no_scratches_or_stains') || arr.includes('all'))
+            !!(arr.includes("no_scratches_or_stains") || arr.includes("all"))
           }
         />
         <FormControlLabel
@@ -83,7 +83,7 @@ const ProductStatusCheckbox = ({
           label="やや傷・汚れあり"
           checked={
             !!(
-              arr.includes('slight_scratches_or_stains') || arr.includes('all')
+              arr.includes("slight_scratches_or_stains") || arr.includes("all")
             )
           }
         />
@@ -93,8 +93,8 @@ const ProductStatusCheckbox = ({
           label="目立つ傷・汚れあり"
           checked={
             !!(
-              arr.includes('noticeable_scratches_or_stains') ||
-              arr.includes('all')
+              arr.includes("noticeable_scratches_or_stains") ||
+              arr.includes("all")
             )
           }
         />

@@ -1,18 +1,25 @@
-export const REQUEST_SEARCH = 'REQUEST_SEARCH';
-export const SUCCEEDED_SEARCH = 'SUCCEEDED_SEARCH';
-export const FAILED_SEARCH = 'FAILED_SEARCH';
-export const LOAD_ITEMS = 'LOAD_ITEMS';
+/* eslint-disable no-param-reassign */
+export const REQUEST_SEARCH = "REQUEST_SEARCH";
+export const SUCCEEDED_SEARCH = "SUCCEEDED_SEARCH";
+export const FAILED_SEARCH = "FAILED_SEARCH";
+export const LOAD_ITEMS = "LOAD_ITEMS";
 export const LOAD_ITEM_NUMBER = 15;
 
-export const _spliceArr = (array) => {
+const _spliceArray = (array) => {
   const itemsArr = array;
   const loadedArr = itemsArr.splice(0, LOAD_ITEM_NUMBER);
   return { items: itemsArr, loaded: loadedArr };
 };
 
-export const requestSearch = (params, props) => ({
+const _checkPrices = (form) => {
+  if (!form.minPrice) form.minPrice = "0";
+  if (!form.maxPrice) form.maxPrice = "0";
+  return form;
+};
+
+export const requestSearch = (values, props) => ({
   type: REQUEST_SEARCH,
-  formValue: { params },
+  formValue: _checkPrices(values),
   formProp: props,
   // フォーム周りの必要な情報を定数で定義し、sagasのcreateDataメソッドで
   // formDataのpropsを使うようにする。それによって、フォーム名や非同期処理のメソッド名、
@@ -21,15 +28,14 @@ export const requestSearch = (params, props) => ({
 
 export const succeededSearch = (resData) => ({
   type: SUCCEEDED_SEARCH,
-  resData: _spliceArr(resData),
+  resData: _spliceArray(resData),
 });
 
-export const failedSearch = (message) => ({
+export const failedSearch = () => ({
   type: FAILED_SEARCH,
-  message,
 });
 
 export const loadItems = (params) => ({
   type: LOAD_ITEMS,
-  moldedData: _spliceArr(params),
+  moldedData: _spliceArray(params),
 });
