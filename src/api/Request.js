@@ -41,7 +41,7 @@ const handleErrors = async (res) => {
 
 const search = async (params) => {
   return (
-    apiRequest("/api/search/v1", params)
+    apiRequest("/api/v1/search", params)
       // ネットワーク周りなどリクエスト以前の段階でのエラーを処理
       .catch((e) => {
         throw Error(e);
