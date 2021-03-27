@@ -2,8 +2,10 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { withStyles, makeStyles, createStyles } from "@material-ui/core/styles";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import KeyboardArrowUpOutlinedIcon from "@material-ui/icons/KeyboardArrowUpOutlined";
 import clsx from "clsx";
 import InfiniteScroll from "react-infinite-scroller";
+import ScrollUpButton from "react-scroll-up-button";
 import commonStyle from "../../style/common";
 import Header from "../organisms/Header";
 import Footer from "../organisms/Footer";
@@ -114,6 +116,28 @@ const useStyles = makeStyles((theme) =>
       color: "#2b546a",
       fontWeight: 300,
     },
+    scrollUpBtn: {
+      width: "2.5rem",
+      height: "2.5rem",
+      background: "#5CC5B6",
+      display: "block",
+      lineHeight: "2.5rem",
+      padding: ".5rem .5rem .2rem",
+      position: "fixed",
+      right: "1.5rem",
+      bottom: "-5rem",
+      borderRadius: ".8rem",
+      textAlign: "center",
+      zIndex: 9999,
+      transition: "bottom 0.8s",
+      cursor: "pointer",
+    },
+    showBtn: {
+      bottom: "5rem",
+      [theme.breakpoints.down("xs")]: {
+        bottom: "2.5rem",
+      },
+    },
   })
 );
 
@@ -153,7 +177,8 @@ const Main = (props) => {
           </span>
         </div>
       );
-    } else if (!loading && !loadedItems.length) {
+    }
+    if (!loading && !loadedItems.length) {
       return (
         <div className={classes.loading}>
           <span className={clsx(classes.loadingText, classes.common)}>
@@ -209,6 +234,16 @@ const Main = (props) => {
         </div>
       </div>
       <Footer />
+      <ScrollUpButton
+        StopPosition={0}
+        ShowAtPosition={1500}
+        EasingType="easeOutCubic"
+        AnimationDuration={1500}
+        ContainerClassName={classes.scrollUpBtn}
+        TransitionClassName={classes.showBtn}
+      >
+        <KeyboardArrowUpOutlinedIcon htmlColor="#fff" fontSize="large" />
+      </ScrollUpButton>
     </>
   );
 };
