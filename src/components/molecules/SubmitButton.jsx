@@ -13,10 +13,11 @@ const useStyles = makeStyles(() =>
   })
 );
 
-const RadioButton = ({ disabled }) => {
+const SubmitButton = ({ disabled }) => {
   const classes = useStyles();
   return (
     <Button
+      id="submit"
       className={classes.button}
       type="submit"
       size="medium"
@@ -30,4 +31,4 @@ const RadioButton = ({ disabled }) => {
   );
 };
 
-export default RadioButton;
+export default SubmitButton;

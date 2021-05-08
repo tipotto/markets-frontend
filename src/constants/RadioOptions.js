@@ -7,6 +7,7 @@ const radioOptionsObject = {
   deliveryCost: [
     { label: "すべて", value: "all" },
     { label: "出品者・無料", value: "free" },
+    { label: "購入者", value: "required" },
   ],
   sortOrder: [
     { label: "価格の安い順", value: "asc" },

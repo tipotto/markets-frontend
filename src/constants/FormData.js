@@ -12,6 +12,8 @@ const FormData = {
     name: SEARCH,
     validater: searchValidater,
     initialValues: {
+      // type: "initial",
+      page: 1,
       category: [{ main: "", sub: "" }],
       keyword: "",
       platforms: [],

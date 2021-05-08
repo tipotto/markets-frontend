@@ -7,10 +7,13 @@ const stateReducer = (state = initState.state, action) => {
       return { ...state, isLoading: true };
 
     case SUCCEEDED_SEARCH:
-      return { ...state, isLoading: false };
-
     case FAILED_SEARCH:
       return { ...state, isLoading: false };
+
+    // case FAILED_SEARCH:
+    //   return { ...state, isLoading: false };
+
+    // case FAILED_ADDITIONAL_SEARCH:
     // return { ...state, isLoading: false, hasError: true };
 
     default:

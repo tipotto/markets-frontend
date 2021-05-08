@@ -1,136 +1,186 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+import React, { memo } from "react";
+import clsx from "clsx";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
 // import CardContent from "@material-ui/core/CardContent";
 import Avatar from "@material-ui/core/Avatar";
 // import Typography from "@material-ui/core/Typography";
+import FavoriteIcon from "@material-ui/icons/Favorite";
+// import HighlightOffRoundedIcon from "@material-ui/icons/HighlightOffRounded";
+// import DeleteOutlinedIcon from "@material-ui/icons/DeleteOutlined";
+import ToggleButton from "@material-ui/lab/ToggleButton";
 import mercariIcon from "../../images/mercari-icon.png";
 import rakumaIcon from "../../images/rakuma-icon.png";
 import paypayIcon from "../../images/paypay-icon.png";
+// import { addFavoriteItem, deleteFavoriteItem } from "../../actions";
+import itemStyles from "../../style/item";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    marginTop: "1rem",
-    boxSizing: "border-box",
-    [theme.breakpoints.up("md")]: {
-      width: "24%",
-    },
-    [theme.breakpoints.down("sm")]: {
-      width: "32%",
-    },
-  },
-  link: {
-    display: "block",
-    width: "100%",
-    height: "100%",
-    textDecoration: "none",
-    color: "#757575",
-  },
-  header: {
-    [theme.breakpoints.down("xs")]: {
-      display: "none",
-    },
-    "&>div.MuiCardHeader-content": {
-      "&>span.MuiTypography-root": {
-        height: "2.5rem",
-        maxWidth: "100%",
-        display: "-webkit-box",
-        WebkitBoxOrient: "vertical",
-        WebkitLineClamp: 2,
-        overflow: "hidden",
-        textOverflow: "ellipsis",
-      },
-    },
-  },
-  media: {
-    height: "5rem",
-    paddingTop: "56.25%", // 16:9
-  },
-  // content: {
-  //   [theme.breakpoints.up("sm")]: {
-  //     paddingBottom: 0,
-  //   },
-  //   [theme.breakpoints.down("xs")]: {
-  //     display: "none",
-  //   },
-  // },
-  // typography: {
-  //   fontSize: "17px",
-  //   textAlign: "center",
-  // },
-  priceLabel: {
-    display: "table",
-    marginTop: "-2rem",
-    backgroundColor: "rgba(0,0,0,0.3)",
-    borderRadius: "0 12px 12px 0",
-    color: "#fff",
-    fontSize: ".8rem",
-    fontWeight: 600,
-    padding: "4px 12px 4px 8px",
-    zIndex: 2,
-  },
-}));
+// const moldTitle = () => {
+//   const MAX_LENGTH = 18;
+//   if (!title) return "";
+//   if (title.length <= MAX_LENGTH) return title;
+//   return `${title.substr(0, MAX_LENGTH)}...`;
+// };
 
-const Item = ({ title, price, image, detail, platform }) => {
-  const classes = useStyles();
+// TODO: フロントエンドよりも、バックエンドで処理した方が良さそう
+// const moldPrice = (price) => {
+//   return String(price).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+// };
 
-  // const moldTitle = () => {
-  //   const MAX_LENGTH = 18;
-  //   if (!title) return "";
-  //   if (title.length <= MAX_LENGTH) return title;
-  //   return `${title.substr(0, MAX_LENGTH)}...`;
-  // };
+// TODO: フロントエンドよりも、バックエンドで処理した方が良さそう
+const setIcon = (service) => {
+  let icon;
+  let alt;
+  if (service === "mercari") {
+    icon = mercariIcon;
+    alt = "mercari icon";
+  } else if (service === "rakuma") {
+    icon = rakumaIcon;
+    alt = "rakuma icon";
+  } else {
+    icon = paypayIcon;
+    alt = "paypay icon";
+  }
 
-  const moldPrice = () => {
-    return String(price).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+  return <Avatar alt={alt} src={icon} />;
+};
+
+const Item = ({ item, isFavorite, handleFavorite, empty }) => {
+  console.log("Item");
+  const {
+    root,
+    emptyBox,
+    header,
+    fav,
+    favButton,
+    favIcon,
+    link,
+    media,
+    priceBox,
+    priceLabel,
+    // deleteButton,
+    // deleteIcon,
+  } = itemStyles();
+
+  if (empty) return <Card className={clsx(root, emptyBox)} />;
+
+  const openNewTab = (e) => {
+    // console.log("target", e.target);
+    // console.log("currentTarget", e.currentTarget);
+    const detailUrl = e.currentTarget.getAttribute("value");
+    console.log("detailUrl", detailUrl);
+
+    const newWindow = window.open(detailUrl, "_blank");
+    newWindow.onload = () => {
+      const body = newWindow.document.querySelector("body");
+      body.replaceWith("<h1>Unkooooooooooooooooo</h1>");
+    };
+
+    // newWindow.addEventListener(
+    //   "load",
+    //   () => {
+    //     const body = newWindow.document.querySelector("body");
+    //     body.replaceWith("<h1>Unkooooooooooooooooo</h1>");
+    //     // newWindow.document.title = "Unkooooooooo";
+    //   },
+    //   false
+    // );
   };
 
-  const setIcon = (service) => {
-    let icon, alt;
-    if (service === "mercari") {
-      icon = mercariIcon;
-      alt = "mercari icon";
-    } else if (service === "rakuma") {
-      icon = rakumaIcon;
-      alt = "rakuma icon";
-    } else {
-      icon = paypayIcon;
-      alt = "paypay icon";
-    }
-
-    return <Avatar alt={alt} src={icon} />;
-  };
-
+  const { id, title, price, imageUrl, detailUrl, platform } = item;
   return (
-    <Card className={classes.root}>
-      <a
-        className={classes.link}
-        href={detail}
+    <Card className={root}>
+      <CardHeader className={header} avatar={setIcon(platform)} title={title} />
+      <div className={fav}>
+        <ToggleButton
+          className={favButton}
+          value={{
+            id,
+            title,
+            price,
+            imageUrl,
+            detailUrl,
+            platform,
+            isFavorite: !isFavorite,
+          }}
+          selected={isFavorite}
+          onClick={handleFavorite}
+        >
+          <FavoriteIcon
+            className={favIcon}
+            style={{
+              color: isFavorite ? "#F2105A" : "#E795B0",
+            }}
+          />
+        </ToggleButton>
+      </div>
+      <div onClick={openNewTab} className={link} value={detailUrl}>
+        <CardMedia className={media} image={imageUrl} title={title} />
+        <div className={priceBox}>
+          <div className={priceLabel}>¥{price.str}</div>
+        </div>
+      </div>
+      {/* <a
+        className={link}
+        href={detailUrl}
         target="_blank"
         rel="noopener noreferrer"
       >
-        <CardHeader
-          className={classes.header}
-          avatar={setIcon(platform)}
-          title={title}
-        />
-        <CardMedia className={classes.media} image={image} title={title} />
-        <div className={classes.priceLabel}>¥{moldPrice()}</div>
-        {/* <CardContent className={classes.content}>
-          <Typography
-            className={classes.typography}
-            variant="body2"
-            color="textSecondary"
-            component="p"
-          >
-            ¥{moldPrice()}
-          </Typography>
-        </CardContent> */}
-      </a>
+        <CardMedia className={media} image={imageUrl} title={title} />
+        <div className={priceBox}>
+          <div className={priceLabel}>¥{price.str}</div>
+        </div>
+      </a> */}
     </Card>
+    // <Card className={root}>
+    //   <CardHeader className={header} avatar={setIcon(platform)} title={title} />
+    //   <div className={fav}>
+    //     <ToggleButton
+    //       className={selectedTab === "all" ? favButton : deleteButton}
+    //       value={selectedTab === "all" ? !isFavorite : false}
+    //       selected={isFavorite}
+    //       onChange={handleChange}
+    //     >
+    //       {selectedTab === "all" && (
+    //         <FavoriteIcon
+    //           className={favIcon}
+    //           style={{
+    //             color: isFavorite ? "#F2105A" : "#E795B0",
+    //           }}
+    //         />
+    //       )}
+    //       {selectedTab === "favorites" && (
+    //         <DeleteOutlinedIcon className={deleteIcon} color="secondary" />
+    //       )}
+    //     </ToggleButton>
+    //   </div>
+    //   <a
+    //     className={link}
+    //     href={detailUrl}
+    //     target="_blank"
+    //     rel="noopener noreferrer"
+    //   >
+    //     <CardMedia className={media} image={imageUrl} title={title} />
+    //     <div className={priceBox}>
+    //       <div className={priceLabel}>¥{moldPrice(price)}</div>
+    //     </div>
+    //   </a>
+    // </Card>
+    //   {/* <CardContent className={content}>
+    //       <Typography
+    //         className={typography}
+    //         variant="body2"
+    //         color="textSecondary"
+    //         component="p"
+    //       >
+    //         ¥{moldPrice()}
+    //       </Typography>
+    //     </CardContent> */}
+    // </Card>
   );
 };
 
-export default Item;
+export default memo(Item);

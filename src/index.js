@@ -9,6 +9,7 @@ import history from "./history";
 import * as serviceWorker from "./serviceWorker";
 import storeCreator from "./store";
 import Top from "./components/pages/Top";
+import InfiniteScrollerTop from "./components/pages/InfiniteScrollerTop";
 import "./index.css";
 
 const store = storeCreator();
@@ -82,6 +83,7 @@ ReactDOM.render(
       <Router history={history}>
         <Switch>
           <Route exact path="/" component={Top} />
+          {/* <Route exact path="/" component={InfiniteScrollerTop} /> */}
         </Switch>
       </Router>
     </Provider>

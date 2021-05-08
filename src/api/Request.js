@@ -50,8 +50,8 @@ const search = async (params) => {
       // .then((res) => handleErrors(res))
       .then(handleErrors)
       // 以上2つをパスした正常なレスポンスからのJSONオブジェクトを取得
-      .then((res) => {
-        return res;
+      .then((items) => {
+        return items;
       })
   );
 };

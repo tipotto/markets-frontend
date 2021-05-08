@@ -1,15 +1,27 @@
 const initState = {
   search: {
-    items: [],
-    loaded: [],
-    // fetchItemNum: 0,
-    loadItemNum: 0,
+    items: {
+      all: [],
+      favorites: [],
+    },
+    selectedTab: "all",
   },
+
+  // 無限スクロール利用時にコメントイン
+  // search: {
+  //   items: {
+  //     all: {
+  //       loaded: [],
+  //       rest: [],
+  //       loadedNumber: 0,
+  //     },
+  //     favorites: [],
+  //   },
+  //   selectedTab: "all",
+  // },
   state: {
     isLoading: false,
-    // hasError: false,
   },
-  //   error: null
 };
 
 export default initState;

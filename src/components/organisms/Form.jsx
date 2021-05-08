@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, memo } from "react";
 import { connect } from "react-redux";
 import { reduxForm, Field, reset, FieldArray } from "redux-form";
 import $ from "jquery";
-import { makeStyles, createStyles } from "@material-ui/core/styles";
 import MenuItem from "@material-ui/core/MenuItem";
 import { requestSearch } from "../../actions";
 import {
@@ -17,51 +16,34 @@ import RadioButton from "../molecules/RadioButton";
 import RadioOptions from "../molecules/RadioOptions";
 import SubmitButton from "../molecules/SubmitButton";
 import radioOptionsObject from "../../constants/RadioOptions";
+import formStyles from "../../style/form";
 
-const scrollWindow = () => {
+const scrollDownWindow = () => {
   const speed = 1000;
   const position = $("#result").offset().top;
   $("body,html").animate({ scrollTop: position }, speed, "swing");
 };
 
-const submit = (values, dispatch, props) => {
-  dispatch(requestSearch(values, props));
-  dispatch(reset(props.form));
-  scrollWindow();
+const submit = (dispatch, props, values) => {
+  // console.log("values", values);
+  dispatch(requestSearch(props, values));
+  dispatch(reset(props));
+  scrollDownWindow();
 };
 
-const useStyles = makeStyles((theme) =>
-  createStyles({
-    root: {
-      width: "100%",
-      [theme.breakpoints.up("md")]: {
-        width: "40%",
-      },
-    },
-    items: {
-      marginBottom: 30,
-      display: "block",
-    },
-    priceContainer: {
-      display: "flex",
-      justifyContent: "space-between",
-      marginBottom: "2.5rem",
-    },
-    price: {
-      width: "45%",
-    },
-    hyphen: {
-      display: "inline-block",
-      paddingTop: "1rem",
-    },
-  })
-);
+const Form = ({
+  handleSubmit,
+  submitting,
+  invalid,
+  change,
+  form,
+  handleFormValues,
+}) => {
+  console.log("Form");
 
-const Form = (props) => {
-  const classes = useStyles();
+  const { root, items, priceContainer, price, hyphen } = formStyles();
   const [isShowSubCategory, setShowSubCategory] = useState(false);
   const [subCategoryArray, setSubCategoryArray] = useState([]);
-  const { handleSubmit, submitting, invalid, change } = props;
 
   const fetchCategoryOptions = (categoryOptions) => {
     return categoryOptions.map((category) => (
@@ -99,7 +81,7 @@ const Form = (props) => {
           name={`${category}.main`}
           label="メインカテゴリー"
           component={Selectbox}
-          rootClass={classes.items}
+          rootClass={items}
           onChange={(e) => handleChange(e, category)}
         >
           {fetchCategoryOptions(mainCategoryArray)}
@@ -109,7 +91,7 @@ const Form = (props) => {
             name={`${category}.sub`}
             label="サブカテゴリー"
             component={Selectbox}
-            rootClass={classes.items}
+            rootClass={items}
           >
             {fetchCategoryOptions(subCategoryArray)}
           </Field>
@@ -120,10 +102,11 @@ const Form = (props) => {
 
   return (
     <form
-      className={classes.root}
+      className={root}
       onSubmit={handleSubmit((values, dispatch) => {
-        submit(values, dispatch, props);
+        submit(dispatch, form, values);
         handleSubCategory([], false);
+        handleFormValues(values);
       })}
       encType="multipart/form-data"
     >
@@ -132,42 +115,42 @@ const Form = (props) => {
         name="keyword"
         label="検索ワード"
         component={CustomTextField}
-        rootClass={classes.items}
+        rootClass={items}
         required
       />
       <Field
         name="platforms"
         label="フリマサイト"
         component={PlatformCheckbox}
-        rootClass={classes.items}
+        rootClass={items}
         required
       />
-      <div className={classes.priceContainer}>
+      <div className={priceContainer}>
         <Field
           name="minPrice"
           label="最低金額"
           component={CustomTextField}
-          rootClass={classes.price}
+          rootClass={price}
         />
-        <span className={classes.hyphen}>〜</span>
+        <span className={hyphen}>〜</span>
         <Field
           name="maxPrice"
           label="最高金額"
           component={CustomTextField}
-          rootClass={classes.price}
+          rootClass={price}
         />
       </div>
       <Field
         name="productStatus"
         label="商品の状態"
         component={ProductStatusCheckbox}
-        rootClass={classes.items}
+        rootClass={items}
       />
       <Field
         name="salesStatus"
         label="販売状況"
         component={RadioButton}
-        rootClass={classes.items}
+        rootClass={items}
       >
         <RadioOptions options={radioOptionsObject.salesStatus} />
       </Field>
@@ -175,7 +158,7 @@ const Form = (props) => {
         name="deliveryCost"
         label="配送料の負担"
         component={RadioButton}
-        rootClass={classes.items}
+        rootClass={items}
       >
         <RadioOptions options={radioOptionsObject.deliveryCost} />
       </Field>
@@ -183,7 +166,7 @@ const Form = (props) => {
         name="sortOrder"
         label="並び替え"
         component={RadioButton}
-        rootClass={classes.items}
+        rootClass={items}
       >
         <RadioOptions options={radioOptionsObject.sortOrder} />
       </Field>
@@ -195,7 +178,7 @@ const Form = (props) => {
 const formOption = reduxForm({
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
-})(Form);
+})(memo(Form));
 
 const formParam = (_, { form }) => ({
   form: form.name || "leetName",
