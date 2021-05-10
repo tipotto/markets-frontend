@@ -1,26 +1,15 @@
 const initState = {
   search: {
-    items: {
-      all: [],
-      favorites: [],
-    },
-    selectedTab: "all",
+    byId: {},
+    allIds: [],
   },
-
-  // 無限スクロール利用時にコメントイン
-  // search: {
-  //   items: {
-  //     all: {
-  //       loaded: [],
-  //       rest: [],
-  //       loadedNumber: 0,
-  //     },
-  //     favorites: [],
-  //   },
-  //   selectedTab: "all",
-  // },
+  like: {
+    byId: {},
+    allIds: [],
+  },
   state: {
     isLoading: false,
+    selectedTab: "all",
   },
 };
 

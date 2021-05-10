@@ -5,17 +5,12 @@ import clsx from "clsx";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
-// import CardContent from "@material-ui/core/CardContent";
 import Avatar from "@material-ui/core/Avatar";
-// import Typography from "@material-ui/core/Typography";
 import FavoriteIcon from "@material-ui/icons/Favorite";
-// import HighlightOffRoundedIcon from "@material-ui/icons/HighlightOffRounded";
-// import DeleteOutlinedIcon from "@material-ui/icons/DeleteOutlined";
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import mercariIcon from "../../images/mercari-icon.png";
 import rakumaIcon from "../../images/rakuma-icon.png";
 import paypayIcon from "../../images/paypay-icon.png";
-// import { addFavoriteItem, deleteFavoriteItem } from "../../actions";
 import itemStyles from "../../style/item";
 
 // const moldTitle = () => {
@@ -49,7 +44,7 @@ const setIcon = (service) => {
 };
 
 const Item = ({ item, isFavorite, handleFavorite, empty }) => {
-  console.log("Item");
+  console.log("Item is rendered.");
   const {
     root,
     emptyBox,
@@ -61,51 +56,18 @@ const Item = ({ item, isFavorite, handleFavorite, empty }) => {
     media,
     priceBox,
     priceLabel,
-    // deleteButton,
-    // deleteIcon,
   } = itemStyles();
 
   if (empty) return <Card className={clsx(root, emptyBox)} />;
 
-  const openNewTab = (e) => {
-    // console.log("target", e.target);
-    // console.log("currentTarget", e.currentTarget);
-    const detailUrl = e.currentTarget.getAttribute("value");
-    console.log("detailUrl", detailUrl);
-
-    const newWindow = window.open(detailUrl, "_blank");
-    newWindow.onload = () => {
-      const body = newWindow.document.querySelector("body");
-      body.replaceWith("<h1>Unkooooooooooooooooo</h1>");
-    };
-
-    // newWindow.addEventListener(
-    //   "load",
-    //   () => {
-    //     const body = newWindow.document.querySelector("body");
-    //     body.replaceWith("<h1>Unkooooooooooooooooo</h1>");
-    //     // newWindow.document.title = "Unkooooooooo";
-    //   },
-    //   false
-    // );
-  };
-
-  const { id, title, price, imageUrl, detailUrl, platform } = item;
+  const { title, price, imageUrl, detailUrl, platform } = item;
   return (
     <Card className={root}>
       <CardHeader className={header} avatar={setIcon(platform)} title={title} />
       <div className={fav}>
         <ToggleButton
           className={favButton}
-          value={{
-            id,
-            title,
-            price,
-            imageUrl,
-            detailUrl,
-            platform,
-            isFavorite: !isFavorite,
-          }}
+          value={{ ...item, isFavorite: !isFavorite }}
           selected={isFavorite}
           onClick={handleFavorite}
         >
@@ -117,13 +79,7 @@ const Item = ({ item, isFavorite, handleFavorite, empty }) => {
           />
         </ToggleButton>
       </div>
-      <div onClick={openNewTab} className={link} value={detailUrl}>
-        <CardMedia className={media} image={imageUrl} title={title} />
-        <div className={priceBox}>
-          <div className={priceLabel}>¥{price.str}</div>
-        </div>
-      </div>
-      {/* <a
+      <a
         className={link}
         href={detailUrl}
         target="_blank"
@@ -133,53 +89,8 @@ const Item = ({ item, isFavorite, handleFavorite, empty }) => {
         <div className={priceBox}>
           <div className={priceLabel}>¥{price.str}</div>
         </div>
-      </a> */}
+      </a>
     </Card>
-    // <Card className={root}>
-    //   <CardHeader className={header} avatar={setIcon(platform)} title={title} />
-    //   <div className={fav}>
-    //     <ToggleButton
-    //       className={selectedTab === "all" ? favButton : deleteButton}
-    //       value={selectedTab === "all" ? !isFavorite : false}
-    //       selected={isFavorite}
-    //       onChange={handleChange}
-    //     >
-    //       {selectedTab === "all" && (
-    //         <FavoriteIcon
-    //           className={favIcon}
-    //           style={{
-    //             color: isFavorite ? "#F2105A" : "#E795B0",
-    //           }}
-    //         />
-    //       )}
-    //       {selectedTab === "favorites" && (
-    //         <DeleteOutlinedIcon className={deleteIcon} color="secondary" />
-    //       )}
-    //     </ToggleButton>
-    //   </div>
-    //   <a
-    //     className={link}
-    //     href={detailUrl}
-    //     target="_blank"
-    //     rel="noopener noreferrer"
-    //   >
-    //     <CardMedia className={media} image={imageUrl} title={title} />
-    //     <div className={priceBox}>
-    //       <div className={priceLabel}>¥{moldPrice(price)}</div>
-    //     </div>
-    //   </a>
-    // </Card>
-    //   {/* <CardContent className={content}>
-    //       <Typography
-    //         className={typography}
-    //         variant="body2"
-    //         color="textSecondary"
-    //         component="p"
-    //       >
-    //         ¥{moldPrice()}
-    //       </Typography>
-    //     </CardContent> */}
-    // </Card>
   );
 };
 

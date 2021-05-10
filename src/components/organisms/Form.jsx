@@ -25,7 +25,6 @@ const scrollDownWindow = () => {
 };
 
 const submit = (dispatch, props, values) => {
-  // console.log("values", values);
   dispatch(requestSearch(props, values));
   dispatch(reset(props));
   scrollDownWindow();
@@ -39,7 +38,7 @@ const Form = ({
   form,
   handleFormValues,
 }) => {
-  console.log("Form");
+  console.log("Form is rendered.");
 
   const { root, items, priceContainer, price, hyphen } = formStyles();
   const [isShowSubCategory, setShowSubCategory] = useState(false);

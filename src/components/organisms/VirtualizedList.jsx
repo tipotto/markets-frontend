@@ -1,4 +1,5 @@
-import React from "react";
+/* eslint-disable no-plusplus */
+import React, { memo } from "react";
 import { List, WindowScroller } from "react-virtualized";
 import { makeStyles } from "@material-ui/core/styles";
 import Item from "./Item";
@@ -31,20 +32,31 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const VirtualizedList = ({ results, handleFavorite }) => {
-  const { cardArea, row } = useStyles();
+const getItemComponent = (itemObj, itemId, handleFavorite) => {
+  const item = itemObj[itemId];
+  if (!item) return null;
+  return (
+    <Item
+      key={item.id}
+      item={item}
+      isFavorite={item.isFavorite}
+      handleFavorite={handleFavorite}
+    />
+  );
+};
 
+const VirtualizedList = ({ itemObj, itemIds, handleFavorite }) => {
+  console.log("VirtualizedList is rendered.");
+  const { cardArea, row } = useStyles();
   return (
     <WindowScroller>
       {({ width, height, isScrolling, registerChild, scrollTop }) => {
         const { itemWidth, itemHeight } = getItemSize(width);
-
         const itemsPerRow = Math.min(
           getItemsPerRow(width),
           Math.floor(width / itemWidth)
         );
-
-        const rowCount = Math.ceil(results.length / itemsPerRow);
+        const rowCount = Math.ceil(itemIds.length / itemsPerRow);
         return (
           <div ref={registerChild} className={cardArea}>
             <List
@@ -55,32 +67,27 @@ const VirtualizedList = ({ results, handleFavorite }) => {
               scrollTop={scrollTop}
               rowCount={rowCount}
               rowHeight={itemHeight + ROW_HEIGHT_MARGIN}
-              overscanRowCount={2}
+              overscanRowCount={5}
               rowRenderer={({ index, key, style }) => {
-                const items = [];
+                const itemList = [];
                 const fromIndex = index * itemsPerRow;
                 const toIndex = Math.min(
                   fromIndex + itemsPerRow,
-                  results.length
+                  itemIds.length
                 );
                 for (let i = fromIndex; i < toIndex; i++) {
-                  const item = results[i];
-                  items.push(
-                    <Item
-                      key={item.id}
-                      item={item}
-                      isFavorite={item.isFavorite}
-                      handleFavorite={handleFavorite}
-                    />
+                  const itemId = itemIds[i];
+                  itemList.push(
+                    getItemComponent(itemObj, itemId, handleFavorite)
                   );
                 }
-                const emptySize = itemsPerRow - items.length;
+                const emptySize = itemsPerRow - itemList.length;
                 for (let i = 0; i < emptySize; i++) {
-                  items.push(<Item key={i + toIndex} empty />);
+                  itemList.push(<Item key={i + toIndex} empty />);
                 }
                 return (
                   <div className={row} key={key} style={style}>
-                    {items}
+                    {itemList}
                   </div>
                 );
               }}
@@ -90,6 +97,56 @@ const VirtualizedList = ({ results, handleFavorite }) => {
       }}
     </WindowScroller>
   );
+
+  // return (
+  //   <WindowScroller>
+  //     {({ width, height, isScrolling, registerChild, scrollTop }) => {
+  //       const { itemWidth, itemHeight } = getItemSize(width);
+  //       const itemsPerRow = Math.min(
+  //         getItemsPerRow(width),
+  //         Math.floor(width / itemWidth)
+  //       );
+  //       const rowCount = Math.ceil(itemIds.length / itemsPerRow);
+  //       return (
+  //         <div ref={registerChild} className={cardArea}>
+  //           <List
+  //             autoHeight
+  //             width={width}
+  //             height={height}
+  //             isScrolling={isScrolling}
+  //             scrollTop={scrollTop}
+  //             rowCount={rowCount}
+  //             rowHeight={itemHeight + ROW_HEIGHT_MARGIN}
+  //             overscanRowCount={5}
+  //             rowRenderer={({ index, key, style }) => {
+  //               const items = [];
+  //               const fromIndex = index * itemsPerRow;
+  //               const toIndex = Math.min(
+  //                 fromIndex + itemsPerRow,
+  //                 itemIds.length
+  //               );
+  //               for (let i = fromIndex; i < toIndex; i++) {
+  //                 const itemId = itemIds[i];
+  //                 items.push(
+  //                   getItemComponent(allItems, itemId, handleFavorite)
+  //                 );
+  //               }
+  //               const emptySize = itemsPerRow - items.length;
+  //               for (let i = 0; i < emptySize; i++) {
+  //                 items.push(<Item key={i + toIndex} empty />);
+  //               }
+  //               return (
+  //                 <div className={row} key={key} style={style}>
+  //                   {items}
+  //                 </div>
+  //               );
+  //             }}
+  //           />
+  //         </div>
+  //       );
+  //     }}
+  //   </WindowScroller>
+  // );
 };
 
-export default VirtualizedList;
+export default memo(VirtualizedList);

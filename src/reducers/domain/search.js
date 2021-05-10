@@ -4,54 +4,58 @@ import {
   SUCCEEDED_SEARCH,
   ADD_FAVORITE_ITEM,
   DELETE_FAVORITE_ITEM,
-  CHANGE_ITEM_TYPE,
 } from "../../actions";
+
+const addItems = (state, data) => {
+  const byId = {};
+  const allIds = data.map((item) => {
+    byId[item.id] = item;
+    return item.id;
+  });
+  return { byId, allIds };
+};
+
+// dataはオブジェクトであることを想定
+const addFavoriteItem = (state, data) => {
+  const { byId } = state;
+  const updateItem = byId[data.id];
+  return {
+    ...state,
+    byId: {
+      ...byId,
+      [data.id]: { ...updateItem, isFavorite: true },
+    },
+  };
+};
+
+const deleteFavoriteItem = (state, data) => {
+  const { byId } = state;
+  const updateItem = byId[data.id];
+
+  if (!updateItem) {
+    console.log("No item to update.");
+    return state;
+  }
+
+  return {
+    ...state,
+    byId: {
+      ...byId,
+      [data.id]: { ...updateItem, isFavorite: false },
+    },
+  };
+};
 
 const searchReducer = (state = initState.search, { type, data }) => {
   switch (type) {
     case SUCCEEDED_SEARCH:
-      return {
-        ...state,
-        items: {
-          ...state.items,
-          all: data,
-        },
-        selectedTab: "all",
-      };
+      return addItems(state, data);
 
     case ADD_FAVORITE_ITEM:
-      return {
-        ...state,
-        items: {
-          ...state.items,
-          all: state.items.all.map((i) => {
-            if (i.id === data.id) i.isFavorite = true;
-            return i;
-          }),
-          favorites: [...state.items.favorites, data],
-        },
-      };
+      return addFavoriteItem(state, data);
 
     case DELETE_FAVORITE_ITEM:
-      return {
-        ...state,
-        items: {
-          ...state.items,
-          all: state.items.all.map((i) => {
-            if (i.id === data.id) i.isFavorite = false;
-            return i;
-          }),
-          favorites: state.items.favorites.filter(
-            (item) => item.id !== data.id
-          ),
-        },
-      };
-
-    case CHANGE_ITEM_TYPE:
-      return {
-        ...state,
-        selectedTab: data,
-      };
+      return deleteFavoriteItem(state, data);
 
     default:
       return state;

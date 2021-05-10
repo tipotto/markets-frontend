@@ -1,51 +1,27 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useState, useRef, useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import $ from "jquery";
-import { withStyles } from "@material-ui/core/styles";
+import React, { memo, useState, useRef, useCallback } from "react";
+import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import KeyboardArrowUpOutlinedIcon from "@material-ui/icons/KeyboardArrowUpOutlined";
 import clsx from "clsx";
-import InfiniteScroll from "react-infinite-scroller";
-import ScrollUpButton from "react-scroll-up-button";
 import Box from "@material-ui/core/Box";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import ToggleButton from "@material-ui/lab/ToggleButton";
-import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
-import MenuItem from "@material-ui/core/MenuItem";
 import Pagination from "@material-ui/lab/Pagination";
-import tabOptionsObject from "../../constants/TabOptions";
 import Header from "../organisms/Header";
 import Footer from "../organisms/Footer";
-// import Item from "../organisms/Item";
-import ItemList from "../organisms/ItemList";
 import VirtualizedList from "../organisms/VirtualizedList";
 import Form from "../organisms/Form";
 import FormData from "../../constants/FormData";
-import AdditionalSearchButton from "../molecules/AdditionalSearchButton";
 import {
   requestSearch,
-  loadItems,
   changeItemType,
-  resetLoadedItems,
   addFavoriteItem,
   deleteFavoriteItem,
 } from "../../actions";
-import { LOAD_ITEM_NUMBER, spliceArray } from "../../actions/function";
-import { platformArray } from "../../constants/SelectOptions";
-import commonStyles from "../../style/common";
 import topStyles from "../../style/top";
 
-// const scrollUpWindow = () => {
-//   const speed = 2000;
-//   const position = $("#result").offset().top;
-//   $("body,html").animate({ scrollTop: position }, speed, "swing");
-//   // $("body,html").animate({ scrollTop: "-=1000px" }, speed, "swing");
-// };
-
-export const useReferredState = (initialValue) => {
+const useReferredState = (initialValue) => {
   const [state, setState] = useState(initialValue);
   const reference = useRef(state);
 
@@ -57,50 +33,68 @@ export const useReferredState = (initialValue) => {
   return [reference, setReferredState];
 };
 
-const useMain = () => {
+const useTop = () => {
   const { common, loading, loadingText } = topStyles();
   const dispatch = useDispatch();
-  // const [selectedPlatform, setSelectedPlatform] = useState("mercari");
   const [page, setPage] = useReferredState(1);
   const [formValues, setFormValues] = useReferredState(null);
-  const allItems = useSelector((state) => state.search.items.all);
-  // const restItems = useSelector((state) => state.search.items.all.rest);
-  const favoriteItems = useSelector((state) => state.search.items.favorites);
+
+  // Reduxはデフォルトで値の比較を「===」で行う
+  // 以下の2つはプリミティブ型の値を参照するため問題なく比較できる
   const isLoading = useSelector((state) => state.state.isLoading);
-  const selectedTab = useSelector((state) => state.search.selectedTab);
 
-  // const _loadMore = () => {
-  //   console.log("_loadMore");
-  //   if (selectedTab !== "all") return;
+  // タブが切り替わる度に取得する値は替わる（all or favorite）
+  // そのため、Topが再レンダリングされる
+  const selectedTab = useSelector((state) => state.state.selectedTab);
 
-  //   const items = spliceArray(restItems);
-  //   dispatch(loadItems(items));
-  // };
+  // 以下の2つはオブジェクト型（Object, Array）の値を参照する
+  // そのため「===」ではなくshallowEqualを利用し、異なるオブジェクトであっても適切に比較できる
+
+  // 各オブジェクトの isFavorite が変更された場合、
+  // 変更を検知するため、Topが再レンダリングされる
+  const itemObj = useSelector((state) => state.search.byId, shallowEqual);
+  const favObj = useSelector((state) => state.like.byId, shallowEqual);
+
+  // 検索が実行される度に、itemIdsの値は変わる(favIdsの値は更新されない)
+  // そのため、Topが再レンダリングされる
+  const itemIds = useSelector((state) => state.search.allIds, shallowEqual);
+
+  // Likes ボタンがタップされる度に、favIdsの値は変わる
+  // そのため、Topが再レンダリングされる
+  const favIds = useSelector((state) => state.like.allIds, shallowEqual);
+
+  // const allItems = useMemo(() => {
+  //   console.log("AllItems is calculated.");
+  //   return itemIds.map((id) => {
+  //     return itemObj[id];
+  //   });
+  // }, [itemIds, favIds]);
+
+  // const favoriteItems = useMemo(() => {
+  //   console.log("FavoriteItems is calculated.");
+  //   return favIds.map((id) => {
+  //     return itemObj[id];
+  //   });
+  // }, [favIds]);
 
   const _getItemsByType = () => {
-    if (selectedTab === "all") return allItems;
-    if (selectedTab === "favorites") return favoriteItems;
-    return [];
+    console.log("_getItemsByType");
+    if (selectedTab === "all") {
+      return { byId: itemObj, allIds: itemIds };
+    }
+    if (selectedTab === "favorites") {
+      return { byId: favObj, allIds: favIds };
+    }
+    return {};
   };
 
   const handleCategoryChange = (event, newValue) => {
     console.log("tab value", newValue);
     dispatch(changeItemType(newValue));
-
-    // if (newValue === "all" && loadedItems.length > LOAD_ITEM_NUMBER) {
-    //   const items = spliceArray([...loadedItems, ...restItems]);
-    //   dispatch(resetLoadedItems(items));
-    // }
   };
 
-  // const handlePlatformChange = (event, platform) => {
-  //   console.log("platform", platform);
-  //   // console.log("platform", event.target.value);
-  //   setSelectedPlatform(platform);
-  // };
-
   const handleFavorite = useCallback((event, value) => {
-    console.log("handleFavorite", value);
+    // console.log("handleFavorite", value);
     if (value.isFavorite) {
       dispatch(addFavoriteItem(value));
     } else {
@@ -126,12 +120,20 @@ const useMain = () => {
   }, []);
 
   const _renderItems = () => {
-    const items = _getItemsByType();
-    console.log("renderItems", items);
+    const item = _getItemsByType();
+    // console.log("renderItems", itemObj);
 
-    if (!items.length) return [];
+    if (!Object.keys(item).length) return [];
 
-    return <VirtualizedList results={items} handleFavorite={handleFavorite} />;
+    // タブが切り替わる度に itemObj, itemIds として渡すpropsの値は変わる
+    // そのため、VirtualizedList は再レンダリングされる
+    return (
+      <VirtualizedList
+        itemObj={item.byId}
+        itemIds={item.allIds}
+        handleFavorite={handleFavorite}
+      />
+    );
   };
 
   const setContent = () => {
@@ -148,7 +150,8 @@ const useMain = () => {
       );
     }
 
-    if (!isLoading && !allItems.length) {
+    if (!isLoading && !itemIds.length) {
+      // if (!isLoading) {
       return (
         <div className={loading}>
           <span className={clsx(loadingText, common)}>
@@ -165,33 +168,25 @@ const useMain = () => {
     page,
     formValues,
     selectedTab,
-    // selectedPlatform,
-    // formData,
     handleCategoryChange,
-    // handlePlatformChange,
     handleFormValues,
     handleAdditionalSearch,
     setContent,
   };
 };
 
-const Main = (props) => {
+const Top = () => {
   const {
     page,
-    formValues,
     selectedTab,
-    // selectedPlatform,
-    // formData,
     handleCategoryChange,
-    // handlePlatformChange,
     handleFormValues,
     handleAdditionalSearch,
     setContent,
-  } = useMain();
-  // } = useMain(rootElement, scrollTotal);
-  const { wrapper } = props.classes;
+  } = useTop();
   const {
     common,
+    wrapper,
     main,
     serviceName,
     title,
@@ -202,22 +197,13 @@ const Main = (props) => {
     resultContainer,
     resultHeader,
     result,
-    box,
     itemTypeSelect,
     tabs,
     tab,
     pagination,
-    selectBox,
-    // results,
-    scrollUpBtn,
-    showBtn,
-    loading,
-    loadingText,
-    platformSelectGroup,
-    platformSelectBtn,
   } = topStyles();
 
-  console.log("Main");
+  console.log("Top is rendered.");
 
   return (
     <>
@@ -258,24 +244,11 @@ const Main = (props) => {
                   onChange={handleCategoryChange}
                   variant="scrollable"
                   scrollButtons="on"
-                  // allowScrollButtonsMobile
                   aria-label="scrollable force tabs example"
-                  // centered
                 >
                   <Tab className={tab} label="すべて" value="all" />
                   <Tab className={tab} label="お気に入り" value="favorites" />
-                  {/* <Tab className={tab} label="人気アイテム" value="likes" /> */}
-                  {/* {!restItems.length &&
-                  TabOptions.platforms.map((platform) => (
-                    <Tab
-                      key={platform.value}
-                      className={tabs}
-                      label={platform.label}
-                      value={platform.value}
-                    />
-                  ))} */}
                 </Tabs>
-                {/* {selectedTab === "all" && formValues.current && ( */}
                 {selectedTab === "all" && (
                   <Pagination
                     className={pagination}
@@ -286,51 +259,17 @@ const Main = (props) => {
                     onChange={handleAdditionalSearch}
                   />
                 )}
-                {/* {selectedTab === "likes" && (
-                  <ToggleButtonGroup
-                    className={platformSelectGroup}
-                    exclusive
-                    value={selectedPlatform}
-                    onChange={handlePlatformChange}
-                    aria-label="platform"
-                  >
-                    {tabOptionsObject.platforms.map((platform) => (
-                      <ToggleButton
-                        className={platformSelectBtn}
-                        key={platform.value}
-                        value={platform.value}
-                        aria-label={platform.value}
-                      >
-                        {platform.label}
-                      </ToggleButton>
-                    ))}
-                  </ToggleButtonGroup>
-                )} */}
               </Box>
             </div>
           </div>
           <div>
             <div>{setContent()}</div>
           </div>
-          {/* <AdditionalSearchButton
-            formValues={formValues}
-            handleAdditionalSearch={handleAdditionalSearch}
-          /> */}
         </div>
       </div>
       <Footer />
-      {/* <ScrollUpButton
-        StopPosition={0}
-        ShowAtPosition={1500}
-        EasingType="easeOutCubic"
-        AnimationDuration={1500}
-        ContainerClassName={scrollUpBtn}
-        TransitionClassName={showBtn}
-      >
-        <KeyboardArrowUpOutlinedIcon htmlColor="#fff" fontSize="large" />
-      </ScrollUpButton> */}
     </>
   );
 };
 
-export default withStyles(commonStyles)(Main);
+export default memo(Top);

@@ -2,6 +2,9 @@ import { makeStyles, createStyles } from "@material-ui/core/styles";
 
 const topStyles = makeStyles((theme) =>
   createStyles({
+    wrapper: {
+      backgroundColor: "#fff",
+    },
     main: {
       maxWidth: "65rem",
       margin: "0 auto",

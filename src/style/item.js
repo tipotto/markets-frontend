@@ -98,23 +98,23 @@ const itemStyles = makeStyles((theme) =>
         fontSize: "1.5rem",
       },
     },
-    deleteButton: {
-      background: "transparent !important",
-      padding: 0,
-      marginRight: ".3rem",
-      marginBottom: "-1.5rem",
-      border: "none",
-      [theme.breakpoints.down("xs")]: {
-        marginRight: ".1rem",
-        marginBottom: "-0.7rem",
-      },
-    },
-    deleteIcon: {
-      fontSize: "2.5rem",
-      [theme.breakpoints.down("xs")]: {
-        fontSize: "1.8rem",
-      },
-    },
+    // deleteButton: {
+    //   background: "transparent !important",
+    //   padding: 0,
+    //   marginRight: ".3rem",
+    //   marginBottom: "-1.5rem",
+    //   border: "none",
+    //   [theme.breakpoints.down("xs")]: {
+    //     marginRight: ".1rem",
+    //     marginBottom: "-0.7rem",
+    //   },
+    // },
+    // deleteIcon: {
+    //   fontSize: "2.5rem",
+    //   [theme.breakpoints.down("xs")]: {
+    //     fontSize: "1.8rem",
+    //   },
+    // },
   })
 );
 
