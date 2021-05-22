@@ -2,14 +2,18 @@ import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 import { connectRouter } from 'connected-react-router';
 import searchReducer from './domain/search';
+import likeReducer from './domain/like';
 import stateReducer from './app/state';
+import errorReducer from './app/error';
 
-const createRootReducer = (history) =>
+const rootReducer = (history) =>
   combineReducers({
-    form: formReducer,
     router: connectRouter(history),
+    form: formReducer,
     search: searchReducer,
+    like: likeReducer,
     state: stateReducer,
+    error: errorReducer,
   });
 
-export default createRootReducer;
+export default rootReducer;

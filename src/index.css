@@ -1,22 +1,11 @@
 html {
   /* 16px */
   font-size: 100%;
-  /* font-family: "Hiragino Sans", sans-serif;
-  line-height: 1.7;
-  letter-spacing: 1px; */
 }
 
 body {
   margin: 0;
   padding: 0;
-  font-family: "Avenir Next";
+  font-family: 'Avenir Next';
   width: 100%;
-  /* min-width: 1280px; */
 }
-
-/* div.MuiPopover-root
-  > div.MuiPaper-root
-  > ul.MuiList-root
-  > li.MuiButtonBase-root {
-  font-size: 1.5rem;
-} */

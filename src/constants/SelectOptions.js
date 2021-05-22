@@ -1,3 +1,9 @@
+export const platformArray = [
+  { label: 'メルカリ', value: 'mercari' },
+  { label: 'ラクマ', value: 'rakuma' },
+  { label: 'Paypay', value: 'paypay' },
+];
+
 export const mainCategoryArray = [
   //   { label: '未選択', value: 'unselected' },
   { label: 'すべて', value: 'all' },
@@ -85,64 +91,3 @@ export const subCategoryObject = {
   ],
   ticket: [],
 };
-
-// export const subCategoryObject = {
-//     //   unselected: [],
-//     all: [],
-//     fashion: [
-//       { label: 'レディース', value: 'ladies', selected: true },
-//       { label: 'メンズ', value: 'mens', selected: false },
-//     ],
-//     'food-beverage-alcohol': [
-//       { label: '食品', value: 'food', selected: true },
-//       { label: '飲料', value: 'beverage', selected: false },
-//       { label: '酒類', value: 'alcohol', selected: false },
-//     ],
-//     'sports-outdoor': [
-//       { label: 'スポーツ', value: 'sports', selected: true },
-//       { label: 'アウトドア', value: 'outdoor', selected: false },
-//     ],
-//     'diet-health': [],
-//     'cosmetic-beauty': [],
-//     'smartphone-tablet-pc': [
-//       { label: 'スマートフォン', value: 'smartphone', selected: true },
-//       { label: 'タブレット・PC', value: 'tablet-pc', selected: false },
-//     ],
-//     'tv-audio-camera': [
-//       { label: 'テレビ', value: 'tv', selected: true },
-//       { label: 'オーディオ機器', value: 'audio', selected: false },
-//       { label: 'カメラ', value: 'camera', selected: false },
-//     ],
-//     'home-appliances': [
-//       { label: '生活家電', value: 'home-appliances', selected: true },
-//       { label: '調理家電', value: 'cooking-appliances', selected: false },
-//       { label: '健康家電', value: 'health-appliances', selected: false },
-//       { label: '美容家電', value: 'beauty-appliances', selected: false },
-//       { label: '冷暖房・空調', value: 'air-conditioning', selected: false },
-//     ],
-//     'furniture-interior': [],
-//     'daily-necessities-accessories': [],
-//     handmade: [],
-//     'musical-instrument': [],
-//     game: [
-//       { label: 'テレビゲーム', value: 'video-game', selected: true },
-//       { label: 'トレーディングカード', value: 'trading-card', selected: false },
-//       { label: 'カードゲーム', value: 'card-game', selected: false },
-//       { label: 'ボードゲーム', value: 'board-game', selected: false },
-//     ],
-//     'toy-hobby': [],
-//     'baby-kids-maternity': [],
-//     'car-bike': [
-//       { label: '自動車', value: 'car', selected: true },
-//       { label: 'バイク', value: 'bike', selected: false },
-//       { label: '自転車', value: 'bicycle', selected: false },
-//     ],
-//     'cd-music': [],
-//     dvd: [],
-//     'book-magazine-cartoon': [
-//       { label: '本', value: 'book', selected: true },
-//       { label: '雑誌', value: 'magazine', selected: false },
-//       { label: '漫画', value: 'cartoon', selected: false },
-//     ],
-//     ticket: [],
-//   };

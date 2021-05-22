@@ -1,22 +1,23 @@
-import React from "react";
-import { createStyles, makeStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
+import React from 'react';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles(() =>
   createStyles({
     button: {
-      backgroundColor: "#57C5B6",
-      "&:hover": {
-        backgroundColor: "#57C5B6",
+      backgroundColor: '#57C5B6',
+      '&:hover': {
+        backgroundColor: '#57C5B6',
       },
     },
-  })
+  }),
 );
 
-const RadioButton = ({ disabled }) => {
+const SubmitButton = ({ disabled }) => {
   const classes = useStyles();
   return (
     <Button
+      id="submit"
       className={classes.button}
       type="submit"
       size="medium"
@@ -30,4 +31,4 @@ const RadioButton = ({ disabled }) => {
   );
 };
 
-export default RadioButton;
+export default SubmitButton;

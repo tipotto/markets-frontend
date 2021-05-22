@@ -1,41 +1,52 @@
-/* eslint-disable no-param-reassign */
-export const REQUEST_SEARCH = "REQUEST_SEARCH";
-export const SUCCEEDED_SEARCH = "SUCCEEDED_SEARCH";
-export const FAILED_SEARCH = "FAILED_SEARCH";
-export const LOAD_ITEMS = "LOAD_ITEMS";
-export const LOAD_ITEM_NUMBER = 15;
+export const REQUEST_SEARCH = 'REQUEST_SEARCH';
+export const REQUEST_ADDITIONAL_SEARCH = 'REQUEST_ADDITIONAL_SEARCH';
+export const SUCCEEDED_SEARCH = 'SUCCEEDED_SEARCH';
+export const FAILED_SEARCH = 'FAILED_SEARCH';
+export const LOAD_ITEMS = 'LOAD_ITEMS';
+export const ADD_FAVORITE_ITEM = 'ADD_FAVORITE_ITEM';
+export const DELETE_FAVORITE_ITEM = 'DELETE_FAVORITE_ITEM';
+export const CHANGE_ITEM_TYPE = 'CHANGE_ITEM_TYPE';
+export const RESET_LOADED_ITEMS = 'RESET_LOADED_ITEMS';
 
-const _spliceArray = (array) => {
-  const itemsArr = array;
-  const loadedArr = itemsArr.splice(0, LOAD_ITEM_NUMBER);
-  return { items: itemsArr, loaded: loadedArr };
-};
-
-const _checkPrices = (form) => {
-  if (!form.minPrice) form.minPrice = "0";
-  if (!form.maxPrice) form.maxPrice = "0";
-  return form;
-};
-
-export const requestSearch = (values, props) => ({
+export const requestSearch = () => ({
   type: REQUEST_SEARCH,
-  formValue: _checkPrices(values),
-  formProp: props,
-  // フォーム周りの必要な情報を定数で定義し、sagasのcreateDataメソッドで
-  // formDataのpropsを使うようにする。それによって、フォーム名や非同期処理のメソッド名、
-  // 遷移先のパスを参照でき、createDataメソッドの汎用性が高まりそう。
 });
 
-export const succeededSearch = (resData) => ({
+export const requestAdditionalSearch = () => ({
+  type: REQUEST_ADDITIONAL_SEARCH,
+});
+
+export const succeededSearch = (items) => ({
   type: SUCCEEDED_SEARCH,
-  resData: _spliceArray(resData),
+  data: items,
 });
 
-export const failedSearch = () => ({
+export const failedSearch = (error) => ({
   type: FAILED_SEARCH,
+  error,
 });
 
-export const loadItems = (params) => ({
-  type: LOAD_ITEMS,
-  moldedData: _spliceArray(params),
+// export const loadItems = (items) => ({
+//   type: LOAD_ITEMS,
+//   data: items,
+// });
+
+export const addFavoriteItem = (item) => ({
+  type: ADD_FAVORITE_ITEM,
+  data: item,
 });
+
+export const deleteFavoriteItem = (item) => ({
+  type: DELETE_FAVORITE_ITEM,
+  data: item,
+});
+
+export const changeItemType = (itemType) => ({
+  type: CHANGE_ITEM_TYPE,
+  data: itemType,
+});
+
+// export const resetLoadedItems = (items) => ({
+//   type: RESET_LOADED_ITEMS,
+//   data: items,
+// });

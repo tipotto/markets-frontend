@@ -1,15 +1,21 @@
 const initState = {
   search: {
-    items: [],
-    loaded: [],
-    // fetchItemNum: 0,
-    loadItemNum: 0,
+    byId: {},
+    allIds: [],
+  },
+  like: {
+    byId: {},
+    allIds: [],
   },
   state: {
     isLoading: false,
-    // hasError: false,
+    selectedTab: 'all',
   },
-  //   error: null
+  error: {
+    hasError: false,
+    status: null,
+    message: null,
+  },
 };
 
 export default initState;

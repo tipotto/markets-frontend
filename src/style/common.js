@@ -1,8 +1,8 @@
-const commonStyle = {
+const commonStyles = {
   wrapper: {
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
     // backgroundColor: '#f4fafa',
   },
 };
 
-export default commonStyle;
+export default commonStyles;
