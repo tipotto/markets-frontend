@@ -7,7 +7,7 @@ const Selectbox = ({
   children,
   meta: { touched, invalid, error },
   required,
-  rootClass = '',
+  rootClass = {},
 }) => {
   const { value } = input;
 

@@ -1,17 +1,15 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { memo } from "react";
-import clsx from "clsx";
-import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
-import CardMedia from "@material-ui/core/CardMedia";
-import Avatar from "@material-ui/core/Avatar";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import ToggleButton from "@material-ui/lab/ToggleButton";
-import mercariIcon from "../../images/mercari-icon.png";
-import rakumaIcon from "../../images/rakuma-icon.png";
-import paypayIcon from "../../images/paypay-icon.png";
-import itemStyles from "../../style/item";
+import React, { memo } from 'react';
+import clsx from 'clsx';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardMedia from '@material-ui/core/CardMedia';
+import Avatar from '@material-ui/core/Avatar';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import ToggleButton from '@material-ui/lab/ToggleButton';
+import mercariIcon from '../../images/mercari-icon.png';
+import rakumaIcon from '../../images/rakuma-icon.png';
+import paypayIcon from '../../images/paypay-icon.png';
+import itemStyles from '../../style/item';
 
 // const moldTitle = () => {
 //   const MAX_LENGTH = 18;
@@ -29,22 +27,22 @@ import itemStyles from "../../style/item";
 const setIcon = (service) => {
   let icon;
   let alt;
-  if (service === "mercari") {
+  if (service === 'mercari') {
     icon = mercariIcon;
-    alt = "mercari icon";
-  } else if (service === "rakuma") {
+    alt = 'mercari icon';
+  } else if (service === 'rakuma') {
     icon = rakumaIcon;
-    alt = "rakuma icon";
+    alt = 'rakuma icon';
   } else {
     icon = paypayIcon;
-    alt = "paypay icon";
+    alt = 'paypay icon';
   }
 
   return <Avatar alt={alt} src={icon} />;
 };
 
 const Item = ({ item, isFavorite, handleFavorite, empty }) => {
-  console.log("Item is rendered.");
+  // console.log('Item is rendered.');
   const {
     root,
     emptyBox,
@@ -74,7 +72,7 @@ const Item = ({ item, isFavorite, handleFavorite, empty }) => {
           <FavoriteIcon
             className={favIcon}
             style={{
-              color: isFavorite ? "#F2105A" : "#E795B0",
+              color: isFavorite ? '#F2105A' : '#E795B0',
             }}
           />
         </ToggleButton>

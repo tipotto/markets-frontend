@@ -1,73 +1,86 @@
-import React, { useState, memo } from "react";
-import { connect } from "react-redux";
-import { reduxForm, Field, reset, FieldArray } from "redux-form";
-import $ from "jquery";
-import MenuItem from "@material-ui/core/MenuItem";
-import { requestSearch } from "../../actions";
+import React, { memo } from 'react';
+import { useSelector, shallowEqual } from 'react-redux';
+import {
+  reduxForm,
+  Field,
+  FieldArray,
+  formValueSelector,
+  startSubmit,
+} from 'redux-form';
+import $ from 'jquery';
+import clsx from 'clsx';
+import MenuItem from '@material-ui/core/MenuItem';
+import { requestSearch } from '../../actions';
 import {
   mainCategoryArray,
   subCategoryObject,
-} from "../../constants/SelectOptions";
-import Selectbox from "../molecules/Selectbox";
-import CustomTextField from "../molecules/CustomTextField";
-import PlatformCheckbox from "../molecules/PlatformCheckbox";
-import ProductStatusCheckbox from "../molecules/ProductStatusCheckbox";
-import RadioButton from "../molecules/RadioButton";
-import RadioOptions from "../molecules/RadioOptions";
-import SubmitButton from "../molecules/SubmitButton";
-import radioOptionsObject from "../../constants/RadioOptions";
-import formStyles from "../../style/form";
+} from '../../constants/SelectOptions';
+import Selectbox from '../molecules/Selectbox';
+import CustomTextField from '../molecules/CustomTextField';
+import PlatformCheckbox from '../molecules/PlatformCheckbox';
+import ProductStatusCheckbox from '../molecules/ProductStatusCheckbox';
+import RadioButton from '../molecules/RadioButton';
+import RadioOptions from '../molecules/RadioOptions';
+import SubmitButton from '../molecules/SubmitButton';
+import radioOptionsObject from '../../constants/RadioOptions';
+import formStyles from '../../style/form';
+import FormData from '../../constants/FormData';
 
 const scrollDownWindow = () => {
   const speed = 1000;
-  const position = $("#result").offset().top;
-  $("body,html").animate({ scrollTop: position }, speed, "swing");
+  const position = $('#result').offset().top;
+  $('body,html').animate({ scrollTop: position }, speed, 'swing');
 };
 
-const submit = (dispatch, props, values) => {
-  dispatch(requestSearch(props, values));
-  dispatch(reset(props));
+const submit = (dispatch, change) => {
+  startSubmit(FormData.name);
+  change('page', 1);
+  dispatch(requestSearch());
   scrollDownWindow();
 };
 
-const Form = ({
-  handleSubmit,
-  submitting,
-  invalid,
-  change,
-  form,
-  handleFormValues,
-}) => {
-  console.log("Form is rendered.");
+const getCategory = (state) => {
+  const selector = formValueSelector(FormData.name);
+  const category = selector(state, 'category');
+  return category ? category[0] : { main: '', sub: '' };
+};
 
-  const { root, items, priceContainer, price, hyphen } = formStyles();
-  const [isShowSubCategory, setShowSubCategory] = useState(false);
-  const [subCategoryArray, setSubCategoryArray] = useState([]);
+const useForm = (change, items) => {
+  const { main, sub } = useSelector(
+    (state) => getCategory(state),
+    shallowEqual,
+  );
 
-  const fetchCategoryOptions = (categoryOptions) => {
-    return categoryOptions.map((category) => (
+  const fetchCategoryOptions = (categoryOptions) =>
+    categoryOptions.map((category) => (
       <MenuItem key={category.value} value={category.value}>
         {category.label}
       </MenuItem>
     ));
-  };
-
-  const handleSubCategory = (arr, isShowSubs) => {
-    setShowSubCategory(isShowSubs);
-    setSubCategoryArray(arr);
-  };
 
   const handleChange = (e, category) => {
-    const subCategoryArr = subCategoryObject[e.target.value];
-    if (subCategoryArr.length <= 0) {
-      change(`${category}.sub`, "");
-      handleSubCategory([], false);
-      return;
-    }
+    // newSubCategories / nextSubCategories
+    const subCategories = subCategoryObject[e.target.value];
 
-    const { value } = subCategoryArr[0];
-    change(`${category}.sub`, value);
-    handleSubCategory(subCategoryArr, true);
+    // console.log('selectedMain', main);
+    // console.log('selectedSub', sub);
+
+    // 今回選択したメインカテゴリにサブカテゴリが存在しない場合
+    if (!subCategories.length) {
+      // 以前に選択したメインカテゴリにサブカテゴリが存在しない場合
+      // 何もせずに処理を終了
+      if (!sub) return;
+
+      // 以前に選択したメインカテゴリにサブカテゴリが存在した場合
+      // サブカテゴリを隠す
+      // console.log('Hide subcategory.');
+      change(`${category}.sub`, '');
+    } else {
+      // サブカテゴリがある場合
+      // console.log('Change subcategory.');
+      const { value } = subCategories[0];
+      change(`${category}.sub`, value);
+    }
   };
 
   const renderCategories = ({ fields }) => {
@@ -85,43 +98,58 @@ const Form = ({
         >
           {fetchCategoryOptions(mainCategoryArray)}
         </Field>
-        {isShowSubCategory && subCategoryArray.length > 0 && (
+        {main && subCategoryObject[main].length > 0 && (
           <Field
             name={`${category}.sub`}
             label="サブカテゴリー"
             component={Selectbox}
             rootClass={items}
           >
-            {fetchCategoryOptions(subCategoryArray)}
+            {fetchCategoryOptions(subCategoryObject[main])}
           </Field>
         )}
       </div>
     ));
   };
 
+  return { renderCategories };
+};
+
+let Form = ({ handleSubmit, submitting, invalid, change }) => {
+  // console.log('Form is rendered.');
+
+  const {
+    root,
+    items,
+    keywordError,
+    platformsError,
+    priceContainer,
+    price,
+    hyphen,
+  } = formStyles();
+  const { renderCategories } = useForm(change, items);
+
   return (
     <form
       className={root}
       onSubmit={handleSubmit((values, dispatch) => {
-        submit(dispatch, form, values);
-        handleSubCategory([], false);
-        handleFormValues(values);
+        submit(dispatch, change);
       })}
       encType="multipart/form-data"
     >
       <FieldArray name="category" component={renderCategories} />
       <Field
         name="keyword"
-        label="検索ワード"
+        label="キーワード"
         component={CustomTextField}
-        rootClass={items}
+        rootClass={clsx(items, keywordError)}
         required
       />
       <Field
         name="platforms"
         label="フリマサイト"
         component={PlatformCheckbox}
-        rootClass={items}
+        rootClass={clsx(items, platformsError)}
         required
       />
       <div className={priceContainer}>
@@ -174,15 +202,12 @@ const Form = ({
   );
 };
 
-const formOption = reduxForm({
+Form = reduxForm({
+  form: FormData.name,
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
-})(memo(Form));
+  validate: FormData.validate,
+  initialValues: FormData.initialValues,
+})(Form);
 
-const formParam = (_, { form }) => ({
-  form: form.name || "leetName",
-  validate: form.validater,
-  initialValues: form.initialValues,
-});
-
-export default connect(formParam)(formOption);
+export default memo(Form);

@@ -1,6 +1,6 @@
 const commonStyles = {
   wrapper: {
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
     // backgroundColor: '#f4fafa',
   },
 };

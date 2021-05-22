@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
-import initState from "../initState";
-import { ADD_FAVORITE_ITEM, DELETE_FAVORITE_ITEM } from "../../actions";
+import initState from '../initState';
+import { ADD_FAVORITE_ITEM, DELETE_FAVORITE_ITEM } from '../../actions';
 
 // dataはitemオブジェクトであることを想定
 const addFavoriteItem = (state, data) => {

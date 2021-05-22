@@ -1,10 +1,10 @@
 /* eslint-disable no-param-reassign */
-import initState from "../initState";
+import initState from '../initState';
 import {
   SUCCEEDED_SEARCH,
   ADD_FAVORITE_ITEM,
   DELETE_FAVORITE_ITEM,
-} from "../../actions";
+} from '../../actions';
 
 const addItems = (state, data) => {
   const byId = {};
@@ -33,7 +33,7 @@ const deleteFavoriteItem = (state, data) => {
   const updateItem = byId[data.id];
 
   if (!updateItem) {
-    console.log("No item to update.");
+    console.log('No item to update.');
     return state;
   }
 

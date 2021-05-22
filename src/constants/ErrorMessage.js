@@ -1,6 +1,6 @@
 const ErrorMessage = {
-  KEYWORD_REQUIRED: '検索ワードを入力してください。',
-  PLATFORMS_REQUIRED: 'プラットフォームを選択してください。',
+  KEYWORD_REQUIRED: 'キーワードを入力してください。',
+  PLATFORMS_REQUIRED: 'フリマサイトを選択してください。',
 };
 
 export default ErrorMessage;

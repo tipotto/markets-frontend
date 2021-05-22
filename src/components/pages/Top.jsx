@@ -1,51 +1,49 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { memo, useState, useRef, useCallback } from "react";
-import { useDispatch, useSelector, shallowEqual } from "react-redux";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import clsx from "clsx";
-import Box from "@material-ui/core/Box";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import Pagination from "@material-ui/lab/Pagination";
-import Header from "../organisms/Header";
-import Footer from "../organisms/Footer";
-import VirtualizedList from "../organisms/VirtualizedList";
-import Form from "../organisms/Form";
-import FormData from "../../constants/FormData";
+import React, { memo, useCallback } from 'react';
+import { useDispatch, useSelector, shallowEqual } from 'react-redux';
+import { formValueSelector, startSubmit, change } from 'redux-form';
+import $ from 'jquery';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
+import clsx from 'clsx';
+import Box from '@material-ui/core/Box';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Pagination from '@material-ui/lab/Pagination';
+import Header from '../organisms/Header';
+import Footer from '../organisms/Footer';
+import VirtualizedList from '../organisms/VirtualizedList';
+import Form from '../organisms/Form';
+import FormData from '../../constants/FormData';
 import {
-  requestSearch,
+  requestAdditionalSearch,
   changeItemType,
   addFavoriteItem,
   deleteFavoriteItem,
-} from "../../actions";
-import topStyles from "../../style/top";
+} from '../../actions';
+import topStyles from '../../style/top';
 
-const useReferredState = (initialValue) => {
-  const [state, setState] = useState(initialValue);
-  const reference = useRef(state);
-
-  const setReferredState = (value) => {
-    reference.current = value;
-    setState(value);
-  };
-
-  return [reference, setReferredState];
+const getPage = (state) => {
+  const selector = formValueSelector(FormData.name);
+  const page = selector(state, 'page');
+  return page || 1;
 };
 
 const useTop = () => {
-  const { common, loading, loadingText } = topStyles();
+  const { common, loading, loadingText, errorText } = topStyles();
   const dispatch = useDispatch();
-  const [page, setPage] = useReferredState(1);
-  const [formValues, setFormValues] = useReferredState(null);
 
   // Reduxはデフォルトで値の比較を「===」で行う
   // 以下の2つはプリミティブ型の値を参照するため問題なく比較できる
+  const page = useSelector((state) => getPage(state));
+
   const isLoading = useSelector((state) => state.state.isLoading);
 
   // タブが切り替わる度に取得する値は替わる（all or favorite）
   // そのため、Topが再レンダリングされる
   const selectedTab = useSelector((state) => state.state.selectedTab);
+
+  const statusCode = useSelector((state) => state.error.status);
+  const errorMessage = useSelector((state) => state.error.message);
 
   // 以下の2つはオブジェクト型（Object, Array）の値を参照する
   // そのため「===」ではなくshallowEqualを利用し、異なるオブジェクトであっても適切に比較できる
@@ -78,18 +76,15 @@ const useTop = () => {
   // }, [favIds]);
 
   const _getItemsByType = () => {
-    console.log("_getItemsByType");
-    if (selectedTab === "all") {
+    // console.log('_getItemsByType');
+    if (selectedTab === 'all') {
       return { byId: itemObj, allIds: itemIds };
     }
-    if (selectedTab === "favorites") {
-      return { byId: favObj, allIds: favIds };
-    }
-    return {};
+    return { byId: favObj, allIds: favIds };
   };
 
   const handleCategoryChange = (event, newValue) => {
-    console.log("tab value", newValue);
+    // console.log('tab value', newValue);
     dispatch(changeItemType(newValue));
   };
 
@@ -102,21 +97,11 @@ const useTop = () => {
     }
   }, []);
 
-  const handleFormValues = useCallback((value) => {
-    console.log("value", value);
-    setFormValues(value);
-  }, []);
-
   const handleAdditionalSearch = useCallback((event, value) => {
-    console.log("formValues", formValues);
-    console.log("value", value);
-    setPage(value);
-
-    const newValue = { ...formValues.current, page: value };
-    console.log("newValue", newValue);
-
-    setFormValues(newValue);
-    dispatch(requestSearch(FormData.SEARCH, newValue));
+    // console.log("value", value);
+    startSubmit(FormData.name);
+    dispatch(change(FormData.name, 'page', value));
+    dispatch(requestAdditionalSearch());
   }, []);
 
   const _renderItems = () => {
@@ -137,7 +122,18 @@ const useTop = () => {
   };
 
   const setContent = () => {
-    console.log("setContent");
+    // console.log('setContent');
+
+    if (statusCode && errorMessage) {
+      return (
+        <div className={loading}>
+          <ErrorOutlineIcon color="secondary" fontSize="large" />
+          <span className={clsx(errorText, common)}>
+            {statusCode} {errorMessage}
+          </span>
+        </div>
+      );
+    }
 
     if (isLoading) {
       return (
@@ -166,13 +162,38 @@ const useTop = () => {
 
   return {
     page,
-    formValues,
     selectedTab,
     handleCategoryChange,
-    handleFormValues,
     handleAdditionalSearch,
     setContent,
   };
+};
+
+const showAboutService = (event) => {
+  const button = event.target;
+
+  const showText = $(button)
+    .parent('#about-service-container')
+    .find('#about-service-content');
+
+  const smallHeight = 150; // This is initial height.
+  const originalHeight = showText.css({ height: 'auto' }).height();
+
+  if (showText.hasClass('open')) {
+    /* CLOSE*/
+    showText.height(originalHeight).animate({ height: smallHeight }, 300);
+    showText.removeClass('open');
+    $(button).text('+ 続きを読む').removeClass('active');
+  } else {
+    /* OPEN*/
+    showText
+      .height(smallHeight)
+      .animate({ height: originalHeight }, 300, () => {
+        showText.height('auto');
+      });
+    showText.addClass('open');
+    $(button).text('- 閉じる').addClass('active');
+  }
 };
 
 const Top = () => {
@@ -180,7 +201,6 @@ const Top = () => {
     page,
     selectedTab,
     handleCategoryChange,
-    handleFormValues,
     handleAdditionalSearch,
     setContent,
   } = useTop();
@@ -194,6 +214,11 @@ const Top = () => {
     formContainer,
     sectionTitle,
     sectionDescription,
+    aboutContainer,
+    aboutSection,
+    aboutTitle,
+    aboutDescription,
+    aboutButton,
     resultContainer,
     resultHeader,
     result,
@@ -203,7 +228,7 @@ const Top = () => {
     pagination,
   } = topStyles();
 
-  console.log("Top is rendered.");
+  // console.log('Top is rendered.');
 
   return (
     <>
@@ -212,19 +237,61 @@ const Top = () => {
         <div className={main}>
           <div>
             <h1 className={serviceName}>
-              <span className={title}>フリマサイト検索</span>
+              <span className={title}>フリマサイト検索・比較</span>
               markets.jp
             </h1>
             <p className={clsx(siteDescription, common)}>
               複数のフリマサイトを一括検索し、商品を比較することができます。
             </p>
           </div>
+          <div id="about-service-container" className={aboutContainer}>
+            <h2 className={clsx(sectionTitle, common)}>markets.jpについて</h2>
+            <p className={clsx(sectionDescription, common)}>
+              このサービスについてご説明します。
+            </p>
+            <div id="about-service-content" className={aboutSection}>
+              <h3 className={clsx(aboutTitle, common)}>サービス概要</h3>
+              <p className={clsx(aboutDescription, common)}>
+                markets.jpは、複数のフリマサイトを一括検索し、その結果を統合して表示するサービスです。
+                フリマサイトの垣根を越えて、ご希望の商品を探したり、値段を比較することができます。
+                また、検索結果のアイテムをタップすることで、商品の詳細情報を確認したり、購入することができます。
+              </p>
+              <h3 className={clsx(aboutTitle, common)}>検索フォームについて</h3>
+              <p className={clsx(aboutDescription, common)}>
+                キーワードとフリマサイトは必ず指定してください。
+                また、検索オプションの「配送料の負担」で「購入者」を選択した場合、PayPayフリマは検索対象から除外されます（基本的にPayPayフリマは配送料無料のため）。
+              </p>
+
+              <h3 className={clsx(aboutTitle, common)}>
+                ハートアイコンについて
+              </h3>
+              <p className={clsx(aboutDescription, common)}>
+                検索結果の各アイテムにはハートアイコンが表示されます。そのアイコンをタップすることで、お気に入りに含めることができます。
+                お気に入りリストは、検索結果の「お気に入り」タブから閲覧できます。
+              </p>
+              <h3 className={clsx(aboutTitle, common)}>
+                ページネーションについて
+              </h3>
+              <p className={clsx(aboutDescription, common)}>
+                フォームを送信すると、入力されたキーワードで検索を行い、各フリマサイトの1ページ目の結果を統合して表示します。
+                2ページ目以降の結果を閲覧したい場合は、「あなたの検索結果」のページネーションをご利用ください。
+                検索結果として表示されるページを自由に指定することができます（最大10ページまで）。
+                ページネーションを利用する場合は、必ず検索フォームに「キーワード」と「フリマサイト」が指定されている必要があります。
+              </p>
+            </div>
+            <span
+              className={clsx(aboutButton, common)}
+              onClick={showAboutService}
+            >
+              + 続きを読む
+            </span>
+          </div>
           <div className={formContainer}>
             <h2 className={clsx(sectionTitle, common)}>検索フォーム</h2>
             <p className={clsx(sectionDescription, common)}>
               メルカリ、ラクマ、PayPayフリマに対応。豊富な検索オプションにより、精度の高い検索が可能です。
             </p>
-            <Form form={FormData.SEARCH} handleFormValues={handleFormValues} />
+            <Form />
           </div>
         </div>
         <div className={resultContainer}>
@@ -232,11 +299,12 @@ const Top = () => {
             <div id="result" className={resultHeader}>
               <h2 className={clsx(sectionTitle, common)}>あなたの検索結果</h2>
               <p className={clsx(sectionDescription, common)}>
-                気に入った商品をクリックして、各フリマサイトですぐに購入できます。
+                値段を比較して、気に入った商品は各フリマサイトで購入できます。
+                {/* 気に入った商品をタップして、各フリマサイトですぐに購入できます。 */}
               </p>
               <Box
                 className={itemTypeSelect}
-                sx={{ width: "100%", bgcolor: "background.paper" }}
+                sx={{ width: '100%', bgcolor: 'background.paper' }}
               >
                 <Tabs
                   className={tabs}
@@ -249,13 +317,14 @@ const Top = () => {
                   <Tab className={tab} label="すべて" value="all" />
                   <Tab className={tab} label="お気に入り" value="favorites" />
                 </Tabs>
-                {selectedTab === "all" && (
+                {selectedTab === 'all' && (
                   <Pagination
                     className={pagination}
                     count={10}
                     size="large"
                     shape="rounded"
-                    page={page.current}
+                    page={page}
+                    // page={page.current}
                     onChange={handleAdditionalSearch}
                   />
                 )}

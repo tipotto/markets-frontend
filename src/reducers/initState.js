@@ -9,7 +9,12 @@ const initState = {
   },
   state: {
     isLoading: false,
-    selectedTab: "all",
+    selectedTab: 'all',
+  },
+  error: {
+    hasError: false,
+    status: null,
+    message: null,
   },
 };
 
