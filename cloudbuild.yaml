@@ -13,6 +13,8 @@ steps:
       [
         'compute',
         'scp',
+        '-P',
+        '49152',
         '--recurse',
         './html',
         'markets-jp:/var/www',
