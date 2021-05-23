@@ -33,7 +33,7 @@ const deleteFavoriteItem = (state, data) => {
   const updateItem = byId[data.id];
 
   if (!updateItem) {
-    console.log('No item to update.');
+    // console.log('No item to update.');
     return state;
   }
 

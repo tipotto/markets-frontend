@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { persistStore } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
@@ -83,6 +83,7 @@ ReactDOM.render(
         <BrowserRouter>
           <Switch>
             <Route exact path="/" component={Top} />
+            <Route path="*" render={() => <Redirect to="/" />} />
           </Switch>
         </BrowserRouter>
       </PersistGate>
