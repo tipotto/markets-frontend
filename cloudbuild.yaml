@@ -1,0 +1,21 @@
+steps:
+  - name: node
+    entrypoint: yarn
+    args: ['install']
+  - name: node
+    entrypoint: yarn
+    args: ['build']
+  - name: 'bash'
+    args: ['mv', './build', 'html']
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      [
+        'compute',
+        'scp',
+        '--recurse',
+        './html',
+        'markets-jp:/var/www',
+        '--zone',
+        'asia-northeast1-b',
+      ]
