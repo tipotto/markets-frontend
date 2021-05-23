@@ -13,11 +13,9 @@ steps:
       [
         'compute',
         'scp',
-        '-P',
+        '--port',
         '49152',
         '--recurse',
         './html',
         'markets-jp:/var/www',
-        '--zone',
-        'asia-northeast1-b',
       ]
