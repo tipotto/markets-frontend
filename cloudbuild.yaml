@@ -1,15 +1,36 @@
 steps:
-  # - name: 'bash'
-  #   args: ['cloudbuild.sh']
-  - name: node
+  - id: 'Create env file'
+    name: 'ubuntu'
+    entrypoint: 'bash'
+    args:
+      - -c
+      - |
+        echo PORT=443 >> .env &&
+        echo REACT_APP_BACKEND_API="http://www.markets-jp.com:8080" >> .env &&
+
+  - id: 'Install dependencies'
+    name: node
     entrypoint: yarn
     args: ['install']
-  - name: node
-    entrypoint: yarn
-    args: ['build']
-  - name: 'bash'
+
+  - id: 'Build static files'
+    name: node
+    entrypoint: 'bash'
+    args:
+      - -c
+      - |
+        echo "node_modules >>> " $(ls node_modules) &&
+        yarn build &&
+        echo ".env >>> " $(cat .env)
+    # entrypoint: yarn
+    # args: ['build']
+
+  - id: 'Rename build file directory'
+    name: 'ubuntu'
     args: ['mv', './build', 'html']
-  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+
+  - id: 'Transfer html directory with scp'
+    name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: gcloud
     args:
       [
