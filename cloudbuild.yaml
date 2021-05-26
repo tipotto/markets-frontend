@@ -19,11 +19,9 @@ steps:
     args:
       - -c
       - |
+        echo ".env >>> " $(cat .env) &&
         echo "node_modules >>> " $(ls node_modules) &&
-        yarn build &&
-        echo ".env >>> " $(cat .env)
-    # entrypoint: yarn
-    # args: ['build']
+        yarn build
 
   - id: 'Rename build file directory'
     name: 'ubuntu'

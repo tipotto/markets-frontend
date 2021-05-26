@@ -51,14 +51,13 @@ const handleResponse = async (res) => {
   return { result: null, error };
 };
 
-const fetchItems = async (params) => {
-  return sendRequest('/api/v1/search', params)
+const fetchItems = async (params) =>
+  // return sendRequest('/api/v1/search', params)
+  sendRequest('https://www.markets-jp.com/api/v1/search', params)
     .then(handleResponse)
     .then((res) => res)
     .catch((e) => {
       const error = { status: 504, message: 'Gateway Timeout' };
       return { result: null, error };
     });
-};
-
 export default fetchItems;
