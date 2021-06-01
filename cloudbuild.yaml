@@ -10,7 +10,7 @@ steps:
 
   - id: 'Install necessary libraries for puppeteer'
     name: 'ubuntu'
-    entrypoint: 'yarn'
+    entrypoint: 'bash'
     args:
       - -c
       - |
