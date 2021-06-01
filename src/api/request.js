@@ -53,7 +53,7 @@ const handleResponse = async (res) => {
 
 const fetchItems = async (params) =>
   // return sendRequest('/api/v1/search', params)
-  sendRequest('https://www.markets-jp.com/api/v1/search', params)
+  sendRequest(process.env.REACT_APP_BACKEND_API, params)
     .then(handleResponse)
     .then((res) => res)
     .catch((e) => {
