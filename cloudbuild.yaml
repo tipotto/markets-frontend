@@ -8,23 +8,27 @@ steps:
         echo PORT=443 >> .env &&
         echo REACT_APP_BACKEND_API="https://www.markets-jp.com/api/v1/search" >> .env
 
-  - id: 'Install puppeteer and headless chrome'
+  - id: 'Install necessary libraries for puppeteer'
     name: 'ubuntu'
     entrypoint: 'bash'
     args:
       - -c
       - |
-        export DEBIAN_FRONTEND=noninteractive &&  
+        export DEBIAN_FRONTEND=noninteractive &&
         apt update &&
         apt install -y -q \
         gconf-service libasound2 libatk1.0-0 libatk-bridge2.0-0 libc6 libcairo2 libcups2 libdbus-1-3 \
         libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 \
         libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 \
         libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates \
-        fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget &&
-        yarn add puppeteer
+        fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget
 
-  - id: 'Install dependencies'
+  - id: 'Install puppeteer'
+    name: node
+    entrypoint: yarn
+    args: ['add', 'puppeteer']
+
+  - id: 'Install node modules'
     name: node
     entrypoint: yarn
     args: ['install']
@@ -43,7 +47,7 @@ steps:
     name: 'ubuntu'
     args: ['mv', './build', 'html']
 
-  - id: 'Transfer html directory with scp'
+  - id: 'Transfer built files with scp'
     name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: gcloud
     args:
