@@ -22,13 +22,11 @@ steps:
         libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 \
         libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates \
         fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget &&
-        yarn add puppeteer &&
-        yarn install &&
-        yarn build
-
-  - id: 'Rename build file directory'
-    name: 'ubuntu'
-    args: ['mv', './build', 'html']
+        apt install -y -q nodejs npm &&
+        npm i puppeteer &&
+        npm i &&
+        npm build &&
+        mv ./build html
 
   - id: 'Transfer built files with scp'
     name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
