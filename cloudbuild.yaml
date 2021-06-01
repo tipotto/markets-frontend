@@ -10,7 +10,6 @@ steps:
 
   - id: 'Install puppeteer and headless chrome'
     name: 'ubuntu'
-    entrypoint: 'bash'
     args:
       - -c
       - |
