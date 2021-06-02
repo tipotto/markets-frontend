@@ -6,8 +6,8 @@
     "build": "react-app-rewired build",
     "eject": "react-scripts eject",
     "lint": "eslint ./src",
-    "start": "react-app-rewired start",
-    "test": "react-app-rewired test"
+    "start": "react-scripts start",
+    "test": "react-scripts test"
   },
   "browserslist": {
     "production": [
