@@ -26,7 +26,6 @@ steps:
         npm i puppeteer &&
         npm run build &&
         mv ./build html
-    timeout: 1800s
 
   - id: 'Transfer built files with scp'
     name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
@@ -45,3 +44,4 @@ steps:
         './html',
         'markets-jp:/var/www',
       ]
+timeout: 1800s
