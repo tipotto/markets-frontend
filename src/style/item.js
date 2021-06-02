@@ -34,6 +34,7 @@ const itemStyles = makeStyles((theme) =>
           WebkitLineClamp: 2,
           overflow: 'hidden',
           textOverflow: 'ellipsis',
+          textAlign: 'left',
         },
       },
     },

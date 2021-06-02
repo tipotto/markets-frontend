@@ -300,7 +300,6 @@ const Top = () => {
               <h2 className={clsx(sectionTitle, common)}>あなたの検索結果</h2>
               <p className={clsx(sectionDescription, common)}>
                 値段を比較して、気に入った商品は各フリマサイトで購入できます。
-                {/* 気に入った商品をタップして、各フリマサイトですぐに購入できます。 */}
               </p>
               <Box
                 className={itemTypeSelect}
@@ -324,7 +323,6 @@ const Top = () => {
                     size="large"
                     shape="rounded"
                     page={page}
-                    // page={page.current}
                     onChange={handleAdditionalSearch}
                   />
                 )}

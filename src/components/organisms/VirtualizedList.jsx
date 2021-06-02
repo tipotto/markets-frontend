@@ -12,6 +12,7 @@ import {
 const useStyles = makeStyles(() => ({
   cardArea: {
     marginTop: 10,
+    backgroundColor: '#fff',
     '&>div.ReactVirtualized__List': {
       outline: 'none',
     },
