@@ -34,18 +34,14 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const getItemComponent = (itemObj, itemId, handleFavorite) => {
-  const item = itemObj[itemId];
-  if (!item) return null;
-  return (
-    <Item
-      key={item.id}
-      item={item}
-      isFavorite={item.isFavorite}
-      handleFavorite={handleFavorite}
-    />
-  );
-};
+const getItemComponent = (item, handleFavorite) => (
+  <Item
+    key={item.id}
+    item={item}
+    isFavorite={item.isFavorite}
+    handleFavorite={handleFavorite}
+  />
+);
 
 const VirtualizedList = ({ itemObj, itemIds, handleFavorite }) => {
   // console.log('VirtualizedList is rendered.');
@@ -79,9 +75,14 @@ const VirtualizedList = ({ itemObj, itemIds, handleFavorite }) => {
                 );
                 for (let i = fromIndex; i < toIndex; i++) {
                   const itemId = itemIds[i];
-                  itemList.push(
-                    getItemComponent(itemObj, itemId, handleFavorite),
-                  );
+                  const item = itemObj[itemId];
+                  if (!item) continue;
+
+                  // 画像のプリロード
+                  const img = new Image();
+                  img.src = item.imageUrl;
+
+                  itemList.push(getItemComponent(item, handleFavorite));
                 }
                 const emptySize = itemsPerRow - itemList.length;
                 for (let i = 0; i < emptySize; i++) {

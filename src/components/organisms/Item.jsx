@@ -42,7 +42,6 @@ const setIcon = (service) => {
 };
 
 const Item = ({ item, isFavorite, handleFavorite, empty }) => {
-  // console.log('Item is rendered.');
   const {
     root,
     emptyBox,
@@ -59,6 +58,7 @@ const Item = ({ item, isFavorite, handleFavorite, empty }) => {
   if (empty) return <Card className={clsx(root, emptyBox)} />;
 
   const { title, price, imageUrl, detailUrl, platform } = item;
+
   return (
     <Card className={root}>
       <CardHeader className={header} avatar={setIcon(platform)} title={title} />

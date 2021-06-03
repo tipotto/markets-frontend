@@ -2,7 +2,6 @@ const sendRequest = async (endPoint, body) => {
   const fetchOptions = {
     method: 'POST',
     mode: 'cors',
-    // credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
       'X-Requested-With': 'fetch',
@@ -52,7 +51,7 @@ const handleResponse = async (res) => {
 };
 
 const fetchItems = async (params) =>
-  // return sendRequest('/api/v1/search', params)
+  // sendRequest('/api/v1/search', params)
   sendRequest(process.env.REACT_APP_BACKEND_API, params)
     .then(handleResponse)
     .then((res) => res)
