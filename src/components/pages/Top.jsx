@@ -319,7 +319,7 @@ const Top = () => {
                 {selectedTab === 'all' && (
                   <Pagination
                     className={pagination}
-                    count={10}
+                    count={5}
                     size="large"
                     shape="rounded"
                     page={page}
