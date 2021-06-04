@@ -241,11 +241,11 @@ const Top = () => {
               markets.jp
             </h1>
             <p className={clsx(siteDescription, common)}>
-              複数のフリマサイトを一括検索し、商品を比較することができます。
+              複数のフリマサイトを一括検索し、アイテムを比較できるサービス
             </p>
           </div>
           <div id="about-service-container" className={aboutContainer}>
-            <h2 className={clsx(sectionTitle, common)}>markets.jpについて</h2>
+            <h2 className={clsx(sectionTitle, common)}>markets.jpとは？</h2>
             <p className={clsx(sectionDescription, common)}>
               このサービスについてご説明します。
             </p>
@@ -253,30 +253,30 @@ const Top = () => {
               <h3 className={clsx(aboutTitle, common)}>サービス概要</h3>
               <p className={clsx(aboutDescription, common)}>
                 markets.jpは、複数のフリマサイトを一括検索し、その結果を統合して表示するサービスです。
-                フリマサイトの垣根を越えて、ご希望の商品を探したり、値段を比較することができます。
-                また、検索結果のアイテムをタップすることで、商品の詳細情報を確認したり、購入することができます。
+                フリマサイトの垣根を越えて、ご希望のアイテムを探したり、価格を比較することができます。
+                また、検索結果をタップすることで、各サイトで出品アイテムの詳細情報を確認したり、購入することができます。
               </p>
               <h3 className={clsx(aboutTitle, common)}>検索フォームについて</h3>
               <p className={clsx(aboutDescription, common)}>
                 キーワードとフリマサイトは必ず指定してください。
-                また、検索オプションの「配送料の負担」で「購入者」を選択した場合、PayPayフリマは検索対象から除外されます（基本的にPayPayフリマは配送料無料のため）。
+                また、検索オプションの「配送料の負担」で「購入者」を選択した場合、PayPayフリマは検索対象から除外されます（PayPayフリマは配送料無料のため）。
               </p>
 
               <h3 className={clsx(aboutTitle, common)}>
                 ハートアイコンについて
               </h3>
               <p className={clsx(aboutDescription, common)}>
-                検索結果の各アイテムにはハートアイコンが表示されます。そのアイコンをタップすることで、お気に入りに含めることができます。
-                お気に入りリストは、検索結果の「お気に入り」タブから閲覧できます。
+                検索結果の各アイテムにはハートアイコンが表示されます。そのアイコンをタップして、お気に入りに含めることができます。
+                お気に入りリストは「フリマサイトの検索結果」から確認できます。
               </p>
               <h3 className={clsx(aboutTitle, common)}>
                 ページネーションについて
               </h3>
               <p className={clsx(aboutDescription, common)}>
-                フォームを送信すると、入力されたキーワードで検索を行い、各フリマサイトの1ページ目の結果を統合して表示します。
-                2ページ目以降の結果を閲覧したい場合は、「あなたの検索結果」のページネーションをご利用ください。
-                検索結果として表示されるページを自由に指定することができます（最大5ページまで）。
-                ページネーションを利用する場合は、必ず検索フォームに「キーワード」と「フリマサイト」が指定されている必要があります。
+                フォームを送信すると、入力されたキーワードで検索を行い、各フリマサイトの1ページ目の出品アイテムを統合して表示します。
+                2ページ目以降の結果を閲覧したい場合は、「フリマサイトの検索結果」のページネーションをご利用ください。
+                検索結果として表示するページを自由に指定することができます（最大5ページまで）。
+                ページネーションを利用する場合は、必ず検索フォームに「キーワード」と「フリマサイト」を指定してください。
               </p>
             </div>
             <span
@@ -289,7 +289,7 @@ const Top = () => {
           <div className={formContainer}>
             <h2 className={clsx(sectionTitle, common)}>検索フォーム</h2>
             <p className={clsx(sectionDescription, common)}>
-              メルカリ、ラクマ、PayPayフリマに対応。豊富な検索オプションにより、精度の高い検索が可能です。
+              メルカリ、ラクマ、PayPayフリマに対応。豊富な検索オプションで、高精度のサイト検索・比較が可能です。
             </p>
             <Form />
           </div>
@@ -297,9 +297,11 @@ const Top = () => {
         <div className={resultContainer}>
           <div className={clsx(main, result)}>
             <div id="result" className={resultHeader}>
-              <h2 className={clsx(sectionTitle, common)}>あなたの検索結果</h2>
+              <h2 className={clsx(sectionTitle, common)}>
+                フリマサイトの検索結果
+              </h2>
               <p className={clsx(sectionDescription, common)}>
-                値段を比較して、気に入った商品は各フリマサイトで購入できます。
+                価格を比較して、気に入ったアイテムは各サイトで購入できます。
               </p>
               <Box
                 className={itemTypeSelect}
