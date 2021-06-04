@@ -155,14 +155,14 @@ let Form = ({ handleSubmit, submitting, invalid, change }) => {
       <div className={priceContainer}>
         <Field
           name="minPrice"
-          label="最低金額"
+          label="最低価格"
           component={CustomTextField}
           rootClass={price}
         />
         <span className={hyphen}>〜</span>
         <Field
           name="maxPrice"
-          label="最高金額"
+          label="最高価格"
           component={CustomTextField}
           rootClass={price}
         />

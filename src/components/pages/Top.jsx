@@ -253,30 +253,25 @@ const Top = () => {
               <h3 className={clsx(aboutTitle, common)}>サービス概要</h3>
               <p className={clsx(aboutDescription, common)}>
                 markets.jpは、複数のフリマサイトを一括検索し、その結果を統合して表示するサービスです。
-                フリマサイトの垣根を越えて、ご希望のアイテムを探したり、価格を比較することができます。
-                また、検索結果をタップすることで、各サイトで出品アイテムの詳細情報を確認したり、購入することができます。
+                フリマサイトの垣根を越えて、ご希望のアイテムを探したり、価格を比較できます。
+                また、検索結果をタップして、各サイトで詳細情報の確認・購入ができます。
               </p>
-              <h3 className={clsx(aboutTitle, common)}>検索フォームについて</h3>
+              <h3 className={clsx(aboutTitle, common)}>フリマサイト検索</h3>
               <p className={clsx(aboutDescription, common)}>
                 キーワードとフリマサイトは必ず指定してください。
-                また、検索オプションの「配送料の負担」で「購入者」を選択した場合、PayPayフリマは検索対象から除外されます（PayPayフリマは配送料無料のため）。
+                また、検索オプションの「配送料の負担」で「購入者」を選択した場合、PayPayフリマは検索対象から除外されます（PayPayフリマは配送無料のため）。
               </p>
 
-              <h3 className={clsx(aboutTitle, common)}>
-                ハートアイコンについて
-              </h3>
+              <h3 className={clsx(aboutTitle, common)}>ハートアイコン</h3>
               <p className={clsx(aboutDescription, common)}>
-                検索結果の各アイテムにはハートアイコンが表示されます。そのアイコンをタップして、お気に入りに含めることができます。
+                検索結果のアイテムにはハートアイコンが表示されます。そのアイコンをタップして、お気に入りに含めることができます。
                 お気に入りリストは「フリマサイトの検索結果」から確認できます。
               </p>
-              <h3 className={clsx(aboutTitle, common)}>
-                ページネーションについて
-              </h3>
+              <h3 className={clsx(aboutTitle, common)}>ページ選択機能</h3>
               <p className={clsx(aboutDescription, common)}>
-                フォームを送信すると、入力されたキーワードで検索を行い、各フリマサイトの1ページ目の出品アイテムを統合して表示します。
-                2ページ目以降の結果を閲覧したい場合は、「フリマサイトの検索結果」のページネーションをご利用ください。
-                検索結果として表示するページを自由に指定することができます（最大5ページまで）。
-                ページネーションを利用する場合は、必ず検索フォームに「キーワード」と「フリマサイト」を指定してください。
+                このサービスは、入力されたキーワードで検索を行い、各フリマサイトの1ページ目の出品アイテムを統合して表示します。
+                2ページ目以降の内容を閲覧したい場合は、「フリマサイトの検索結果」のページ選択機能で、表示するページを自由に指定できます（最大5ページまで）。
+                ページ選択機能を利用する場合は、必ず検索フォームの「キーワード」と「フリマサイト」を指定してください。
               </p>
             </div>
             <span
@@ -287,7 +282,7 @@ const Top = () => {
             </span>
           </div>
           <div className={formContainer}>
-            <h2 className={clsx(sectionTitle, common)}>検索フォーム</h2>
+            <h2 className={clsx(sectionTitle, common)}>フリマサイト検索</h2>
             <p className={clsx(sectionDescription, common)}>
               メルカリ、ラクマ、PayPayフリマに対応。豊富な検索オプションで、高精度のサイト検索・比較が可能です。
             </p>
