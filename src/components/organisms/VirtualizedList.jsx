@@ -65,7 +65,7 @@ const VirtualizedList = ({ itemObj, itemIds, handleFavorite }) => {
               scrollTop={scrollTop}
               rowCount={rowCount}
               rowHeight={itemHeight + ROW_HEIGHT_MARGIN}
-              overscanRowCount={10}
+              overscanRowCount={5}
               rowRenderer={({ index, key, style }) => {
                 const itemList = [];
                 const fromIndex = index * itemsPerRow;
