@@ -4,9 +4,9 @@ import { List, WindowScroller } from 'react-virtualized';
 import { makeStyles } from '@material-ui/core/styles';
 import Item from './Item';
 import {
-  ROW_HEIGHT_MARGIN,
   getItemSize,
   getItemsPerRow,
+  getRowHeightMargin,
 } from '../../constants/VirtualizedList';
 
 const useStyles = makeStyles(() => ({
@@ -22,13 +22,13 @@ const useStyles = makeStyles(() => ({
     display: 'flex',
     justifyContent: 'center',
     '&>div.MuiPaper-root': {
-      marginLeft: '5px',
-      marginRight: '5px',
+      marginLeft: '2.5px',
+      marginRight: '2.5px',
       '&:first-child': {
-        marginLeft: '10px',
+        marginLeft: '7px',
       },
       '&:last-child': {
-        marginRight: '10px',
+        marginRight: '7px',
       },
     },
   },
@@ -64,7 +64,7 @@ const VirtualizedList = ({ itemObj, itemIds, handleFavorite }) => {
               isScrolling={isScrolling}
               scrollTop={scrollTop}
               rowCount={rowCount}
-              rowHeight={itemHeight + ROW_HEIGHT_MARGIN}
+              rowHeight={itemHeight + getRowHeightMargin(width)}
               overscanRowCount={5}
               rowRenderer={({ index, key, style }) => {
                 const itemList = [];

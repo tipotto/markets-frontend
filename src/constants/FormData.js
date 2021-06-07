@@ -14,6 +14,7 @@ const FormData = {
     salesStatus: 'all',
     deliveryCost: 'all',
     sortOrder: 'asc',
+    keywordFilter: 'use',
   },
 };
 

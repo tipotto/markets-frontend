@@ -197,6 +197,14 @@ let Form = ({ handleSubmit, submitting, invalid, change }) => {
       >
         <RadioOptions options={radioOptionsObject.sortOrder} />
       </Field>
+      <Field
+        name="keywordFilter"
+        label="検索対象"
+        component={RadioButton}
+        rootClass={items}
+      >
+        <RadioOptions options={radioOptionsObject.keywordFilter} />
+      </Field>
       <SubmitButton disabled={invalid || submitting} />
     </form>
   );

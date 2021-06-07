@@ -13,6 +13,10 @@ const radioOptionsObject = {
     { label: '価格の安い順', value: 'asc' },
     { label: '価格の高い順', value: 'desc' },
   ],
+  keywordFilter: [
+    { label: '商品名', value: 'use' },
+    { label: '商品名・説明文', value: 'unuse' },
+  ],
 };
 
 export default radioOptionsObject;

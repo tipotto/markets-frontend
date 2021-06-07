@@ -66,13 +66,16 @@ const itemStyles = makeStyles((theme) =>
       width: '100%',
       display: 'flex',
       justifyContent: 'space-between',
-      marginTop: '-2.6rem',
+      marginTop: '-2.8rem',
       background: 'transparent',
       [theme.breakpoints.only('xs')]: {
-        marginTop: '-2.3rem',
+        marginTop: '-2.7rem',
       },
       [theme.breakpoints.only('sm')]: {
-        marginTop: '-2.4rem',
+        marginTop: '-3rem',
+      },
+      [theme.breakpoints.only('md')]: {
+        marginTop: '-3.2rem',
       },
     },
     priceLabel: {

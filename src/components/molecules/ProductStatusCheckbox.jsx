@@ -83,7 +83,7 @@ const ProductStatusCheckbox = ({
         <FormControlLabel
           value="noticeable_scratches_or_stains"
           control={<GreenCheckbox />}
-          label="目立つ傷・汚れあり"
+          label="傷・汚れあり"
           checked={
             !!(
               arr.includes('noticeable_scratches_or_stains') ||

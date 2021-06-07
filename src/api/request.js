@@ -51,8 +51,8 @@ const handleResponse = async (res) => {
 };
 
 const fetchItems = async (params) =>
-  // sendRequest('/api/v1/search', params)
-  sendRequest(process.env.REACT_APP_BACKEND_API, params)
+  sendRequest('/api/v1/search', params)
+    // sendRequest(process.env.REACT_APP_BACKEND_API, params)
     .then(handleResponse)
     .then((res) => res)
     .catch((e) => {

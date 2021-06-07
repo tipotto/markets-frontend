@@ -1,4 +1,4 @@
-export const ROW_HEIGHT_MARGIN = 16;
+export const ROW_HEIGHT_MARGIN = 10;
 export const SMARTPHONE_BREAKPOINT = 360;
 export const TABLET_BREAKPOINT = 768;
 export const PC_BREAKPOINT = 1025;
@@ -25,4 +25,12 @@ export const getItemsPerRow = (width) => {
   }
 
   return 5;
+};
+
+export const getRowHeightMargin = (width) => {
+  if (width < TABLET_BREAKPOINT) {
+    return 7;
+  }
+
+  return 16;
 };
