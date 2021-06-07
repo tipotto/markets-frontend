@@ -23,7 +23,6 @@ import itemStyles from '../../style/item';
 //   return String(price).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
 // };
 
-// TODO: フロントエンドよりも、バックエンドで処理した方が良さそう
 const setIcon = (service) => {
   let icon;
   let alt;
