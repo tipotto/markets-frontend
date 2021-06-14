@@ -20,7 +20,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Header = () => {
+const Footer = () => {
   const classes = useStyles();
   return (
     <footer className={classes.appBar}>
@@ -33,4 +33,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default Footer;

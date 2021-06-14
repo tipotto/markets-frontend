@@ -211,11 +211,11 @@ let Form = ({ handleSubmit, submitting, invalid, change }) => {
 };
 
 Form = reduxForm({
-  form: FormData.name,
+  form: FormData.search.name,
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
-  validate: FormData.validate,
-  initialValues: FormData.initialValues,
+  validate: FormData.search.validate,
+  initialValues: FormData.search.initialValues,
 })(Form);
 
 export default memo(Form);

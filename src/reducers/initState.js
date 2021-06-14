@@ -7,6 +7,10 @@ const initState = {
     byId: {},
     allIds: [],
   },
+  analyze: {
+    byId: {},
+    allIds: [],
+  },
   state: {
     isLoading: false,
     selectedTab: 'all',

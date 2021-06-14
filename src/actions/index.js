@@ -2,6 +2,9 @@ export const REQUEST_SEARCH = 'REQUEST_SEARCH';
 export const REQUEST_ADDITIONAL_SEARCH = 'REQUEST_ADDITIONAL_SEARCH';
 export const SUCCEEDED_SEARCH = 'SUCCEEDED_SEARCH';
 export const FAILED_SEARCH = 'FAILED_SEARCH';
+export const REQUEST_ANALYSIS = 'REQUEST_ANALYSIS';
+export const SUCCEEDED_ANALYSIS = 'SUCCEEDED_ANALYSIS';
+export const FAILED_ANALYSIS = 'FAILED_ANALYSIS';
 export const LOAD_ITEMS = 'LOAD_ITEMS';
 export const ADD_FAVORITE_ITEM = 'ADD_FAVORITE_ITEM';
 export const DELETE_FAVORITE_ITEM = 'DELETE_FAVORITE_ITEM';
@@ -10,6 +13,11 @@ export const RESET_LOADED_ITEMS = 'RESET_LOADED_ITEMS';
 
 export const requestSearch = () => ({
   type: REQUEST_SEARCH,
+});
+
+export const requestAnalysis = (searchType) => ({
+  type: REQUEST_ANALYSIS,
+  data: searchType,
 });
 
 export const requestAdditionalSearch = () => ({
@@ -21,8 +29,18 @@ export const succeededSearch = (items) => ({
   data: items,
 });
 
+export const succeededAnalysis = (items) => ({
+  type: SUCCEEDED_ANALYSIS,
+  data: items,
+});
+
 export const failedSearch = (error) => ({
   type: FAILED_SEARCH,
+  error,
+});
+
+export const failedAnalysis = (error) => ({
+  type: FAILED_ANALYSIS,
   error,
 });
 

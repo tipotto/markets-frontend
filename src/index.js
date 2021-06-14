@@ -9,6 +9,7 @@ import createBreakpoints from '@material-ui/core/styles/createBreakpoints';
 import * as serviceWorker from './serviceWorker';
 import storeCreator from './store';
 import Top from './components/pages/Top';
+import Analytics from './components/pages/Analytics';
 import './index.css';
 
 const store = storeCreator();
@@ -82,7 +83,8 @@ ReactDOM.render(
       <PersistGate loading={null} persistor={persistor}>
         <BrowserRouter>
           <Switch>
-            <Route exact path="/" component={Top} />
+            <Route exact path="/" component={Analytics} />
+            {/* <Route exact path="/" component={Top} /> */}
             <Route path="*" render={() => <Redirect to="/" />} />
           </Switch>
         </BrowserRouter>

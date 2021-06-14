@@ -50,7 +50,7 @@ const handleResponse = async (res) => {
   return { result: null, error };
 };
 
-const fetchItems = async (params) =>
+export const fetchItems = async (params) =>
   // sendRequest('/api/v1/search', params)
   sendRequest(process.env.REACT_APP_BACKEND_API, params)
     .then(handleResponse)
@@ -59,4 +59,13 @@ const fetchItems = async (params) =>
       const error = { status: 504, message: 'Gateway Timeout' };
       return { result: null, error };
     });
-export default fetchItems;
+
+export const analyzeData = async (params) =>
+  // sendRequest('/api/v1/analyze', params)
+  sendRequest(process.env.REACT_APP_BACKEND_API, params)
+    .then(handleResponse)
+    .then((res) => res)
+    .catch((e) => {
+      const error = { status: 504, message: 'Gateway Timeout' };
+      return { result: null, error };
+    });

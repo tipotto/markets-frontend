@@ -23,7 +23,7 @@ import {
 import topStyles from '../../style/top';
 
 const getPage = (state) => {
-  const selector = formValueSelector(FormData.name);
+  const selector = formValueSelector(FormData.search.name);
   const page = selector(state, 'page');
   return page || 1;
 };
@@ -99,8 +99,8 @@ const useTop = () => {
 
   const handleAdditionalSearch = useCallback((event, value) => {
     // console.log("value", value);
-    startSubmit(FormData.name);
-    dispatch(change(FormData.name, 'page', value));
+    startSubmit(FormData.search.name);
+    dispatch(change(FormData.search.name, 'page', value));
     dispatch(requestAdditionalSearch());
   }, []);
 
