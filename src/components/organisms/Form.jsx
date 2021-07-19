@@ -14,7 +14,7 @@ import { requestSearch } from '../../actions';
 import {
   mainCategoryArray,
   subCategoryObject,
-} from '../../constants/SelectOptions';
+} from '../../constants/selectOptions';
 import Selectbox from '../molecules/Selectbox';
 import CustomTextField from '../molecules/CustomTextField';
 import PlatformCheckbox from '../molecules/PlatformCheckbox';
@@ -22,9 +22,9 @@ import ProductStatusCheckbox from '../molecules/ProductStatusCheckbox';
 import RadioButton from '../molecules/RadioButton';
 import RadioOptions from '../molecules/RadioOptions';
 import SubmitButton from '../molecules/SubmitButton';
-import radioOptionsObject from '../../constants/RadioOptions';
-import formStyles from '../../style/form';
-import FormData from '../../constants/FormData';
+import radioOptionsObject from '../../constants/radioOptions';
+import formCss from '../../style/form';
+import formData from '../../constants/formData';
 
 const scrollDownWindow = () => {
   const speed = 1000;
@@ -33,14 +33,15 @@ const scrollDownWindow = () => {
 };
 
 const submit = (dispatch, change) => {
-  startSubmit(FormData.name);
+  startSubmit(formData.search.name);
+  change('type', 'initial');
   change('page', 1);
   dispatch(requestSearch());
   scrollDownWindow();
 };
 
 const getCategory = (state) => {
-  const selector = formValueSelector(FormData.name);
+  const selector = formValueSelector(formData.search.name);
   const category = selector(state, 'category');
   return category ? category[0] : { main: '', sub: '' };
 };
@@ -126,7 +127,7 @@ let Form = ({ handleSubmit, submitting, invalid, change }) => {
     priceContainer,
     price,
     hyphen,
-  } = formStyles();
+  } = formCss();
   const { renderCategories } = useForm(change, items);
 
   return (
@@ -146,12 +147,26 @@ let Form = ({ handleSubmit, submitting, invalid, change }) => {
         required
       />
       <Field
+        name="negKeyword"
+        label="除外キーワード"
+        component={CustomTextField}
+        rootClass={clsx(items, keywordError)}
+      />
+      <Field
         name="platforms"
         label="フリマサイト"
         component={PlatformCheckbox}
         rootClass={clsx(items, platformsError)}
         required
       />
+      <Field
+        name="searchRange"
+        label="検索範囲"
+        component={RadioButton}
+        rootClass={items}
+      >
+        <RadioOptions options={radioOptionsObject.searchRange} />
+      </Field>
       <div className={priceContainer}>
         <Field
           name="minPrice"
@@ -197,25 +212,17 @@ let Form = ({ handleSubmit, submitting, invalid, change }) => {
       >
         <RadioOptions options={radioOptionsObject.sortOrder} />
       </Field>
-      <Field
-        name="keywordFilter"
-        label="検索対象"
-        component={RadioButton}
-        rootClass={items}
-      >
-        <RadioOptions options={radioOptionsObject.keywordFilter} />
-      </Field>
       <SubmitButton disabled={invalid || submitting} />
     </form>
   );
 };
 
 Form = reduxForm({
-  form: FormData.search.name,
+  form: formData.search.name,
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
-  validate: FormData.search.validate,
-  initialValues: FormData.search.initialValues,
+  validate: formData.search.validate,
+  initialValues: formData.search.initialValues,
 })(Form);
 
 export default memo(Form);

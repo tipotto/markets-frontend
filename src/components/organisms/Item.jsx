@@ -9,7 +9,7 @@ import ToggleButton from '@material-ui/lab/ToggleButton';
 import mercariIcon from '../../images/mercari-icon.png';
 import rakumaIcon from '../../images/rakuma-icon.png';
 import paypayIcon from '../../images/paypay-icon.png';
-import itemStyles from '../../style/item';
+import itemCss from '../../style/item';
 
 // const moldTitle = () => {
 //   const MAX_LENGTH = 18;
@@ -52,7 +52,7 @@ const Item = ({ item, isFavorite, handleFavorite, empty }) => {
     media,
     priceBox,
     priceLabel,
-  } = itemStyles();
+  } = itemCss();
 
   if (empty) return <Card className={clsx(root, emptyBox)} />;
 
@@ -61,21 +61,38 @@ const Item = ({ item, isFavorite, handleFavorite, empty }) => {
   return (
     <Card className={root}>
       <CardHeader className={header} avatar={setIcon(platform)} title={title} />
-      <div className={fav}>
+      {handleFavorite && (
+        <div className={fav}>
+          <ToggleButton
+            className={favButton}
+            value={{ ...item, isFavorite: !isFavorite }}
+            selected={isFavorite}
+            onClick={handleFavorite}
+          >
+            <FavoriteIcon
+              className={favIcon}
+              style={{
+                color: isFavorite ? '#F2105A' : '#E795B0',
+              }}
+            />
+          </ToggleButton>
+        </div>
+      )}
+      {/* <div className={fav}>
         <ToggleButton
           className={favButton}
-          value={{ ...item, isFavorite: !isFavorite }}
-          selected={isFavorite}
-          onClick={handleFavorite}
+          value={true}
+          selected={true}
+          // onClick={handleFavorite}
         >
           <FavoriteIcon
             className={favIcon}
             style={{
-              color: isFavorite ? '#F2105A' : '#E795B0',
+              color: '#F2105A',
             }}
           />
         </ToggleButton>
-      </div>
+      </div> */}
       <a
         className={link}
         href={detailUrl}

@@ -5,12 +5,16 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { persistStore } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { Chart } from 'chart.js';
+import zoomPlugin from 'chartjs-plugin-zoom';
 import createBreakpoints from '@material-ui/core/styles/createBreakpoints';
 import * as serviceWorker from './serviceWorker';
-import storeCreator from './store';
+import storeCreator from './store/';
 import Top from './components/pages/Top';
 import Analytics from './components/pages/Analytics';
 import './index.css';
+
+Chart.register(zoomPlugin);
 
 const store = storeCreator();
 const persistor = persistStore(store);
@@ -83,8 +87,8 @@ ReactDOM.render(
       <PersistGate loading={null} persistor={persistor}>
         <BrowserRouter>
           <Switch>
-            <Route exact path="/" component={Analytics} />
-            {/* <Route exact path="/" component={Top} /> */}
+            <Route exact path="/" component={Top} />
+            <Route exact path="/analyze" component={Analytics} />
             <Route path="*" render={() => <Redirect to="/" />} />
           </Switch>
         </BrowserRouter>

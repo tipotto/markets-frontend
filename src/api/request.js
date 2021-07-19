@@ -52,7 +52,7 @@ const handleResponse = async (res) => {
 
 export const fetchItems = async (params) =>
   // sendRequest('/api/v1/search', params)
-  sendRequest(process.env.REACT_APP_BACKEND_API, params)
+  sendRequest(process.env.REACT_APP_BACKEND_SEARCH_API, params)
     .then(handleResponse)
     .then((res) => res)
     .catch((e) => {
@@ -62,7 +62,7 @@ export const fetchItems = async (params) =>
 
 export const analyzeData = async (params) =>
   // sendRequest('/api/v1/analyze', params)
-  sendRequest(process.env.REACT_APP_BACKEND_API, params)
+  sendRequest(process.env.REACT_APP_BACKEND_ANALYZE_API, params)
     .then(handleResponse)
     .then((res) => res)
     .catch((e) => {

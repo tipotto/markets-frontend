@@ -1,9 +1,10 @@
-import ErrorMessage from '../../constants/ErrorMessage';
+import {
+  KEYWORD_REQUIRED,
+  PLATFORMS_REQUIRED,
+} from '../../constants/errorMessages';
 
-const searchValidate = (values) => {
+const searchValidator = ({ keyword, platforms }) => {
   const errors = {};
-  const { KEYWORD_REQUIRED, PLATFORMS_REQUIRED } = ErrorMessage;
-  const { keyword, platforms } = values;
 
   if (!keyword) {
     errors.keyword = KEYWORD_REQUIRED;
@@ -16,4 +17,4 @@ const searchValidate = (values) => {
   return errors;
 };
 
-export default searchValidate;
+export default searchValidator;

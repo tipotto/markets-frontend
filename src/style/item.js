@@ -1,6 +1,6 @@
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 
-const itemStyles = makeStyles((theme) =>
+const itemCss = makeStyles((theme) =>
   createStyles({
     root: {
       width: '250px',
@@ -40,8 +40,6 @@ const itemStyles = makeStyles((theme) =>
     },
     fav: {
       width: '100%',
-      // display: "flex",
-      // justifyContent: "space-between",
       marginBottom: '-1.5rem',
       background: 'transparent',
       textAlign: 'right',
@@ -50,18 +48,6 @@ const itemStyles = makeStyles((theme) =>
       height: '5rem',
       paddingTop: '56.25%', // 16:9
     },
-    // content: {
-    //   [theme.breakpoints.up("sm")]: {
-    //     paddingBottom: 0,
-    //   },
-    //   [theme.breakpoints.down("xs")]: {
-    //     display: "none",
-    //   },
-    // },
-    // typography: {
-    //   fontSize: "17px",
-    //   textAlign: "center",
-    // },
     priceBox: {
       width: '100%',
       display: 'flex',
@@ -108,24 +94,7 @@ const itemStyles = makeStyles((theme) =>
         fontSize: '1.5rem',
       },
     },
-    // deleteButton: {
-    //   background: "transparent !important",
-    //   padding: 0,
-    //   marginRight: ".3rem",
-    //   marginBottom: "-1.5rem",
-    //   border: "none",
-    //   [theme.breakpoints.down("xs")]: {
-    //     marginRight: ".1rem",
-    //     marginBottom: "-0.7rem",
-    //   },
-    // },
-    // deleteIcon: {
-    //   fontSize: "2.5rem",
-    //   [theme.breakpoints.down("xs")]: {
-    //     fontSize: "1.8rem",
-    //   },
-    // },
   }),
 );
 
-export default itemStyles;
+export default itemCss;

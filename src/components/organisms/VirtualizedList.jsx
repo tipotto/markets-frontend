@@ -1,51 +1,32 @@
 /* eslint-disable no-plusplus */
 import React, { memo } from 'react';
 import { List, WindowScroller } from 'react-virtualized';
-import { makeStyles } from '@material-ui/core/styles';
 import Item from './Item';
 import {
   getItemSize,
   getItemsPerRow,
   getRowHeightMargin,
-} from '../../constants/VirtualizedList';
+} from '../../constants/virtualizedList';
+import vListCss from '../../style/virtualizedList';
 
-const useStyles = makeStyles(() => ({
-  cardArea: {
-    marginTop: 10,
-    padding: 0,
-    backgroundColor: '#fff',
-    '&>div.ReactVirtualized__List': {
-      outline: 'none',
-    },
-  },
-  row: {
-    display: 'flex',
-    justifyContent: 'center',
-    '&>div.MuiPaper-root': {
-      marginLeft: '2.5px',
-      marginRight: '2.5px',
-      '&:first-child': {
-        marginLeft: '7px',
-      },
-      '&:last-child': {
-        marginRight: '7px',
-      },
-    },
-  },
-}));
+const getItemComponent = (item, handleFavorite) => {
+  if (!handleFavorite) {
+    return <Item key={item.id} item={item} />;
+  }
 
-const getItemComponent = (item, handleFavorite) => (
-  <Item
-    key={item.id}
-    item={item}
-    isFavorite={item.isFavorite}
-    handleFavorite={handleFavorite}
-  />
-);
+  return (
+    <Item
+      key={item.id}
+      item={item}
+      isFavorite={item.isFavorite}
+      handleFavorite={handleFavorite}
+    />
+  );
+};
 
 const VirtualizedList = ({ itemObj, itemIds, handleFavorite }) => {
   // console.log('VirtualizedList is rendered.');
-  const { cardArea, row } = useStyles();
+  const { cardArea, row } = vListCss();
   return (
     <WindowScroller>
       {({ width, height, isScrolling, registerChild, scrollTop }) => {

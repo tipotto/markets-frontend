@@ -91,8 +91,3 @@ export const subCategoryObject = {
   ],
   ticket: [],
 };
-
-export const searchTypeArray = [
-  { label: '市場の分析', value: 'market' },
-  { label: '適正価格の算出', value: 'price' },
-];

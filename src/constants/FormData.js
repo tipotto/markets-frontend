@@ -1,40 +1,41 @@
-import searchValidate from '../components/validate/search';
+import searchValidator from '../components/validate/search';
+import analyzeValidator from '../components/validate/analyze';
 
-const FormData = {
+const formData = {
   search: {
     name: 'Search',
-    validate: searchValidate,
+    validate: searchValidator,
     initialValues: {
+      type: 'initial',
       page: 1,
       category: [{ main: '', sub: '' }],
       keyword: '',
+      negKeyword: '',
       platforms: ['mercari', 'rakuma', 'paypay'],
+      searchRange: 'title',
       minPrice: '',
       maxPrice: '',
       productStatus: ['all'],
       salesStatus: 'all',
       deliveryCost: 'all',
       sortOrder: 'asc',
-      keywordFilter: 'use',
     },
   },
   analysis: {
     name: 'Analysis',
-    validate: searchValidate,
+    validate: analyzeValidator,
     initialValues: {
-      page: 1,
-      searchType: 'market',
       keyword: '',
-      platforms: ['mercari', 'rakuma', 'paypay'],
-      // minPrice: '',
-      // maxPrice: '',
+      negKeyword: '',
+      platform: 'mercari',
+      searchTarget: 'selling',
+      priceType: 'market',
+      searchRange: 'title',
       productStatus: ['all'],
-      // salesStatus: 'all',
       deliveryCost: 'all',
-      // sortOrder: 'asc',
-      keywordFilter: 'use',
+      sortOrder: 'asc',
     },
   },
 };
 
-export default FormData;
+export default formData;

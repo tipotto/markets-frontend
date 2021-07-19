@@ -6,7 +6,8 @@ steps:
       - -c
       - |
         echo PORT=443 >> .env &&
-        echo REACT_APP_BACKEND_API="https://www.markets-jp.com/api/v1/search" >> .env
+        echo REACT_APP_BACKEND_SEARCH_API="https://www.markets-jp.com/api/v1/search" >> .env &&
+        echo REACT_APP_BACKEND_ANALYZE_API="https://www.markets-jp.com/api/v1/analyze" >> .env
 
   - id: 'Build files and prerender'
     name: 'ubuntu'

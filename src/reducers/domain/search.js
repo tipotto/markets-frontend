@@ -2,17 +2,28 @@
 import initState from '../initState';
 import {
   SUCCEEDED_SEARCH,
+  SUCCEEDED_NEXT_SEARCH,
   ADD_FAVORITE_ITEM,
   DELETE_FAVORITE_ITEM,
 } from '../../actions';
 
-const addItems = (state, data) => {
-  const byId = {};
-  const allIds = data.map((item) => {
-    byId[item.id] = item;
-    return item.id;
-  });
-  return { byId, allIds };
+const addInitialItems = (state, { items, pages }) => {
+  const { byId, allIds } = items;
+  return {
+    ...state,
+    pages,
+    byId,
+    allIds,
+  };
+};
+
+const addNextItems = (state, { items }) => {
+  const { byId, allIds } = items;
+  return {
+    ...state,
+    byId,
+    allIds,
+  };
 };
 
 // dataはオブジェクトであることを想定
@@ -49,7 +60,10 @@ const deleteFavoriteItem = (state, data) => {
 const searchReducer = (state = initState.search, { type, data }) => {
   switch (type) {
     case SUCCEEDED_SEARCH:
-      return addItems(state, data);
+      return addInitialItems(state, data);
+
+    case SUCCEEDED_NEXT_SEARCH:
+      return addNextItems(state, data);
 
     case ADD_FAVORITE_ITEM:
       return addFavoriteItem(state, data);

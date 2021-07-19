@@ -1,7 +1,7 @@
 import initState from '../initState';
 import {
   REQUEST_SEARCH,
-  REQUEST_ADDITIONAL_SEARCH,
+  REQUEST_NEXT_SEARCH,
   REQUEST_ANALYSIS,
   FAILED_SEARCH,
   FAILED_ANALYSIS,
@@ -10,7 +10,7 @@ import {
 const errorReducer = (state = initState.error, { type, error }) => {
   switch (type) {
     case REQUEST_SEARCH:
-    case REQUEST_ADDITIONAL_SEARCH:
+    case REQUEST_NEXT_SEARCH:
     case REQUEST_ANALYSIS:
       return {
         ...state,

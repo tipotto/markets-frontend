@@ -1,9 +1,12 @@
 import React, { memo, useCallback } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { formValueSelector, startSubmit, change } from 'redux-form';
+import { Link } from 'react-router-dom';
+import ScrollUpButton from 'react-scroll-up-button';
 import $ from 'jquery';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
+import KeyboardArrowUpOutlinedIcon from '@material-ui/icons/KeyboardArrowUpOutlined';
 import clsx from 'clsx';
 import Box from '@material-ui/core/Box';
 import Tabs from '@material-ui/core/Tabs';
@@ -13,28 +16,30 @@ import Header from '../organisms/Header';
 import Footer from '../organisms/Footer';
 import VirtualizedList from '../organisms/VirtualizedList';
 import Form from '../organisms/Form';
-import FormData from '../../constants/FormData';
+import formData from '../../constants/formData';
 import {
-  requestAdditionalSearch,
+  requestNextSearch,
   changeItemType,
   addFavoriteItem,
   deleteFavoriteItem,
 } from '../../actions';
-import topStyles from '../../style/top';
+import baseCss from '../../style/base';
+import topCss from '../../style/top';
 
 const getPage = (state) => {
-  const selector = formValueSelector(FormData.search.name);
+  const selector = formValueSelector(formData.search.name);
   const page = selector(state, 'page');
   return page || 1;
 };
 
 const useTop = () => {
-  const { common, loading, loadingText, errorText } = topStyles();
+  const { common, loading, loadingText, errorText } = baseCss();
   const dispatch = useDispatch();
 
   // Reduxはデフォルトで値の比較を「===」で行う
   // 以下の2つはプリミティブ型の値を参照するため問題なく比較できる
   const page = useSelector((state) => getPage(state));
+  const pagers = useSelector((state) => state.search.pages);
 
   const isLoading = useSelector((state) => state.state.isLoading);
 
@@ -97,25 +102,24 @@ const useTop = () => {
     }
   }, []);
 
-  const handleAdditionalSearch = useCallback((event, value) => {
+  const handleNextSearch = useCallback((event, value) => {
     // console.log("value", value);
-    startSubmit(FormData.search.name);
-    dispatch(change(FormData.search.name, 'page', value));
-    dispatch(requestAdditionalSearch());
+    startSubmit(formData.search.name);
+    dispatch(change(formData.search.name, 'type', 'next'));
+    dispatch(change(formData.search.name, 'page', value));
+    dispatch(requestNextSearch());
   }, []);
 
   const _renderItems = () => {
-    const item = _getItemsByType();
-    // console.log("renderItems", itemObj);
-
-    if (!Object.keys(item).length) return [];
+    const { byId, allIds } = _getItemsByType();
+    if (!allIds.length) return [];
 
     // タブが切り替わる度に itemObj, itemIds として渡すpropsの値は変わる
     // そのため、VirtualizedList は再レンダリングされる
     return (
       <VirtualizedList
-        itemObj={item.byId}
-        itemIds={item.allIds}
+        itemObj={byId}
+        itemIds={allIds}
         handleFavorite={handleFavorite}
       />
     );
@@ -162,9 +166,10 @@ const useTop = () => {
 
   return {
     page,
+    pagers,
     selectedTab,
     handleCategoryChange,
-    handleAdditionalSearch,
+    handleNextSearch,
     setContent,
   };
 };
@@ -199,9 +204,10 @@ const showAboutService = (event) => {
 const Top = () => {
   const {
     page,
+    pagers,
     selectedTab,
     handleCategoryChange,
-    handleAdditionalSearch,
+    handleNextSearch,
     setContent,
   } = useTop();
   const {
@@ -212,22 +218,23 @@ const Top = () => {
     title,
     siteDescription,
     formContainer,
+    toolLinkContainer,
     sectionTitle,
     sectionDescription,
+    sectionToolLink,
+    toolLink,
     aboutContainer,
     aboutSection,
     aboutTitle,
     aboutDescription,
     aboutButton,
     resultContainer,
-    resultHeader,
     result,
-    itemTypeSelect,
-    tabs,
-    tab,
-    pagination,
-  } = topStyles();
-
+    resultHeader,
+    scrollUpBtn,
+    showScrollUpBtn,
+  } = baseCss();
+  const { itemTypeSelect, tabs, tab, pagination } = topCss();
   // console.log('Top is rendered.');
 
   return (
@@ -252,27 +259,40 @@ const Top = () => {
             <div id="about-service-content" className={aboutSection}>
               <h3 className={clsx(aboutTitle, common)}>サービス概要</h3>
               <p className={clsx(aboutDescription, common)}>
-                markets.jpは、複数のフリマサイトを一括検索し、その結果を統合して表示するサービスです。
+                複数のフリマサイトを一括検索し、その結果をまとめて表示するサービスです。
                 フリマサイトの垣根を越えて、ご希望のアイテムを探したり、価格を比較できます。
                 また、検索結果をタップして、各サイトで詳細情報の確認・購入ができます。
               </p>
-              <h3 className={clsx(aboutTitle, common)}>フリマサイト検索</h3>
+              <h3 className={clsx(aboutTitle, common)}>検索結果の精度</h3>
               <p className={clsx(aboutDescription, common)}>
-                キーワードとフリマサイトは必ず指定してください。
-                また、検索オプションの「配送料の負担」で「購入者」を選択した場合、PayPayフリマは検索対象から除外されます（PayPayフリマは配送無料のため）。
+                このサービスの検索結果は、全て各サイトに基づいています。
+                ただし、キーワードや各サイトの検索アルゴリズムによっては、
+                検索結果の中にご希望に沿わない商品が含まれることがあります。
+                その場合は、以下の検索オプションを利用することで、分析の精度を高めることができます。
               </p>
-
-              <h3 className={clsx(aboutTitle, common)}>お気に入り機能</h3>
+              <ul className={clsx(aboutDescription, common)}>
+                <li>除外キーワードを指定する。</li>
+                <li>検索範囲で「商品名」を選択する。</li>
+              </ul>
+              <h3 className={clsx(aboutTitle, common)}>除外キーワード</h3>
               <p className={clsx(aboutDescription, common)}>
-                検索結果のアイテムにはハートアイコンが表示されます。そのアイコンをタップして、お気に入りに含めることができます。
+                検索結果から除外するキーワードを入力できます。
+                スペースを空けて入力することで、複数のキーワードを指定できます。
+              </p>
+              <h3 className={clsx(aboutTitle, common)}>配送料の負担</h3>
+              <p className={clsx(aboutDescription, common)}>
+                PayPayフリマは基本的に配送無料のため、「購入者」を選択した場合は検索対象から除外されます。
+              </p>
+              <h3 className={clsx(aboutTitle, common)}>お気に入り</h3>
+              <p className={clsx(aboutDescription, common)}>
+                各アイテムのハートアイコンをタップすることで、お気に入りに含めることができます。
                 お気に入りリストは「フリマサイトの検索結果」から確認できます。
               </p>
-              <h3 className={clsx(aboutTitle, common)}>ページ選択機能</h3>
+              <h3 className={clsx(aboutTitle, common)}>ページ選択</h3>
               <p className={clsx(aboutDescription, common)}>
-                このサービスは、入力されたキーワードで検索を行い、各フリマサイトの1ページ目の出品アイテムを統合して表示します。
-                2ページ目以降の内容を閲覧したい場合は、「フリマサイトの検索結果」のページ選択機能をご利用ください。
-                表示するページを自由に指定できます（最大5ページまで）。
-                ページ選択機能を利用する場合は、必ず検索フォームの「キーワード」と「フリマサイト」を指定してください。
+                デフォルトでは、各フリマサイトの1ページ目の検索結果を表示します。
+                2ページ目以降の内容を閲覧したい場合は、「フリマサイトの検索結果」から自由にページを指定できます。
+                ページ選択を利用する場合は、必ず検索フォームの「キーワード」と「フリマサイト」を指定してください。
               </p>
             </div>
             <span
@@ -288,6 +308,16 @@ const Top = () => {
               メルカリ、ラクマ、PayPayフリマに対応。豊富な検索オプションで、高精度のサイト検索・比較が可能です。
             </p>
             <Form />
+          </div>
+          <div className={toolLinkContainer}>
+            <h2 className={clsx(sectionTitle, common)}>フリマ分析ツール</h2>
+            <p className={clsx(sectionToolLink, common)}>
+              フリマサイトの相場・人気価格の分析ツールは
+              <Link className={toolLink} to="/analyze">
+                こちら
+              </Link>
+              。
+            </p>
           </div>
         </div>
         <div className={resultContainer}>
@@ -314,25 +344,33 @@ const Top = () => {
                   <Tab className={tab} label="すべて" value="all" />
                   <Tab className={tab} label="お気に入り" value="favorites" />
                 </Tabs>
-                {selectedTab === 'all' && (
+                {selectedTab === 'all' && pagers > 1 && (
                   <Pagination
                     className={pagination}
-                    count={5}
+                    count={pagers}
                     size="large"
                     shape="rounded"
                     page={page}
-                    onChange={handleAdditionalSearch}
+                    onChange={handleNextSearch}
                   />
                 )}
               </Box>
             </div>
           </div>
-          <div>
-            <div>{setContent()}</div>
-          </div>
+          {setContent()}
         </div>
       </div>
       <Footer />
+      <ScrollUpButton
+        StopPosition={0}
+        ShowAtPosition={1500}
+        EasingType="easeOutCubic"
+        AnimationDuration={1500}
+        ContainerClassName={scrollUpBtn}
+        TransitionClassName={showScrollUpBtn}
+      >
+        <KeyboardArrowUpOutlinedIcon htmlColor="#fff" fontSize="large" />
+      </ScrollUpButton>
     </>
   );
 };

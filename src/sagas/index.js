@@ -1,18 +1,18 @@
 import { fork, takeEvery } from 'redux-saga/effects';
 import {
   REQUEST_SEARCH,
-  REQUEST_ADDITIONAL_SEARCH,
+  REQUEST_NEXT_SEARCH,
   REQUEST_ANALYSIS,
 } from '../actions';
-import { search, additionalSearch, analyze } from './task';
+import { search, nextSearch, analyze } from './task';
 
 // 以下の2つの関数はそれぞれ、redux-sagaのタスク
 function* handleSearch() {
   yield takeEvery(REQUEST_SEARCH, search);
 }
 
-function* handleAdditionalSearch() {
-  yield takeEvery(REQUEST_ADDITIONAL_SEARCH, additionalSearch);
+function* handleNextSearch() {
+  yield takeEvery(REQUEST_NEXT_SEARCH, nextSearch);
 }
 
 function* handleAnalysis() {
@@ -26,6 +26,6 @@ function* handleAnalysis() {
 // 生成されるのはただのオブジェクト
 export default function* rootSaga() {
   yield fork(handleSearch);
-  yield fork(handleAdditionalSearch);
+  yield fork(handleNextSearch);
   yield fork(handleAnalysis);
 }

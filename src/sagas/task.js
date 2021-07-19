@@ -2,16 +2,17 @@ import { put, call, select } from 'redux-saga/effects';
 import { stopSubmit } from 'redux-form';
 import {
   succeededSearch,
+  succeededNextSearch,
   succeededAnalysis,
   failedSearch,
   failedAnalysis,
 } from '../actions';
 import { fetchItems, analyzeData } from '../api/request';
-import FormData from '../constants/FormData';
+import formData from '../constants/formData';
 
 export function* search() {
   // console.log('saga task search');
-  const formName = FormData.search.name;
+  const formName = formData.search.name;
   const formValues = yield select((state) => state.form[formName].values);
 
   const { result, error } = yield call(fetchItems, formValues);
@@ -24,13 +25,13 @@ export function* search() {
   }
 }
 
-export function* additionalSearch() {
+export function* nextSearch() {
   // console.log('saga task additionalSearch');
-  const formName = FormData.search.name;
+  const formName = formData.search.name;
   const formValues = yield select((state) => state.form[formName].values);
 
   if (!(formValues.keyword && formValues.platforms.length > 0)) {
-    yield put(succeededSearch([]));
+    yield put(succeededNextSearch([]));
     yield put(stopSubmit(formName));
     return;
   }
@@ -39,15 +40,15 @@ export function* additionalSearch() {
   yield put(stopSubmit(formName));
 
   if (result && !error) {
-    yield put(succeededSearch(result));
+    yield put(succeededNextSearch(result));
   } else {
     yield put(failedSearch(error));
   }
 }
 
 export function* analyze() {
-  console.log('saga task analyze');
-  const formName = FormData.analysis.name;
+  // console.log('saga task analyze');
+  const formName = formData.analysis.name;
   const formValues = yield select((state) => state.form[formName].values);
 
   // if (!(formValues.keyword && formValues.platforms.length > 0)) {
@@ -60,6 +61,7 @@ export function* analyze() {
   yield put(stopSubmit(formName));
 
   if (result && !error) {
+    // console.log('analyze result', result);
     yield put(succeededAnalysis(result));
   } else {
     yield put(failedAnalysis(error));

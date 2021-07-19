@@ -1,21 +1,17 @@
 import React, { memo } from 'react';
-import { useSelector, shallowEqual } from 'react-redux';
-import { reduxForm, Field, startSubmit } from 'redux-form';
+import { useSelector } from 'react-redux';
+import { reduxForm, Field, startSubmit, formValueSelector } from 'redux-form';
 import $ from 'jquery';
 import clsx from 'clsx';
-import MenuItem from '@material-ui/core/MenuItem';
 import { requestAnalysis } from '../../actions';
-import { searchTypeArray } from '../../constants/SelectOptions';
-import Selectbox from '../molecules/Selectbox';
 import CustomTextField from '../molecules/CustomTextField';
-import PlatformCheckbox from '../molecules/PlatformCheckbox';
 import ProductStatusCheckbox from '../molecules/ProductStatusCheckbox';
 import RadioButton from '../molecules/RadioButton';
 import RadioOptions from '../molecules/RadioOptions';
 import SubmitButton from '../molecules/SubmitButton';
-import radioOptionsObject from '../../constants/RadioOptions';
-import formStyles from '../../style/form';
-import FormData from '../../constants/FormData';
+import radioOptionsObject from '../../constants/radioOptions';
+import formCss from '../../style/form';
+import formData from '../../constants/formData';
 
 const scrollDownWindow = () => {
   const speed = 1000;
@@ -23,55 +19,33 @@ const scrollDownWindow = () => {
   $('body,html').animate({ scrollTop: position }, speed, 'swing');
 };
 
-// const submit = (dispatch, change) => {
-//   startSubmit(FormData.analysis.name);
-//   change('page', 1);
-//   dispatch(requestAnalysis());
-//   scrollDownWindow();
-// };
-
-const submit = (values, dispatch) => {
-  console.log('values', values);
-  startSubmit(FormData.analysis.name);
-  dispatch(requestAnalysis(values['searchType']));
+const submit = (dispatch) => {
+  startSubmit(formData.analysis.name);
+  dispatch(requestAnalysis());
   scrollDownWindow();
+};
+
+const getSelectedPlatform = (state) => {
+  const selector = formValueSelector(formData.analysis.name);
+  const platform = selector(state, 'platform');
+  return platform || 'mercari';
 };
 
 let AnalysisForm = ({ handleSubmit, submitting, invalid, change }) => {
   // console.log('Form is rendered.');
+  const platform = useSelector((state) => getSelectedPlatform(state));
 
-  const {
-    root,
-    items,
-    keywordError,
-    platformsError,
-    priceContainer,
-    price,
-    hyphen,
-  } = formStyles();
+  const { root, items, keywordError } = formCss();
 
   return (
     <form
       className={root}
       onSubmit={handleSubmit((values, dispatch) => {
         // submit(dispatch, change);
-        submit(values, dispatch);
+        submit(dispatch);
       })}
       encType="multipart/form-data"
     >
-      <Field
-        name="searchType"
-        label="検索タイプ"
-        component={Selectbox}
-        rootClass={items}
-        required
-      >
-        {searchTypeArray.map(({ label, value }) => (
-          <MenuItem key={value} value={value}>
-            {label}
-          </MenuItem>
-        ))}
-      </Field>
       <Field
         name="keyword"
         label="キーワード"
@@ -80,41 +54,51 @@ let AnalysisForm = ({ handleSubmit, submitting, invalid, change }) => {
         required
       />
       <Field
-        name="platforms"
-        label="フリマサイト"
-        component={PlatformCheckbox}
-        rootClass={clsx(items, platformsError)}
-        required
+        name="negKeyword"
+        label="除外キーワード"
+        component={CustomTextField}
+        rootClass={clsx(items, keywordError)}
       />
-      {/* <div className={priceContainer}>
+      <Field
+        name="platform"
+        label="フリマサイト"
+        component={RadioButton}
+        rootClass={items}
+      >
+        <RadioOptions options={radioOptionsObject.platform} />
+      </Field>
+      <Field
+        name="searchTarget"
+        label="検索対象"
+        component={RadioButton}
+        rootClass={items}
+      >
+        <RadioOptions options={radioOptionsObject.searchTarget} />
+      </Field>
+      {platform === 'mercari' && (
         <Field
-          name="minPrice"
-          label="最低価格"
-          component={CustomTextField}
-          rootClass={price}
-        />
-        <span className={hyphen}>〜</span>
-        <Field
-          name="maxPrice"
-          label="最高価格"
-          component={CustomTextField}
-          rootClass={price}
-        />
-      </div> */}
+          name="priceType"
+          label="算出価格"
+          component={RadioButton}
+          rootClass={items}
+        >
+          <RadioOptions options={radioOptionsObject.priceType} />
+        </Field>
+      )}
+      <Field
+        name="searchRange"
+        label="検索範囲"
+        component={RadioButton}
+        rootClass={items}
+      >
+        <RadioOptions options={radioOptionsObject.searchRange} />
+      </Field>
       <Field
         name="productStatus"
         label="アイテムの状態"
         component={ProductStatusCheckbox}
         rootClass={items}
       />
-      {/* <Field
-        name="salesStatus"
-        label="出品状況"
-        component={RadioButton}
-        rootClass={items}
-      >
-        <RadioOptions options={radioOptionsObject.salesStatus} />
-      </Field> */}
       <Field
         name="deliveryCost"
         label="配送料の負担"
@@ -123,21 +107,13 @@ let AnalysisForm = ({ handleSubmit, submitting, invalid, change }) => {
       >
         <RadioOptions options={radioOptionsObject.deliveryCost} />
       </Field>
-      {/* <Field
+      <Field
         name="sortOrder"
         label="並びかえ"
         component={RadioButton}
         rootClass={items}
       >
         <RadioOptions options={radioOptionsObject.sortOrder} />
-      </Field> */}
-      <Field
-        name="keywordFilter"
-        label="検索対象"
-        component={RadioButton}
-        rootClass={items}
-      >
-        <RadioOptions options={radioOptionsObject.keywordFilter} />
       </Field>
       <SubmitButton disabled={invalid || submitting} />
     </form>
@@ -145,11 +121,11 @@ let AnalysisForm = ({ handleSubmit, submitting, invalid, change }) => {
 };
 
 AnalysisForm = reduxForm({
-  form: FormData.analysis.name,
+  form: formData.analysis.name,
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
-  validate: FormData.analysis.validate,
-  initialValues: FormData.analysis.initialValues,
+  validate: formData.analysis.validate,
+  initialValues: formData.analysis.initialValues,
 })(AnalysisForm);
 
 export default memo(AnalysisForm);

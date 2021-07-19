@@ -1,6 +1,6 @@
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 
-const formStyles = makeStyles((theme) =>
+const formCss = makeStyles((theme) =>
   createStyles({
     root: {
       width: '100%',
@@ -41,4 +41,4 @@ const formStyles = makeStyles((theme) =>
   }),
 );
 
-export default formStyles;
+export default formCss;
