@@ -2,11 +2,11 @@ import React, { memo, useCallback } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { formValueSelector, startSubmit, change } from 'redux-form';
 import { Link } from 'react-router-dom';
-import ScrollUpButton from 'react-scroll-up-button';
+// import ScrollUpButton from 'react-scroll-up-button';
 import $ from 'jquery';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
-import KeyboardArrowUpOutlinedIcon from '@material-ui/icons/KeyboardArrowUpOutlined';
+// import KeyboardArrowUpOutlinedIcon from '@material-ui/icons/KeyboardArrowUpOutlined';
 import clsx from 'clsx';
 import Box from '@material-ui/core/Box';
 import Tabs from '@material-ui/core/Tabs';
@@ -361,7 +361,7 @@ const Top = () => {
         </div>
       </div>
       <Footer />
-      <ScrollUpButton
+      {/* <ScrollUpButton
         StopPosition={0}
         ShowAtPosition={1500}
         EasingType="easeOutCubic"
@@ -370,7 +370,7 @@ const Top = () => {
         TransitionClassName={showScrollUpBtn}
       >
         <KeyboardArrowUpOutlinedIcon htmlColor="#fff" fontSize="large" />
-      </ScrollUpButton>
+      </ScrollUpButton> */}
     </>
   );
 };
