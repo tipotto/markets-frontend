@@ -261,7 +261,7 @@ const Top = () => {
               <p className={clsx(aboutDescription, common)}>
                 複数のフリマサイトを一括検索するサービスです。
                 ワンクリックでご希望の商品を比較できます。
-                また、アイテムをタップすると、詳細情報の確認や購入ができます。
+                また、アイテムをタップすると、各サイトで詳細情報の確認や購入ができます。
               </p>
               <h3 className={clsx(aboutTitle, common)}>検索の精度</h3>
               <p className={clsx(aboutDescription, common)}>
@@ -270,10 +270,10 @@ const Top = () => {
                 その場合は、以下のオプションを利用して、検索の精度を高めることができます。
               </p>
               <ul className={clsx(aboutDescription, common)}>
-                <li>除外キーワードを指定する。</li>
+                <li>除外ワードを指定する。</li>
                 <li>検索範囲で「商品名」を選択する。</li>
               </ul>
-              <h3 className={clsx(aboutTitle, common)}>除外キーワード</h3>
+              <h3 className={clsx(aboutTitle, common)}>除外ワード</h3>
               <p className={clsx(aboutDescription, common)}>
                 検索結果から除外するキーワードを入力します。
                 スペースを空けて入力することで、複数指定もできます。
@@ -309,9 +309,11 @@ const Top = () => {
             <Form />
           </div>
           <div className={toolLinkContainer}>
-            <h2 className={clsx(sectionTitle, common)}>フリマ分析ツール</h2>
+            <h2 className={clsx(sectionTitle, common)}>
+              フリマサイト分析・比較ツール
+            </h2>
             <p className={clsx(sectionToolLink, common)}>
-              フリマサイトの相場・人気価格の分析ツールは
+              相場や人気価格を算出し、フリマサイトを比較できる分析ツールは
               <Link className={toolLink} to="/analyze">
                 こちら
               </Link>
@@ -326,7 +328,7 @@ const Top = () => {
                 フリマサイトの検索結果
               </h2>
               <p className={clsx(sectionDescription, common)}>
-                価格を比較して、気に入った商品は各サイトで購入できます。
+                比較して気に入った商品は、各サイトで購入できます。
               </p>
               <Box
                 className={itemTypeSelect}
