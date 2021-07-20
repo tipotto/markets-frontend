@@ -27,8 +27,8 @@ const radioOptionsObject = {
     { label: '購入者', value: 'required' },
   ],
   sortOrder: [
-    { label: '価格の安い順', value: 'asc' },
-    { label: '価格の高い順', value: 'desc' },
+    { label: '安い順', value: 'asc' },
+    { label: '高い順', value: 'desc' },
   ],
 };
 

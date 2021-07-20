@@ -95,7 +95,7 @@ let AnalysisForm = ({ handleSubmit, submitting, invalid, change }) => {
       </Field>
       <Field
         name="productStatus"
-        label="アイテムの状態"
+        label="商品の状態"
         component={ProductStatusCheckbox}
         rootClass={items}
       />

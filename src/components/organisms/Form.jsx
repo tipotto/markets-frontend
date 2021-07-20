@@ -184,13 +184,13 @@ let Form = ({ handleSubmit, submitting, invalid, change }) => {
       </div>
       <Field
         name="productStatus"
-        label="アイテムの状態"
+        label="商品の状態"
         component={ProductStatusCheckbox}
         rootClass={items}
       />
       <Field
         name="salesStatus"
-        label="出品状況"
+        label="販売状況"
         component={RadioButton}
         rootClass={items}
       >
