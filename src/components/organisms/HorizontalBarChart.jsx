@@ -65,7 +65,7 @@ const getOption = (chartTitle) => {
     scales: {
       x: {
         min: 0,
-        max: 10,
+        max: 30,
         // max: parseInt('10', 10),
       },
     },
