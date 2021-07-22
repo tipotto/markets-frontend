@@ -425,21 +425,20 @@ const Analytics = () => {
                 フリマサイトの分析サービスです。メルカリ、ラクマ、PayPayフリマに対応しています。
                 商品を購入する際に相場価格を調べたり、出品する際の価格設定の参考にしていただけます。
               </p>
-              <h3 className={clsx(aboutTitle, common)}>分析結果の精度</h3>
+              <h3 className={clsx(aboutTitle, common)}>分析の精度</h3>
               <p className={clsx(aboutDescription, common)}>
-                分析結果は、全て各サイトの検索結果に基づいています。
-                ただし、キーワードや各サイトの検索アルゴリズムによっては、
-                検索結果の中にご希望に沿わない商品が含まれることがあります。
-                その場合は、以下の検索オプションを利用することで、分析の精度を高めることができます。
+                このサービスの分析内容は、全て各フリマサイトに基づいています。
+                ただし、入力されたキーワードや各サイトが提供する検索アルゴリズムによっては、ご希望に沿わない商品が含まれることがあります。
+                その場合は、以下のオプションを利用して、検索の精度を高めることができます。
               </p>
               <ul className={clsx(aboutDescription, common)}>
-                <li>除外キーワードを指定する。</li>
+                <li>除外ワードを指定する。</li>
                 <li>検索範囲で「商品名」を選択する。</li>
               </ul>
-              <h3 className={clsx(aboutTitle, common)}>除外キーワード</h3>
+              <h3 className={clsx(aboutTitle, common)}>除外ワード</h3>
               <p className={clsx(aboutDescription, common)}>
-                検索結果から除外するキーワードを入力できます。
-                スペースを空けて入力することで、複数のキーワードを指定できます。
+                検索結果から除外するキーワードを入力します。
+                スペースを空けて入力することで、複数指定もできます。
               </p>
               <h3 className={clsx(aboutTitle, common)}>価格チャート</h3>
               <p className={clsx(aboutDescription, common)}>
@@ -457,12 +456,14 @@ const Analytics = () => {
           <div className={formContainer}>
             <h2 className={clsx(sectionTitle, common)}>フリマサイト分析</h2>
             <p className={clsx(sectionDescription, common)}>
-              メルカリ、ラクマ、PayPayフリマに対応。豊富な検索オプションで、高精度のサイト分析が可能です。
+              メルカリ、ラクマ、PayPayフリマに対応。豊富な検索オプションで、精度の高い分析が可能です。
             </p>
             <AnalysisForm />
           </div>
           <div className={toolLinkContainer}>
-            <h2 className={clsx(sectionTitle, common)}>フリマ検索ツール</h2>
+            <h2 className={clsx(sectionTitle, common)}>
+              フリマサイト検索ツール
+            </h2>
             <p className={clsx(sectionToolLink, common)}>
               フリマサイトの一括検索ツールは
               <Link className={toolLink} to="/">

@@ -55,7 +55,7 @@ let AnalysisForm = ({ handleSubmit, submitting, invalid, change }) => {
       />
       <Field
         name="negKeyword"
-        label="除外キーワード"
+        label="除外ワード"
         component={CustomTextField}
         rootClass={clsx(items, keywordError)}
       />
