@@ -12,6 +12,7 @@ import Header from '../organisms/Header';
 import Footer from '../organisms/Footer';
 import VirtualizedList from '../organisms/VirtualizedList';
 import AnalysisForm from '../organisms/AnalysisForm';
+import AnalyticsHead from '../organisms/AnalyticsHead';
 import HorizontalBarChart from '../organisms/HorizontalBarChart';
 import InfoBox from '../organisms/InfoBox';
 import formData from '../../constants/formData';
@@ -402,6 +403,7 @@ const Analytics = () => {
   } = baseCss();
   return (
     <>
+      <AnalyticsHead />
       <Header />
       <div className={wrapper}>
         <div className={main}>

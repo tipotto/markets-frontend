@@ -81,7 +81,7 @@ const theme = createTheme({
   breakpoints: breakpointsFull,
 });
 
-ReactDOM.render(
+const App = () => (
   <ThemeProvider theme={theme}>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
@@ -94,9 +94,10 @@ ReactDOM.render(
         </BrowserRouter>
       </PersistGate>
     </Provider>
-  </ThemeProvider>,
-  document.getElementById('root'),
+  </ThemeProvider>
 );
+
+ReactDOM.render(<App />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

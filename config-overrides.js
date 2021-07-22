@@ -6,7 +6,7 @@ module.exports = (config, env) => {
 
   config.plugins = config.plugins.concat([
     new PrerenderSPAPlugin({
-      routes: ['/'],
+      routes: ['/', '/analyze'],
       staticDir: path.join(__dirname, 'build'),
     }),
   ]);

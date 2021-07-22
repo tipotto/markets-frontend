@@ -16,6 +16,7 @@ import Header from '../organisms/Header';
 import Footer from '../organisms/Footer';
 import VirtualizedList from '../organisms/VirtualizedList';
 import Form from '../organisms/Form';
+import TopHead from '../organisms/TopHead';
 import formData from '../../constants/formData';
 import {
   requestNextSearch,
@@ -239,6 +240,7 @@ const Top = () => {
 
   return (
     <>
+      <TopHead />
       <Header />
       <div className={wrapper}>
         <div className={main}>
