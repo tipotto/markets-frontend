@@ -12,7 +12,6 @@ const CustomTextField = ({
   <TextField
     required={required}
     className={rootClass}
-    // error={!!(touched && error)}
     label={label}
     type={type}
     fullWidth

@@ -14,11 +14,11 @@ const useStyles = makeStyles(() =>
 );
 
 const SubmitButton = ({ disabled }) => {
-  const classes = useStyles();
+  const { button } = useStyles();
   return (
     <Button
       id="submit"
-      className={classes.button}
+      className={button}
       type="submit"
       size="medium"
       variant="contained"
