@@ -397,6 +397,7 @@ const Analytics = () => {
     result,
     resultHeader,
   } = baseCss();
+  const { aboutListItem } = analyticsCss();
   return (
     <>
       <AnalyticsHead />
@@ -420,34 +421,81 @@ const Analytics = () => {
             <div id="about-service-content" className={aboutSection}>
               <h3 className={clsx(aboutTitle, common)}>サービス概要</h3>
               <p className={clsx(aboutDescription, common)}>
-                詳細な価格データをもとに、フリマサイトを比較できるサービスです。メルカリ、ラクマ、PayPayフリマに対応しています。
-                商品購入時の相場を調べたり、出品時の価格設定の参考にお使いいただけます。
+                フリマサイトのデータ分析・比較にお使いいただけるサービスです。
+                メルカリ、ラクマ、PayPayフリマに対応しているため、各フリマサイトの比較に基づいて、ご希望のニーズに適したサイト選定が可能です。
               </p>
+              <h3 className={clsx(aboutTitle, common)}>サービス用途</h3>
+              <p className={clsx(aboutDescription, common)}>
+                主な用途としては、購入に適したフリマサイトの比較、出品時の価格設定などがあります。その他にも様々な用途でご利用ください。
+              </p>
+              <ul className={clsx(aboutDescription, common)}>
+                <li>
+                  購入に適したフリマサイトの比較
+                  <ul>
+                    <li>
+                      現在の市場の最低価格や相場を比較することで、ご希望の商品を最もお得に購入できるフリマサイトを選定できます。
+                      ここでの「現在の市場」とは、各フリマサイトで出品中の商品を指しています。
+                    </li>
+                  </ul>
+                </li>
+                <li className={aboutListItem}>
+                  出品時の価格設定
+                  <ul>
+                    <li>
+                      現在の市場の相場や価格幅に加えて、過去の販売データも参考に比較検討を行うことで、市場の相場の範囲内、かつ実際の取引履歴に基づいた、最も売り上げが見込める価格を設定することができます。
+                    </li>
+                  </ul>
+                </li>
+              </ul>
               <h3 className={clsx(aboutTitle, common)}>分析の精度</h3>
               <p className={clsx(aboutDescription, common)}>
                 このサービスのコンテンツは、全て各フリマサイトに基づいています。
                 ただし、入力されたキーワードや各サイトが提供する検索アルゴリズムによっては、ご希望に沿わない商品が含まれることがあります。
-                その場合は、以下のオプションを利用して、データの精度を高めることができます。
+                その場合は、以下のオプションを利用して、取得データやサイト比較の精度を高めることができます。
               </p>
               <ul className={clsx(aboutDescription, common)}>
                 <li>除外ワードを指定する。</li>
                 <li>検索範囲で「商品名」を選択する。</li>
               </ul>
-              <h3 className={clsx(aboutTitle, common)}>除外ワード</h3>
+              <h3 className={clsx(aboutTitle, common)}>機能の説明</h3>
               <p className={clsx(aboutDescription, common)}>
-                分析結果から除外するキーワードを入力します。
-                スペースを空けて入力することで、複数指定もできます。
+                精度の高い分析・比較を行う上で便利な機能のため、積極的にご活用ください。
               </p>
-              <h3 className={clsx(aboutTitle, common)}>検索範囲</h3>
+              <ul className={clsx(aboutDescription, common)}>
+                <li>
+                  除外ワード
+                  <ul>
+                    <li>
+                      分析結果から除外するキーワードを入力します。
+                      スペースを空けて入力することで、複数指定もできます。
+                    </li>
+                  </ul>
+                </li>
+                <li className={aboutListItem}>
+                  検索範囲
+                  <ul>
+                    <li>
+                      「商品名」を選択した場合、入力された全てのキーワードを商品名に含むものを検索結果として表示します。
+                      そのため、関連性の低いものやキーワードに完全一致しないものを除外することで、精度の高いデータの取得、サイト比較が可能になります。
+                      ただし、取得できるデータ数が絞られることがありますので、ご了承ください。
+                    </li>
+                  </ul>
+                </li>
+                <li className={aboutListItem}>
+                  価格チャート
+                  <ul>
+                    <li>
+                      算出した価格データがチャートで表示されます。 1k =
+                      1,000円と読み換えてください。
+                      また、グラフをタップすると、データの詳細を見ることができます。
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+              <h3 className={clsx(aboutTitle, common)}>免責事項</h3>
               <p className={clsx(aboutDescription, common)}>
-                「商品名」を選択した場合、入力された全てのキーワードを商品名として含むもののみを検索結果として表示します。
-                そのため、関連度の低いものや付属品など、キーワードに完全に一致しないものを除外することで、精度の高いフリマサイト比較が可能になります。
-                ただし、表示されるデータが絞られることがありますので、ご了承ください。
-              </p>
-              <h3 className={clsx(aboutTitle, common)}>価格チャート</h3>
-              <p className={clsx(aboutDescription, common)}>
-                算出した価格データがチャートで表示されます。 1k =
-                1,000円と読み換えてください。
+                markets.jpのご利用に伴うトラブルや損害に関して、当方は一切の責任を負いかねます。
+                可能な限り、精度の高いデータの提供を目指していますが、価格設定やサイトの比較に関する判断につきましては、個人の責任でお願い致します。
               </p>
             </div>
             <span

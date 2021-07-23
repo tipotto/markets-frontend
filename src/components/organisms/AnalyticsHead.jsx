@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet';
 const AnalyticsHead = () => {
   return (
     <Helmet>
-      <title>フリマサイト比較｜markets.jpでフリマ分析・比較</title>
+      <title>フリマサイト比較｜フリマのmarkets.jp</title>
       <meta charset="utf-8" />
       <meta
         name="viewport"
@@ -12,7 +12,7 @@ const AnalyticsHead = () => {
       />
       <meta
         name="description"
-        content="フリマサイトの相場や人気価格を分析・比較。現在の市場や過去の販売データを元にした、精度の高いフリマサイト比較が可能に。メルカリ、ラクマ、PayPayフリマ対応。商品の購入・出品時のサイト比較にお使いいただけます。"
+        content="フリマサイトの相場や人気価格の分析ツール。現在の市場や過去の販売履歴に基づく、精度の高いフリマ比較が可能です。豊富な検索オプションで、メルカリ、ラクマ、PayPayフリマに対応。商品の購入や出品時のサイト比較に便利です。"
       />
       <meta content="https://www.markets-jp.com/analyze" property="og:url" />
       <meta content="article" property="og:type" />
@@ -23,6 +23,7 @@ const AnalyticsHead = () => {
       />
       <meta content="markets.jp" property="og:site_name" />
       <meta content="./markets-logo.png" property="og:image" />
+      <link rel="shortcut icon" href="./favicon.ico" />
     </Helmet>
   );
 };
