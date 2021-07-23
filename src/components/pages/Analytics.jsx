@@ -493,11 +493,11 @@ const Analytics = () => {
                   </ul>
                 </li>
               </ul>
-              {/* <h3 className={clsx(aboutTitle, common)}>免責事項</h3>
+              <h3 className={clsx(aboutTitle, common)}>免責事項</h3>
               <p className={clsx(aboutDescription, common)}>
                 markets.jpのご利用に伴うトラブルや損害に関して、当方は一切の責任を負いかねます。
                 可能な限り、精度の高いデータの提供を目指していますが、価格設定やサイトの比較に関する判断につきましては、個人の責任でお願い致します。
-              </p> */}
+              </p>
             </div>
             <span
               className={clsx(aboutButton, common)}
