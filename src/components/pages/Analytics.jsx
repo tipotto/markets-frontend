@@ -405,13 +405,11 @@ const Analytics = () => {
         <div className={main}>
           <div>
             <h1 className={serviceName}>
-              {/* <span className={title}>フリマサイト分析</span> */}
               <span className={title}>フリマサイト比較</span>
               markets.jp
             </h1>
             <p className={clsx(siteDescription, common)}>
-              {/* フリマサイトの相場や人気価格を分析・比較できるサービス */}
-              フリマサイトの相場や人気価格を比較できるサービス
+              フリマサイトの相場や人気価格を分析・比較できるサービス
             </p>
           </div>
           <div id="about-service-container" className={aboutContainer}>
@@ -423,11 +421,11 @@ const Analytics = () => {
               <h3 className={clsx(aboutTitle, common)}>サービス概要</h3>
               <p className={clsx(aboutDescription, common)}>
                 詳細な価格データをもとに、フリマサイトを比較できるサービスです。メルカリ、ラクマ、PayPayフリマに対応しています。
-                商品購入のために相場を調べたり、出品時の価格設定の参考にお使いください。
+                商品購入時の相場を調べたり、出品時の価格設定の参考にお使いいただけます。
               </p>
               <h3 className={clsx(aboutTitle, common)}>分析の精度</h3>
               <p className={clsx(aboutDescription, common)}>
-                このサービスの分析内容は、全て各フリマサイトに基づいています。
+                このサービスのコンテンツは、全て各フリマサイトに基づいています。
                 ただし、入力されたキーワードや各サイトが提供する検索アルゴリズムによっては、ご希望に沿わない商品が含まれることがあります。
                 その場合は、以下のオプションを利用して、データの精度を高めることができます。
               </p>
@@ -460,13 +458,9 @@ const Analytics = () => {
             </span>
           </div>
           <div className={formContainer}>
-            <h2 className={clsx(sectionTitle, common)}>
-              {/* フリマサイト分析・比較 */}
-              フリマサイト分析
-            </h2>
+            <h2 className={clsx(sectionTitle, common)}>フリマサイト分析</h2>
             <p className={clsx(sectionDescription, common)}>
-              {/* メルカリ、ラクマ、PayPayフリマに対応。豊富なオプションで、精度の高い分析・比較が可能です。 */}
-              豊富なオプションによる分析で、精度の高いフリマサイト比較ができます。
+              詳細なオプションによるデータ分析で、精度の高いフリマサイト比較を可能にします。
             </p>
             <AnalysisForm />
           </div>
@@ -487,11 +481,10 @@ const Analytics = () => {
           <div className={clsx(main, result)}>
             <div id="result" className={resultHeader}>
               <h2 className={clsx(sectionTitle, common)}>
-                {/* フリマサイトの分析・比較結果 */}
                 フリマサイトの分析結果
               </h2>
               <p className={clsx(sectionDescription, common)}>
-                相場や人気価格など、フリマサイトの比較に必要不可欠なデータを算出します。
+                相場や人気価格など、フリマサイトの比較に必要なデータを算出します。
               </p>
             </div>
           </div>
