@@ -108,6 +108,9 @@ const baseCss = makeStyles((theme) =>
         fontSize: '1rem',
       },
     },
+    aboutListItem: {
+      marginTop: '1.5rem',
+    },
     aboutButton: {
       position: 'absolute',
       bottom: 0,

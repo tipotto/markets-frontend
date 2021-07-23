@@ -228,6 +228,7 @@ const Top = () => {
     aboutSection,
     aboutTitle,
     aboutDescription,
+    aboutListItem,
     aboutButton,
     resultContainer,
     result,
@@ -246,7 +247,7 @@ const Top = () => {
         <div className={main}>
           <div>
             <h1 className={serviceName}>
-              <span className={title}>フリマ一括検索</span>
+              <span className={title}>フリマ検索</span>
               markets.jp
             </h1>
             <p className={clsx(siteDescription, common)}>
@@ -265,7 +266,7 @@ const Top = () => {
                 各サイトの商品が価格順にまとめて表示されるため、ご希望の商品を簡単に比較できます。
                 また、アイテムをタップすると、各サイトで詳細情報の確認や購入ができます。
               </p>
-              <h3 className={clsx(aboutTitle, common)}>一括検索の精度</h3>
+              <h3 className={clsx(aboutTitle, common)}>検索の精度</h3>
               <p className={clsx(aboutDescription, common)}>
                 このサービスの検索内容は、全て各フリマサイトに基づいています。
                 ただし、入力されたキーワードや各サイトが提供する検索アルゴリズムによっては、ご希望に沿わない商品が含まれることがあります。
@@ -275,25 +276,62 @@ const Top = () => {
                 <li>除外ワードを指定する。</li>
                 <li>検索範囲で「商品名」を選択する。</li>
               </ul>
-              <h3 className={clsx(aboutTitle, common)}>除外ワード</h3>
+              <h3 className={clsx(aboutTitle, common)}>機能の説明</h3>
               <p className={clsx(aboutDescription, common)}>
-                検索結果から除外するキーワードを入力します。
-                スペースを空けて入力することで、複数指定もできます。
+                精度の高い検索を行う上で便利な機能のため、積極的にご活用ください。
               </p>
-              <h3 className={clsx(aboutTitle, common)}>配送料の負担</h3>
+              <ul className={clsx(aboutDescription, common)}>
+                <li>
+                  除外ワード
+                  <ul>
+                    <li>
+                      検索結果から除外するキーワードを入力します。
+                      スペースを空けて入力することで、複数指定もできます。
+                    </li>
+                  </ul>
+                </li>
+                <li className={aboutListItem}>
+                  検索範囲
+                  <ul>
+                    <li>
+                      「商品名」を選択した場合、入力された全てのキーワードを商品名に含むものを検索結果として表示します。
+                      そのため、関連性の低いものやキーワードに完全一致しないものを除外することで、精度の高いデータの取得、サイト比較が可能になります。
+                      ただし、取得できるデータ数が絞られることがありますので、ご了承ください。
+                    </li>
+                  </ul>
+                </li>
+                <li className={aboutListItem}>
+                  配送料の負担
+                  <ul>
+                    <li>
+                      PayPayフリマは基本的に配送無料のため、「購入者」を選択した場合は検索対象から除外されます。
+                    </li>
+                  </ul>
+                </li>
+                <li className={aboutListItem}>
+                  お気に入り
+                  <ul>
+                    <li>
+                      各アイテムのハートアイコンをタップして、お気に入りに含めることができます。
+                      お気に入りリストは「フリマサイトの検索結果」から確認できます。
+                    </li>
+                  </ul>
+                </li>
+                <li className={aboutListItem}>
+                  ページ選択
+                  <ul>
+                    <li>
+                      デフォルトでは、各フリマサイトの1ページ目の内容を表示します。
+                      2ページ目以降を見る場合は、「フリマサイトの検索結果」からページを指定できます。
+                      ページ選択を利用する場合は、必ず検索フォームの「キーワード」と「フリマサイト」を指定してください。
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+              <h3 className={clsx(aboutTitle, common)}>免責事項</h3>
               <p className={clsx(aboutDescription, common)}>
-                PayPayフリマは基本的に配送無料のため、「購入者」を選択した場合は検索対象から除外されます。
-              </p>
-              <h3 className={clsx(aboutTitle, common)}>お気に入り</h3>
-              <p className={clsx(aboutDescription, common)}>
-                各アイテムのハートアイコンをタップして、お気に入りに含めることができます。
-                お気に入りリストは「フリマサイトの検索結果」から確認できます。
-              </p>
-              <h3 className={clsx(aboutTitle, common)}>ページ選択</h3>
-              <p className={clsx(aboutDescription, common)}>
-                デフォルトでは、各フリマサイトの1ページ目の内容を表示します。
-                2ページ目以降を見る場合は、「フリマサイトの検索結果」からページを指定できます。
-                ページ選択を利用する場合は、必ず検索フォームの「キーワード」と「フリマサイト」を指定してください。
+                markets.jpのご利用に伴うトラブルや損害に関して、当方は一切の責任を負いかねます。
+                可能な限り、精度の高いデータの提供を目指していますが、商品の購入等の判断につきましては、個人の責任でお願い致します。
               </p>
             </div>
             <span
@@ -304,9 +342,9 @@ const Top = () => {
             </span>
           </div>
           <div className={formContainer}>
-            <h2 className={clsx(sectionTitle, common)}>フリマ一括検索</h2>
+            <h2 className={clsx(sectionTitle, common)}>フリマサイト検索</h2>
             <p className={clsx(sectionDescription, common)}>
-              メルカリ、ラクマ、PayPayフリマに対応。豊富なオプションで、精度の高い一括検索が可能です。
+              メルカリ、ラクマ、PayPayフリマに対応。豊富なオプションで、精度の高い検索が可能です。
             </p>
             <Form />
           </div>
@@ -327,7 +365,7 @@ const Top = () => {
           <div className={clsx(main, result)}>
             <div id="result" className={resultHeader}>
               <h2 className={clsx(sectionTitle, common)}>
-                フリマ一括検索の結果
+                フリマサイト検索の結果
               </h2>
               <p className={clsx(sectionDescription, common)}>
                 気に入った商品は、各サイトで購入できます。

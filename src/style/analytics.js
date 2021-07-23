@@ -156,9 +156,6 @@ const analyticsCss = makeStyles((theme) =>
     items: {
       marginTop: '4rem',
     },
-    aboutListItem: {
-      marginTop: '1.5rem',
-    },
     // analysisResult: {
     //   maxWidth: '75rem',
     //   margin: '0 auto',

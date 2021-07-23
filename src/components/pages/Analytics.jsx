@@ -392,12 +392,12 @@ const Analytics = () => {
     aboutSection,
     aboutTitle,
     aboutDescription,
+    aboutListItem,
     aboutButton,
     resultContainer,
     result,
     resultHeader,
   } = baseCss();
-  const { aboutListItem } = analyticsCss();
   return (
     <>
       <AnalyticsHead />
@@ -426,7 +426,8 @@ const Analytics = () => {
               </p>
               <h3 className={clsx(aboutTitle, common)}>サービス用途</h3>
               <p className={clsx(aboutDescription, common)}>
-                主な用途としては、購入に適したフリマサイトの比較、出品時の価格設定などがあります。その他にも様々な用途でご利用ください。
+                主な用途としては、購入に適したフリマサイトの比較、出品時の価格設定などがあります。
+                {/* その他にも様々な用途でご利用ください。 */}
               </p>
               <ul className={clsx(aboutDescription, common)}>
                 <li>
@@ -434,7 +435,7 @@ const Analytics = () => {
                   <ul>
                     <li>
                       現在の市場の最低価格や相場を比較することで、ご希望の商品を最もお得に購入できるフリマサイトを選定できます。
-                      ここでの「現在の市場」とは、各フリマサイトで出品中の商品を指しています。
+                      {/* ここでの「現在の市場」とは、各フリマサイトで出品中の商品を指しています。 */}
                     </li>
                   </ul>
                 </li>
@@ -477,7 +478,7 @@ const Analytics = () => {
                     <li>
                       「商品名」を選択した場合、入力された全てのキーワードを商品名に含むものを検索結果として表示します。
                       そのため、関連性の低いものやキーワードに完全一致しないものを除外することで、精度の高いデータの取得、サイト比較が可能になります。
-                      ただし、取得できるデータ数が絞られることがありますので、ご了承ください。
+                      {/* ただし、取得できるデータ数が絞られることがありますので、ご了承ください。 */}
                     </li>
                   </ul>
                 </li>
@@ -487,16 +488,16 @@ const Analytics = () => {
                     <li>
                       算出した価格データがチャートで表示されます。 1k =
                       1,000円と読み換えてください。
-                      また、グラフをタップすると、データの詳細を見ることができます。
+                      {/* また、グラフをタップすると、データの詳細を見ることができます。 */}
                     </li>
                   </ul>
                 </li>
               </ul>
-              <h3 className={clsx(aboutTitle, common)}>免責事項</h3>
+              {/* <h3 className={clsx(aboutTitle, common)}>免責事項</h3>
               <p className={clsx(aboutDescription, common)}>
                 markets.jpのご利用に伴うトラブルや損害に関して、当方は一切の責任を負いかねます。
                 可能な限り、精度の高いデータの提供を目指していますが、価格設定やサイトの比較に関する判断につきましては、個人の責任でお願い致します。
-              </p>
+              </p> */}
             </div>
             <span
               className={clsx(aboutButton, common)}
