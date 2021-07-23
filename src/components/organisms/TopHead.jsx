@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet';
 const AnalyticsHead = () => {
   return (
     <Helmet>
-      <title>フリマ検索｜markets.jpでフリマ比較</title>
+      <title>フリマ検索｜markets.jpでフリマ一括検索</title>
       <meta charset="utf-8" />
       <meta
         name="viewport"
@@ -12,7 +12,7 @@ const AnalyticsHead = () => {
       />
       <meta
         name="description"
-        content="複数のフリマサイトを一括検索し、価格を簡単に比較できます。メルカリ、ラクマ、PayPayフリマに対応し、検索オプションも豊富です。フリマサイトを1つずつ検索しなくても、ワンクリックでまとめて比較し、購入できます。"
+        content="フリマサイトを一括検索し、価格を簡単に比較。詳細な検索オプションで、メルカリ、ラクマ、PayPayフリマに対応。フリマサイトを1つずつ検索しなくても、ワンクリックで一括検索できるため、必ずお手頃な商品が見つかります。"
       />
       <meta content="https://www.markets-jp.com/" property="og:url" />
       <meta content="website" property="og:type" />

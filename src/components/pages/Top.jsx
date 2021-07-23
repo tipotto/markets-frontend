@@ -246,11 +246,11 @@ const Top = () => {
         <div className={main}>
           <div>
             <h1 className={serviceName}>
-              <span className={title}>フリマサイト検索・比較</span>
+              <span className={title}>フリマ一括検索</span>
               markets.jp
             </h1>
             <p className={clsx(siteDescription, common)}>
-              複数のフリマサイトを検索し、価格を比較できるサービス
+              フリマサイトを一括検索し、価格を比較できるサービス
             </p>
           </div>
           <div id="about-service-container" className={aboutContainer}>
@@ -261,15 +261,15 @@ const Top = () => {
             <div id="about-service-content" className={aboutSection}>
               <h3 className={clsx(aboutTitle, common)}>サービス概要</h3>
               <p className={clsx(aboutDescription, common)}>
-                複数のフリマサイトを一括検索するサービスです。
-                ワンクリックでご希望の商品を比較できます。
+                フリマサイトを一括検索するサービスです。
+                各サイトの商品が価格順にまとめて表示されるため、ご希望の商品を簡単に比較できます。
                 また、アイテムをタップすると、各サイトで詳細情報の確認や購入ができます。
               </p>
               <h3 className={clsx(aboutTitle, common)}>検索の精度</h3>
               <p className={clsx(aboutDescription, common)}>
                 このサービスの検索内容は、全て各フリマサイトに基づいています。
                 ただし、入力されたキーワードや各サイトが提供する検索アルゴリズムによっては、ご希望に沿わない商品が含まれることがあります。
-                その場合は、以下のオプションを利用して、検索の精度を高めることができます。
+                その場合は、以下のオプションを利用して、一括検索の精度を高めることができます。
               </p>
               <ul className={clsx(aboutDescription, common)}>
                 <li>除外ワードを指定する。</li>
@@ -304,18 +304,18 @@ const Top = () => {
             </span>
           </div>
           <div className={formContainer}>
-            <h2 className={clsx(sectionTitle, common)}>フリマサイト検索</h2>
+            <h2 className={clsx(sectionTitle, common)}>フリマ一括検索</h2>
             <p className={clsx(sectionDescription, common)}>
-              メルカリ、ラクマ、PayPayフリマに対応。豊富な検索オプションで、精度の高い比較が可能です。
+              メルカリ、ラクマ、PayPayフリマに対応。豊富なオプションで、精度の高い一括検索が可能です。
             </p>
             <Form />
           </div>
           <div className={toolLinkContainer}>
             <h2 className={clsx(sectionTitle, common)}>
-              フリマサイト分析・比較ツール
+              フリマサイト比較サービス
             </h2>
             <p className={clsx(sectionToolLink, common)}>
-              相場や人気価格を算出し、フリマサイトを比較できる分析ツールは
+              相場や人気価格を算出し、フリマサイト比較に役立つ分析サービスは
               <Link className={toolLink} to="/analyze">
                 こちら
               </Link>
@@ -327,10 +327,10 @@ const Top = () => {
           <div className={clsx(main, result)}>
             <div id="result" className={resultHeader}>
               <h2 className={clsx(sectionTitle, common)}>
-                フリマサイトの検索結果
+                フリマ一括検索の結果
               </h2>
               <p className={clsx(sectionDescription, common)}>
-                比較して気に入った商品は、各サイトで購入できます。
+                気に入った商品は、各サイトで購入できます。
               </p>
               <Box
                 className={itemTypeSelect}

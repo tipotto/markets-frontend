@@ -182,9 +182,6 @@ const useAnalytics = () => {
           <InfoBox title="平均価格" maxPrice={average} />
         </div>
         <div id="whole-chart" className={wholeChartWrapper}>
-          {/* <div className={header}>
-            <span className={title}>Whole price chart</span>
-          </div> */}
           <div id="whole-chart-container" className={wholeChartSection}>
             <div className={wholeChartContainer}>
               <HorizontalBarChart
@@ -204,7 +201,6 @@ const useAnalytics = () => {
         </div>
         <div className={partialChartWrapper}>
           <div className={toggleBtnContainer}>
-            {/* <span className={title}>Recommended price chart</span> */}
             <ToggleButtonGroup
               className={toggleBtnGroup}
               exclusive
@@ -409,11 +405,13 @@ const Analytics = () => {
         <div className={main}>
           <div>
             <h1 className={serviceName}>
-              <span className={title}>フリマサイト分析</span>
+              {/* <span className={title}>フリマサイト分析</span> */}
+              <span className={title}>フリマサイト比較</span>
               markets.jp
             </h1>
             <p className={clsx(siteDescription, common)}>
-              フリマサイトの相場・人気価格を分析できるサービス
+              {/* フリマサイトの相場や人気価格を分析・比較できるサービス */}
+              フリマサイトの相場や人気価格を比較できるサービス
             </p>
           </div>
           <div id="about-service-container" className={aboutContainer}>
@@ -424,14 +422,14 @@ const Analytics = () => {
             <div id="about-service-content" className={aboutSection}>
               <h3 className={clsx(aboutTitle, common)}>サービス概要</h3>
               <p className={clsx(aboutDescription, common)}>
-                フリマサイトの分析サービスです。メルカリ、ラクマ、PayPayフリマに対応しています。
-                商品を購入する際に相場価格を調べたり、出品する際の価格設定の参考にしていただけます。
+                詳細な価格データをもとに、フリマサイトを比較できるサービスです。メルカリ、ラクマ、PayPayフリマに対応しています。
+                商品購入のために相場を調べたり、出品時の価格設定の参考にお使いください。
               </p>
               <h3 className={clsx(aboutTitle, common)}>分析の精度</h3>
               <p className={clsx(aboutDescription, common)}>
                 このサービスの分析内容は、全て各フリマサイトに基づいています。
                 ただし、入力されたキーワードや各サイトが提供する検索アルゴリズムによっては、ご希望に沿わない商品が含まれることがあります。
-                その場合は、以下のオプションを利用して、検索の精度を高めることができます。
+                その場合は、以下のオプションを利用して、データの精度を高めることができます。
               </p>
               <ul className={clsx(aboutDescription, common)}>
                 <li>除外ワードを指定する。</li>
@@ -439,8 +437,14 @@ const Analytics = () => {
               </ul>
               <h3 className={clsx(aboutTitle, common)}>除外ワード</h3>
               <p className={clsx(aboutDescription, common)}>
-                検索結果から除外するキーワードを入力します。
+                分析結果から除外するキーワードを入力します。
                 スペースを空けて入力することで、複数指定もできます。
+              </p>
+              <h3 className={clsx(aboutTitle, common)}>検索範囲</h3>
+              <p className={clsx(aboutDescription, common)}>
+                「商品名」を選択した場合、入力された全てのキーワードを商品名として含むもののみを検索結果として表示します。
+                そのため、関連度の低いものや付属品など、キーワードに完全に一致しないものを除外することで、精度の高いフリマサイト比較が可能になります。
+                ただし、表示されるデータが絞られることがありますので、ご了承ください。
               </p>
               <h3 className={clsx(aboutTitle, common)}>価格チャート</h3>
               <p className={clsx(aboutDescription, common)}>
@@ -456,18 +460,22 @@ const Analytics = () => {
             </span>
           </div>
           <div className={formContainer}>
-            <h2 className={clsx(sectionTitle, common)}>フリマサイト分析</h2>
+            <h2 className={clsx(sectionTitle, common)}>
+              {/* フリマサイト分析・比較 */}
+              フリマサイト分析
+            </h2>
             <p className={clsx(sectionDescription, common)}>
-              メルカリ、ラクマ、PayPayフリマに対応。豊富な検索オプションで、精度の高い分析が可能です。
+              {/* メルカリ、ラクマ、PayPayフリマに対応。豊富なオプションで、精度の高い分析・比較が可能です。 */}
+              豊富なオプションによる分析で、精度の高いフリマサイト比較ができます。
             </p>
             <AnalysisForm />
           </div>
           <div className={toolLinkContainer}>
             <h2 className={clsx(sectionTitle, common)}>
-              フリマサイト検索ツール
+              フリマサイト検索・比較サービス
             </h2>
             <p className={clsx(sectionToolLink, common)}>
-              フリマサイトの一括検索ツールは
+              フリマサイトを一括検索し、各サイトの商品や価格を比較できるサービスです。ご利用は
               <Link className={toolLink} to="/">
                 こちら
               </Link>
@@ -479,10 +487,11 @@ const Analytics = () => {
           <div className={clsx(main, result)}>
             <div id="result" className={resultHeader}>
               <h2 className={clsx(sectionTitle, common)}>
+                {/* フリマサイトの分析・比較結果 */}
                 フリマサイトの分析結果
               </h2>
               <p className={clsx(sectionDescription, common)}>
-                相場価格やいいねが多い人気価格を算出します。
+                相場や人気価格など、フリマサイトの比較に必要不可欠なデータを算出します。
               </p>
             </div>
           </div>
