@@ -18,7 +18,7 @@ const AnalyticsHead = () => {
       <meta content="article" property="og:type" />
       <meta content="フリマ分析・比較サービス" property="og:title" />
       <meta
-        content="フリマサイトの相場や人気価格をワンクリックで分析・比較。現在の市場や過去の販売データを元にした、精度の高いサイト比較が可能に。メルカリ、ラクマ、PayPayフリマに対応。"
+        content="フリマサイトの相場をワンクリックで分析・比較。現在の市場や過去の販売データを元にした、精度の高いサイト比較が可能に。メルカリ、ラクマ、PayPayフリマに対応。"
         property="og:description"
       />
       <meta content="markets.jp" property="og:site_name" />

@@ -410,21 +410,28 @@ const Analytics = () => {
               markets.jp
             </h1>
             <p className={clsx(siteDescription, common)}>
-              フリマサイトの相場や人気価格を分析・比較できるサービス
+              フリマサイトの相場や人気価格を分析・比較
+              {/* フリマサイトの相場や人気価格をかんたん分析・比較 */}
+              {/* フリマサイトの相場や人気価格を分析・比較できるサービス */}
             </p>
           </div>
           <div id="about-service-container" className={aboutContainer}>
             <h2 className={clsx(sectionTitle, common)}>markets.jpとは？</h2>
             <p className={clsx(sectionDescription, common)}>
-              このサービスについてご説明します。
+              効果的な分析・比較のために、ぜひご一読ください。
+              {/* このサービスについてご説明します。 */}
             </p>
             <div id="about-service-content" className={aboutSection}>
-              <h3 className={clsx(aboutTitle, common)}>サービス概要</h3>
+              <h3 className={clsx(aboutTitle, common)}>概要</h3>
+              {/* <h3 className={clsx(aboutTitle, common)}>サービス概要</h3> */}
               <p className={clsx(aboutDescription, common)}>
-                フリマサイトのデータ分析・比較にお使いいただけるサービスです。
-                メルカリ、ラクマ、PayPayフリマに対応しているため、各フリマサイトの比較に基づいて、ご希望のニーズに適したサイト選定が可能です。
+                フリマサイトの分析・比較にお使いいただけるサービスです。
+                {/* フリマサイトのデータ分析・比較にお使いいただけるサービスです。 */}
+                メルカリ、ラクマ、PayPayフリマに対応しているため、各フリマサイトの比較を通して、ご希望に合ったサイト選定が可能です。
+                {/* メルカリ、ラクマ、PayPayフリマに対応しているため、各フリマサイトの比較に基づいて、ご希望のニーズに適したサイト選定が可能です。 */}
               </p>
-              <h3 className={clsx(aboutTitle, common)}>サービス用途</h3>
+              <h3 className={clsx(aboutTitle, common)}>用途</h3>
+              {/* <h3 className={clsx(aboutTitle, common)}>サービス用途</h3> */}
               <p className={clsx(aboutDescription, common)}>
                 主な用途としては、購入に適したフリマサイトの比較、出品時の価格設定などがあります。
                 {/* その他にも様々な用途でご利用ください。 */}
@@ -434,7 +441,8 @@ const Analytics = () => {
                   購入に適したフリマサイトの比較
                   <ul>
                     <li>
-                      現在の市場の最低価格や相場を比較することで、ご希望の商品を最もお得に購入できるフリマサイトを選定できます。
+                      現在の市場の相場などを比較することで、ご希望の商品を最もお得に購入できるフリマサイトを選定できます。
+                      {/* 現在の市場の最低価格や相場を比較することで、ご希望の商品を最もお得に購入できるフリマサイトを選定できます。 */}
                       {/* ここでの「現在の市場」とは、各フリマサイトで出品中の商品を指しています。 */}
                     </li>
                   </ul>
@@ -443,7 +451,8 @@ const Analytics = () => {
                   出品時の価格設定
                   <ul>
                     <li>
-                      現在の市場の相場や価格幅に加えて、過去の販売データも参考に比較検討を行うことで、市場の相場の範囲内、かつ実際の取引履歴に基づいた、最も売り上げが見込める価格を設定することができます。
+                      現在の市場の相場に加えて、過去の販売データも参考に比較検討を行うことで、市場の相場の範囲内、かつ実際の取引履歴に基づいた、最も売り上げが見込める価格を設定することができます。
+                      {/* 現在の市場の相場や価格幅に加えて、過去の販売データも参考に比較検討を行うことで、市場の相場の範囲内、かつ実際の取引履歴に基づいた、最も売り上げが見込める価格を設定することができます。 */}
                     </li>
                   </ul>
                 </li>
@@ -460,7 +469,8 @@ const Analytics = () => {
               </ul>
               <h3 className={clsx(aboutTitle, common)}>機能の説明</h3>
               <p className={clsx(aboutDescription, common)}>
-                精度の高い分析・比較を行う上で便利な機能のため、積極的にご活用ください。
+                精度の高い分析・比較を行う上で便利な機能です。
+                {/* 精度の高い分析・比較を行う上で便利な機能のため、積極的にご活用ください。 */}
               </p>
               <ul className={clsx(aboutDescription, common)}>
                 <li>
@@ -486,7 +496,8 @@ const Analytics = () => {
                   価格チャート
                   <ul>
                     <li>
-                      算出した価格データがチャートで表示されます。 1k =
+                      {/* 算出した価格データがチャートで表示されます。 */}
+                      算出した価格がチャートで表示されます。 1k =
                       1,000円と読み換えてください。
                       {/* また、グラフをタップすると、データの詳細を見ることができます。 */}
                     </li>
@@ -507,9 +518,12 @@ const Analytics = () => {
             </span>
           </div>
           <div className={formContainer}>
-            <h2 className={clsx(sectionTitle, common)}>フリマサイト分析</h2>
+            <h2 className={clsx(sectionTitle, common)}>
+              フリマサイト分析・比較
+            </h2>
             <p className={clsx(sectionDescription, common)}>
-              詳細なオプションによるデータ分析で、精度の高いフリマサイト比較を可能にします。
+              詳細なオプションによる分析で、精度の高いフリマサイト比較を可能にします。
+              {/* 詳細なオプションによるデータ分析で、精度の高いフリマサイト比較を可能にします。 */}
             </p>
             <AnalysisForm />
           </div>
@@ -518,7 +532,9 @@ const Analytics = () => {
               フリマサイト検索・比較サービス
             </h2>
             <p className={clsx(sectionToolLink, common)}>
-              フリマサイトを一括検索し、各サイトの商品や価格を比較できるサービスです。ご利用は
+              フリマサイトを一括検索し、各サイトの商品を比較できます。ご利用は
+              {/* フリマサイトを一括検索し、各サイトの商品を比較できるサービスです。ご利用は */}
+              {/* フリマサイトを一括検索し、各サイトの商品や価格を比較できるサービスです。ご利用は */}
               <Link className={toolLink} to="/">
                 こちら
               </Link>
@@ -530,10 +546,11 @@ const Analytics = () => {
           <div className={clsx(main, result)}>
             <div id="result" className={resultHeader}>
               <h2 className={clsx(sectionTitle, common)}>
-                フリマサイトの分析結果
+                フリマサイト分析・比較の結果
               </h2>
               <p className={clsx(sectionDescription, common)}>
-                相場や人気価格など、フリマサイトの比較に必要なデータを算出します。
+                フリマサイトの比較に必要なデータを表示します。
+                {/* 相場や人気価格など、フリマサイトの比較に必要なデータを算出します。 */}
               </p>
             </div>
           </div>
