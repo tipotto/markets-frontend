@@ -495,7 +495,8 @@ const Analytics = () => {
                   </ul>
                 </li>
                 <li className={aboutListItem}>
-                  価格チャート
+                  チャート
+                  {/* 価格チャート */}
                   <ul>
                     <li>
                       {/* 算出した価格データがチャートで表示されます。 */}
@@ -538,9 +539,12 @@ const Analytics = () => {
               フリマサイトを一括検索し、各サイトの商品を比較できます。ご利用は
               {/* フリマサイトを一括検索し、各サイトの商品を比較できるサービスです。ご利用は */}
               {/* フリマサイトを一括検索し、各サイトの商品や価格を比較できるサービスです。ご利用は */}
-              <Link className={toolLink} to="/">
+              {/* <Link className={toolLink} to="/">
                 こちら
-              </Link>
+              </Link> */}
+              <a className={toolLink} href="/">
+                こちら
+              </a>
               。
             </p>
           </div>

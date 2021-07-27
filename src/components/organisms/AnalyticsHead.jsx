@@ -22,8 +22,11 @@ const AnalyticsHead = () => {
         property="og:description"
       />
       <meta content="markets.jp" property="og:site_name" />
-      <meta content="./markets-logo.png" property="og:image" />
-      <link rel="shortcut icon" href="./favicon.ico" />
+      <meta
+        content="https://www.markets-jp.com/markets-logo.png"
+        property="og:image"
+      />
+      <link rel="shortcut icon" href="https://www.markets-jp.com/favicon.ico" />
     </Helmet>
   );
 };

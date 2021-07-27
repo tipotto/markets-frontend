@@ -251,7 +251,8 @@ const Top = () => {
               markets.jp
             </h1>
             <p className={clsx(siteDescription, common)}>
-              フリマサイトを一括検索し、価格を比較できるサービス
+              フリマサイトの商品を一括検索・比較
+              {/* フリマサイトを一括検索し、価格を比較できるサービス */}
             </p>
           </div>
           <div id="about-service-container" className={aboutContainer}>
@@ -354,9 +355,12 @@ const Top = () => {
             </h2>
             <p className={clsx(sectionToolLink, common)}>
               相場や人気価格を算出し、フリマサイト比較に役立つ分析サービスは
-              <Link className={toolLink} to="/analyze">
+              {/* <Link className={toolLink} to="/analyze">
                 こちら
-              </Link>
+              </Link> */}
+              <a className={toolLink} href="/analyze">
+                こちら
+              </a>
               。
             </p>
           </div>
