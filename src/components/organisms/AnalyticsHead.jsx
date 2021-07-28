@@ -12,7 +12,7 @@ const AnalyticsHead = () => {
       />
       <meta
         name="description"
-        content="フリマサイトの相場や人気価格の分析ツール。現在の市場や過去の販売履歴に基づく、精度の高いフリマ比較が可能です。豊富な検索オプションで、メルカリ、ラクマ、PayPayフリマに対応。商品の購入や出品時のサイト比較に便利です。"
+        content="フリマサイトの相場や人気価格の分析ツール。現在の市場や過去の販売履歴に基づく、精度の高いフリマ比較ができます。豊富な検索オプションで、メルカリ、ラクマ、PayPayフリマに対応。商品の購入や出品時のサイト比較に便利です。"
       />
       <meta content="https://www.markets-jp.com/analyze" property="og:url" />
       <meta content="article" property="og:type" />
