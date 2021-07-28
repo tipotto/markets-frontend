@@ -67,6 +67,13 @@ let AnalysisForm = ({ handleSubmit, submitting, invalid, change }) => {
       >
         <RadioOptions options={radioOptionsObject.platform} />
       </Field>
+      {/* <Field
+        name="platform"
+        label="フリマサイト"
+        component={RadioButton}
+        rootClass={items}
+        options={radioOptionsObject.platform}
+      /> */}
       <Field
         name="searchTarget"
         label="検索対象"

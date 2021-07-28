@@ -550,7 +550,8 @@ const Analytics = () => {
           </div>
           <div className={toolLinkContainer}>
             <h2 className={clsx(sectionTitle, common)}>
-              フリマサイト検索・比較サービス
+              フリマサイト検索・比較
+              {/* フリマサイト検索・比較サービス */}
             </h2>
             <p className={clsx(sectionToolLink, common)}>
               フリマサイトを一括検索し、各サイトの商品を比較できます。ご利用は
