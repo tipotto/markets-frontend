@@ -550,20 +550,21 @@ const Analytics = () => {
           </div>
           <div className={toolLinkContainer}>
             <h2 className={clsx(sectionTitle, common)}>
-              フリマサイト検索・比較
+              フリマサイト検索
               {/* フリマサイト検索・比較サービス */}
             </h2>
             <p className={clsx(sectionToolLink, common)}>
-              フリマサイトを一括検索し、各サイトの商品を比較できます。ご利用は
+              主要なフリマサイトを一括検索できるサービスです。
+              {/* フリマサイトを一括検索し、各サイトの商品を比較できます。ご利用は */}
               {/* フリマサイトを一括検索し、各サイトの商品を比較できるサービスです。ご利用は */}
               {/* フリマサイトを一括検索し、各サイトの商品や価格を比較できるサービスです。ご利用は */}
               {/* <Link className={toolLink} to="/">
                 こちら
               </Link> */}
               <a className={toolLink} href="/">
-                こちら
+                フリマ検索
               </a>
-              。
+              はこちら。
             </p>
           </div>
         </div>

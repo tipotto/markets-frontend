@@ -371,15 +371,16 @@ const Top = () => {
               {/* フリマサイト比較サービス */}
             </h2>
             <p className={clsx(sectionToolLink, common)}>
-              相場や人気価格を算出する、フリマサイト分析サービスは
+              相場や人気価格を把握できる分析サービスです。
+              {/* 相場や人気価格を算出する、フリマサイト分析サービスは */}
               {/* 相場や人気価格を算出し、フリマサイト比較に便利な分析サービスは */}
               {/* <Link className={toolLink} to="/analyze">
                 こちら
               </Link> */}
               <a className={toolLink} href="/analyze">
-                こちら
+                フリマサイト比較
               </a>
-              。
+              はこちら。
             </p>
           </div>
         </div>
