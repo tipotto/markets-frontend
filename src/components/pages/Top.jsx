@@ -40,7 +40,7 @@ const useTop = () => {
   // Reduxはデフォルトで値の比較を「===」で行う
   // 以下の2つはプリミティブ型の値を参照するため問題なく比較できる
   const page = useSelector((state) => getPage(state));
-  // const pagers = useSelector((state) => state.search.pages);
+  const pagers = useSelector((state) => state.search.pages);
 
   const isLoading = useSelector((state) => state.state.isLoading);
 
@@ -167,7 +167,7 @@ const useTop = () => {
 
   return {
     page,
-    // pagers,
+    pagers,
     selectedTab,
     handleCategoryChange,
     handleNextSearch,
@@ -205,7 +205,7 @@ const showAboutService = (event) => {
 const Top = () => {
   const {
     page,
-    // pagers,
+    pagers,
     selectedTab,
     handleCategoryChange,
     handleNextSearch,
@@ -416,12 +416,10 @@ const Top = () => {
                   <Tab className={tab} label="すべて" value="all" />
                   <Tab className={tab} label="お気に入り" value="favorites" />
                 </Tabs>
-                {/* {selectedTab === 'all' && pagers > 1 && ( */}
-                {selectedTab === 'all' && (
+                {selectedTab === 'all' && pagers > 1 && (
                   <Pagination
                     className={pagination}
-                    // count={pagers}
-                    count={10}
+                    count={pagers}
                     size="large"
                     shape="rounded"
                     page={page}
