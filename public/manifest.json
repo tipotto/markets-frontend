@@ -13,7 +13,7 @@
     {
       "src": "markets-logo.png",
       "type": "image/png",
-      "sizes": "147x147"
+      "sizes": "144x144"
     },
     {
       "src": "apple-touch-icon.png",
@@ -26,6 +26,11 @@
       "sizes": "192x192"
     }
   ],
-  "start_url": ".",
-  "display": "standalone"
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "dir": "ltr",
+  "lang": "ja-jp",
+  "related_applications": [],
+  "prefer_related_applications": false
 }
