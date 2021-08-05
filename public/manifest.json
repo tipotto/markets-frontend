@@ -1,6 +1,9 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "name": "markets.jp",
+  "short_name": "markets",
+  "theme_color": "#000000",
+  "background_color": "#ffffff",
+  "description": "フリマを一括検索したり、分析・比較できるサービスです。",
   "icons": [
     {
       "src": "favicon.ico",
@@ -8,18 +11,11 @@
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
+      "src": "markets-logo.png",
       "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "logo512.png",
-      "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "175x147"
     }
   ],
   "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "display": "standalone"
 }
