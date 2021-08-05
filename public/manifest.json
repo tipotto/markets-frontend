@@ -1,19 +1,29 @@
 {
   "name": "markets.jp",
-  "short_name": "markets",
+  "short_name": "markets.jp",
   "theme_color": "#000000",
   "background_color": "#ffffff",
   "description": "フリマを一括検索したり、分析・比較できるサービスです。",
   "icons": [
     {
       "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
+      "sizes": "48x48 32x32 16x16",
       "type": "image/x-icon"
     },
     {
       "src": "markets-logo.png",
       "type": "image/png",
-      "sizes": "175x147"
+      "sizes": "147x147"
+    },
+    {
+      "src": "apple-touch-icon.png",
+      "type": "image/png",
+      "sizes": "180x180"
+    },
+    {
+      "src": "android-chrome-192×192.png",
+      "type": "image/png",
+      "sizes": "192x192"
     }
   ],
   "start_url": ".",
