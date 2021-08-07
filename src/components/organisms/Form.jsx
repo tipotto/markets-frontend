@@ -20,6 +20,7 @@ import CustomTextField from '../molecules/CustomTextField';
 import PlatformCheckbox from '../molecules/PlatformCheckbox';
 import ProductStatusCheckbox from '../molecules/ProductStatusCheckbox';
 import RadioButton from '../molecules/RadioButton';
+import CustomRadioButton from '../molecules/CustomRadioButton';
 import RadioOptions from '../molecules/RadioOptions';
 import SubmitButton from '../molecules/SubmitButton';
 import radioOptionsObject from '../../constants/radioOptions';
@@ -162,11 +163,9 @@ let Form = ({ handleSubmit, submitting, invalid, change }) => {
       <Field
         name="searchRange"
         label="検索範囲"
-        component={RadioButton}
-        rootClass={items}
-      >
-        <RadioOptions options={radioOptionsObject.searchRange} />
-      </Field>
+        component={CustomRadioButton}
+        options={radioOptionsObject.searchRange}
+      />
       <div className={priceContainer}>
         <Field
           name="minPrice"
@@ -188,30 +187,48 @@ let Form = ({ handleSubmit, submitting, invalid, change }) => {
         component={ProductStatusCheckbox}
         rootClass={items}
       />
-      <Field
+      {/* <Field
         name="salesStatus"
         label="販売状況"
         component={RadioButton}
         rootClass={items}
       >
         <RadioOptions options={radioOptionsObject.salesStatus} />
-      </Field>
+      </Field> */}
       <Field
+        name="salesStatus"
+        label="販売状況"
+        component={CustomRadioButton}
+        options={radioOptionsObject.salesStatus}
+      />
+      {/* <Field
         name="deliveryCost"
         label="配送料の負担"
         component={RadioButton}
         rootClass={items}
       >
         <RadioOptions options={radioOptionsObject.deliveryCost} />
-      </Field>
+      </Field> */}
       <Field
+        name="deliveryCost"
+        label="配送料の負担"
+        component={CustomRadioButton}
+        options={radioOptionsObject.deliveryCost}
+      />
+      {/* <Field
         name="sortOrder"
         label="並びかえ"
         component={RadioButton}
         rootClass={items}
       >
         <RadioOptions options={radioOptionsObject.sortOrder} />
-      </Field>
+      </Field> */}
+      <Field
+        name="sortOrder"
+        label="並びかえ"
+        component={CustomRadioButton}
+        options={radioOptionsObject.sortOrder}
+      />
       <SubmitButton disabled={invalid || submitting} />
     </form>
   );

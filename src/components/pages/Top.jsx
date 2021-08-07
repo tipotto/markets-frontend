@@ -412,7 +412,7 @@ const Top = () => {
                   onChange={handleCategoryChange}
                   variant="scrollable"
                   scrollButtons="on"
-                  aria-label="scrollable force tabs example"
+                  aria-label="Item type tabs"
                 >
                   <Tab className={tab} label="すべて" value="all" />
                   <Tab className={tab} label="お気に入り" value="favorites" />
