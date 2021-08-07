@@ -2,15 +2,14 @@ import React from 'react';
 import '../../index.css';
 
 const CustomRadioButton = ({
-  input: { value, onChange },
-  name,
+  input: { name, value, onChange },
   label,
   options,
 }) => {
-  console.log('value', value);
+  // console.log('value', value);
 
   const handleChange = (e) => {
-    console.log('event value', e.target.value);
+    // console.log('event value', e.target.value);
     onChange(e.target.value);
   };
 
@@ -21,14 +20,14 @@ const CustomRadioButton = ({
         {options.map((option) => (
           <span class="radio-button" key={option.value}>
             <input
-              id={option.value}
+              id={`${name}-${option.value}`}
               type="radio"
               name={name}
               value={option.value}
               onChange={handleChange}
               checked={value === option.value}
             />
-            <label class="label" for={option.value}>
+            <label class="label" for={`${name}-${option.value}`}>
               {option.label}
             </label>
           </span>

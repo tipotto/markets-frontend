@@ -410,8 +410,8 @@ const Top = () => {
                   className={tabs}
                   value={selectedTab}
                   onChange={handleCategoryChange}
-                  variant="scrollable"
-                  scrollButtons="on"
+                  // variant="scrollable"
+                  // scrollButtons="on"
                   aria-label="Item type tabs"
                 >
                   <Tab className={tab} label="すべて" value="all" />

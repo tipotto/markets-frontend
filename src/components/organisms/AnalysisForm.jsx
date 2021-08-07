@@ -6,8 +6,7 @@ import clsx from 'clsx';
 import { requestAnalysis } from '../../actions';
 import CustomTextField from '../molecules/CustomTextField';
 import ProductStatusCheckbox from '../molecules/ProductStatusCheckbox';
-import RadioButton from '../molecules/RadioButton';
-import RadioOptions from '../molecules/RadioOptions';
+import CustomRadioButton from '../molecules/CustomRadioButton';
 import SubmitButton from '../molecules/SubmitButton';
 import radioOptionsObject from '../../constants/radioOptions';
 import formCss from '../../style/form';
@@ -62,44 +61,29 @@ let AnalysisForm = ({ handleSubmit, submitting, invalid, change }) => {
       <Field
         name="platform"
         label="フリマサイト"
-        component={RadioButton}
-        rootClass={items}
-      >
-        <RadioOptions options={radioOptionsObject.platform} />
-      </Field>
-      {/* <Field
-        name="platform"
-        label="フリマサイト"
-        component={RadioButton}
-        rootClass={items}
+        component={CustomRadioButton}
         options={radioOptionsObject.platform}
-      /> */}
+      />
       <Field
         name="searchTarget"
         label="検索対象"
-        component={RadioButton}
-        rootClass={items}
-      >
-        <RadioOptions options={radioOptionsObject.searchTarget} />
-      </Field>
+        component={CustomRadioButton}
+        options={radioOptionsObject.searchTarget}
+      />
       {platform === 'mercari' && (
         <Field
           name="priceType"
           label="算出価格"
-          component={RadioButton}
-          rootClass={items}
-        >
-          <RadioOptions options={radioOptionsObject.priceType} />
-        </Field>
+          component={CustomRadioButton}
+          options={radioOptionsObject.priceType}
+        />
       )}
       <Field
         name="searchRange"
         label="検索範囲"
-        component={RadioButton}
-        rootClass={items}
-      >
-        <RadioOptions options={radioOptionsObject.searchRange} />
-      </Field>
+        component={CustomRadioButton}
+        options={radioOptionsObject.searchRange}
+      />
       <Field
         name="productStatus"
         label="商品の状態"
@@ -109,19 +93,15 @@ let AnalysisForm = ({ handleSubmit, submitting, invalid, change }) => {
       <Field
         name="deliveryCost"
         label="配送料の負担"
-        component={RadioButton}
-        rootClass={items}
-      >
-        <RadioOptions options={radioOptionsObject.deliveryCost} />
-      </Field>
+        component={CustomRadioButton}
+        options={radioOptionsObject.deliveryCost}
+      />
       <Field
         name="sortOrder"
         label="並びかえ"
-        component={RadioButton}
-        rootClass={items}
-      >
-        <RadioOptions options={radioOptionsObject.sortOrder} />
-      </Field>
+        component={CustomRadioButton}
+        options={radioOptionsObject.sortOrder}
+      />
       <SubmitButton disabled={invalid || submitting} />
     </form>
   );
