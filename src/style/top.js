@@ -2,59 +2,30 @@ import { makeStyles, createStyles } from '@material-ui/core/styles';
 
 const topCss = makeStyles((theme) =>
   createStyles({
-    itemTypeSelect: {
+    serviceContainer: {
       display: 'flex',
-      flexWrap: 'nowrap',
+      flexWrap: 'wrap',
       justifyContent: 'space-between',
+      margin: '4rem 0',
+    },
+    serviceBox: {
+      width: '48.5%',
       marginBottom: '2rem',
       [theme.breakpoints.down('xs')]: {
-        flexWrap: 'wrap',
+        width: '100%',
+        marginBottom: '.5rem',
       },
     },
-    tabs: {
-      [theme.breakpoints.down('xs')]: {
-        margin: '0 auto 1.3rem',
-      },
-      '&> div.MuiTabScrollButton-root': {
-        width: 0,
-      },
+    serviceName: {
+      margin: '.5rem 0 0',
     },
-    tab: {
-      '&>span.MuiTab-wrapper': {
-        textTransform: 'none',
-      },
+    link: {
+      textDecoration: 'none',
+      color: '#2D5569',
     },
-    pagination: {
-      overflowX: 'scroll',
-      [theme.breakpoints.down('xs')]: {
-        margin: '0 auto',
-      },
-      '& ul.MuiPagination-ul': {
-        flexWrap: 'nowrap',
-      },
-    },
-    selectBox: {
-      marginBottom: 30,
-      display: 'block',
-      textAlign: 'right',
-    },
-    platformSelectGroup: {
-      [theme.breakpoints.down('xs')]: {
-        margin: '0 auto',
-      },
-    },
-    platformSelectBtn: {
-      padding: '.5rem',
-      border: 'none',
-      '&:first-child': {
-        borderRight: '1px solid #E0E0E0',
-      },
-      '&:last-child': {
-        borderLeft: '1px solid #E0E0E0',
-      },
-      [theme.breakpoints.down('xs')]: {
-        padding: '.4rem',
-      },
+    icon: {
+      fontSize: '4rem',
+      color: '#2D5569',
     },
   }),
 );

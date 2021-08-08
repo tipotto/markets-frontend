@@ -563,7 +563,7 @@ const Analytics = () => {
               {/* <Link className={toolLink} to="/">
                 こちら
               </Link> */}
-              <a className={toolLink} href="/">
+              <a className={toolLink} href="/search">
                 フリマサイト検索
               </a>
               はこちら。

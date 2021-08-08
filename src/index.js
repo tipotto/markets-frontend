@@ -11,6 +11,7 @@ import createBreakpoints from '@material-ui/core/styles/createBreakpoints';
 import * as serviceWorker from './serviceWorker';
 import storeCreator from './store';
 import Top from './components/pages/Top';
+import Search from './components/pages/Search';
 import Analytics from './components/pages/Analytics';
 import './index.css';
 
@@ -88,6 +89,7 @@ const App = () => (
         <BrowserRouter>
           <Switch>
             <Route exact path="/" component={Top} />
+            <Route exact path="/search" component={Search} />
             <Route exact path="/analyze" component={Analytics} />
             <Route path="*" render={() => <Redirect to="/" />} />
           </Switch>
