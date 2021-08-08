@@ -13,7 +13,7 @@ const topCss = makeStyles((theme) =>
       marginBottom: '2rem',
       [theme.breakpoints.down('xs')]: {
         width: '100%',
-        marginBottom: '.5rem',
+        marginBottom: '1.3rem',
       },
     },
     serviceName: {
