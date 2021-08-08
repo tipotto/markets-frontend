@@ -246,32 +246,38 @@ const useAnalytics = () => {
 
     if (statusCode && errorMessage) {
       return (
-        <div className={loading}>
-          <ErrorOutlineIcon color="secondary" fontSize="large" />
-          <span className={clsx(errorText, common)}>
-            {statusCode} {errorMessage}
-          </span>
+        <div className={clsx(main, result, items)}>
+          <div className={loading}>
+            <ErrorOutlineIcon color="secondary" fontSize="large" />
+            <span className={clsx(errorText, common)}>
+              {statusCode} {errorMessage}
+            </span>
+          </div>
         </div>
       );
     }
 
     if (isLoading) {
       return (
-        <div className={loading}>
-          <CircularProgress color="secondary" />
-          <span className={clsx(loadingText, common)}>
-            ただいま分析しています...
-          </span>
+        <div className={clsx(main, result, items)}>
+          <div className={loading}>
+            <CircularProgress color="secondary" />
+            <span className={clsx(loadingText, common)}>
+              ただいま分析しています...
+            </span>
+          </div>
         </div>
       );
     }
 
     if (!isLoading && !allItemIds.length) {
       return (
-        <div className={loading}>
-          <span className={clsx(loadingText, common)}>
-            分析結果はありません。
-          </span>
+        <div className={clsx(main, result, items)}>
+          <div className={loading}>
+            <span className={clsx(loadingText, common)}>
+              分析結果はありません。
+            </span>
+          </div>
         </div>
       );
     }
