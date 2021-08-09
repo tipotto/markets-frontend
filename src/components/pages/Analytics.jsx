@@ -166,7 +166,7 @@ const useAnalytics = () => {
     } = _getDataByType();
     const { min, max, average, market } = price;
     return (
-      <>
+      <div>
         <div className={priceContainer}>
           <InfoBox
             title={
@@ -237,7 +237,7 @@ const useAnalytics = () => {
             />
           </div>
         </div>
-      </>
+      </div>
     );
   };
 

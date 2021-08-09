@@ -5,6 +5,7 @@ const infoBoxCss = makeStyles((theme) =>
     infoBox: {
       width: '24.5%',
       marginBottom: '2rem',
+      // flexShrink: 0,
       [theme.breakpoints.only('sm')]: {
         width: '49.5%',
         marginBottom: '.5rem',
