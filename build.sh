@@ -12,8 +12,7 @@ fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget
 if [ -d $npm_config_cache ]; then
   echo '/home/cache/.npm directory exists.'
 
-  cp -R $npm_config_cache .
-  mv .npm node_modules
+  cp -R $npm_config_cache/node_modules .
   echo 'node_modules content'
   echo "$(ls node_modules)"
 #   echo "$(ls -la | grep node_modules)"
