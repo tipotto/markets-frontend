@@ -13,8 +13,11 @@ if [ -d $npm_config_cache ]; then
   echo '/home/cache/.npm directory exists.'
 
   cp -R $npm_config_cache .
-#   cp -R $npm_config_cache /workspace/
-  echo "$(ls -la | grep node_modules)"
+  mv .npm node_modules
+  echo 'node_modules content'
+  echo "$(ls node_modules)"
+#   echo "$(ls -la | grep node_modules)"
+  echo 'current directory content'
   echo "$(ls -la)"
 
 else
