@@ -6,30 +6,29 @@
 # GCSのバケットにtgzファイルをコピー
 # GCSのバケットにタイムスタンプをコピー
 
-# TIMESTAMP=$(gsutil cat gs://$my_cache_bucket/timestamp || echo 0)
-# SECONDS_IN_A_MONTH=2629743
-
-# if ! [ -d $npm_config_cache ]; then
-# if (( $(date +%s) - $TIMESTAMP >= $SECONDS_IN_A_MONTH )); then
-#   set -e -u
-#   tar -czf /tmp/npm.tgz -C $npm_config_cache .
-#   echo "$(tar -tvzf /tmp/npm.tgz | wc -l) files copied from $npm_config_cache"
-
-#   echo "Saving dependencies to gs://$my_cache_bucket/"
-#   gsutil -q -m cp /tmp/npm.tgz gs://$my_cache_bucket/
-
-#   echo "Saving timestamp to gs://$my_cache_bucket/timestamp"
-#   date +%s | gsutil -q cp - gs://$my_cache_bucket/timestamp
-
-# fi
-
 set -e -u
+TIMESTAMP=$(gsutil cat gs://$my_cache_bucket/timestamp || echo 0)
 
-tar -czf /tmp/npm.tgz -C $npm_config_cache .
-echo "$(tar -tvzf /tmp/npm.tgz | wc -l) files copied from $npm_config_cache"
+if (( $(date +%s) - $TIMESTAMP >= $seconds_in_a_month )); then
+  tar -czf /tmp/npm.tgz -C $npm_config_cache .
+  echo "$(tar -tvzf /tmp/npm.tgz | wc -l) files copied from $npm_config_cache"
 
-echo "Saving dependencies to gs://$my_cache_bucket/"
-gsutil -q -m cp /tmp/npm.tgz gs://$my_cache_bucket/
+  echo "Saving dependencies to gs://$my_cache_bucket/"
+  gsutil -q -m cp /tmp/npm.tgz gs://$my_cache_bucket/
+
+fi
 
 echo "Saving timestamp to gs://$my_cache_bucket/timestamp"
 date +%s | gsutil -q cp - gs://$my_cache_bucket/timestamp
+
+
+# set -e -u
+
+# tar -czf /tmp/npm.tgz -C $npm_config_cache .
+# echo "$(tar -tvzf /tmp/npm.tgz | wc -l) files copied from $npm_config_cache"
+
+# echo "Saving dependencies to gs://$my_cache_bucket/"
+# gsutil -q -m cp /tmp/npm.tgz gs://$my_cache_bucket/
+
+# echo "Saving timestamp to gs://$my_cache_bucket/timestamp"
+# date +%s | gsutil -q cp - gs://$my_cache_bucket/timestamp

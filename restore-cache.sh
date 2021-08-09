@@ -10,9 +10,8 @@ set -e -u
 
 # If there is a cache and the content is not older than a month
 TIMESTAMP=$(gsutil cat gs://$my_cache_bucket/timestamp || echo 0)
-SECONDS_IN_A_MONTH=2629743
 
-if (( $(date +%s) - $TIMESTAMP < $SECONDS_IN_A_MONTH )); then
+if (( $(date +%s) - $TIMESTAMP < $seconds_in_a_month )); then
   gsutil -q -m cp gs://$my_cache_bucket/npm.tgz /tmp 
   mkdir -p $npm_config_cache
 
