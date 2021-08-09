@@ -10,9 +10,16 @@ libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 c
 fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget
 
 if [ -d $npm_config_cache ]; then
+  echo '/home/cache/.npm directory exists.'
+
   cp -R $npm_config_cache .
+#   cp -R $npm_config_cache /workspace/
+  echo "$(ls -la | grep node_modules)"
+  echo "$(ls -la)"
 
 else
+  echo '/home/cache/.npm directory does not exist.'
+
   npm i
   npm i puppeteer
   cp -R ./node_modules $npm_config_cache
