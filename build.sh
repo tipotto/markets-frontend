@@ -21,7 +21,7 @@ if [ -d $npm_cache ]; then
 
 else
   echo '/home/cache/.npm directory does not exist.'
-  npm i
+  npm i --force
   npm i puppeteer
   cp -R ./node_modules $npm_cache
 
