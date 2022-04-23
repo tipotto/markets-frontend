@@ -10,7 +10,8 @@ set -e -u
 
 if [ -f $npm_cache_flag/cache_flag.txt ]; then
   tar -czf /tmp/npm.tgz -C $npm_cache .
-  echo "$(tar -tvzf /tmp/npm.tgz | wc -l) files copied from $npm_cache"
+  echo "Cached dependencies are copied from $npm_cache"
+#   echo "$(tar -tvzf /tmp/npm.tgz | wc -l) files copied from $npm_cache"
 
   echo "Saving dependencies to gs://$npm_cache_bucket/"
   gsutil -q -m cp /tmp/npm.tgz gs://$npm_cache_bucket/

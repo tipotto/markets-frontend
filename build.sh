@@ -16,7 +16,6 @@ if [ -d $npm_cache ]; then
   echo 'npm_cache(/home/cache/.npm) dir content'
   echo "$(ls -la $npm_cache)"
   
-#   echo "$(ls node_modules)"
   echo 'current directory content'
   echo "$(ls -la)"
 

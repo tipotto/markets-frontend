@@ -1,4 +1,3 @@
-/* eslint-disable no-plusplus */
 import React, { memo } from 'react';
 import { List, WindowScroller } from 'react-virtualized';
 import Item from './Item';
@@ -9,24 +8,26 @@ import {
 } from '../../constants/virtualizedList';
 import vListCss from '../../style/virtualizedList';
 
-const getItemComponent = (item, handleFavorite) => {
-  if (!handleFavorite) {
-    return <Item key={item.id} item={item} />;
-  }
-
-  return (
-    <Item
-      key={item.id}
-      item={item}
-      isFavorite={item.isFavorite}
-      handleFavorite={handleFavorite}
-    />
-  );
+const useVirtualizedList = () => {
+  const getItemComponent = (item, handleFavorite) => {
+    if (!handleFavorite) {
+      return <Item key={item.id} item={item} />;
+    }
+    return (
+      <Item
+        key={item.id}
+        item={item}
+        isFavorite={item.isFavorite}
+        handleFavorite={handleFavorite}
+      />
+    );
+  };
+  return { getItemComponent };
 };
 
 const VirtualizedList = ({ itemObj, itemIds, handleFavorite }) => {
-  // console.log('VirtualizedList is rendered.');
-  const { cardArea, row } = vListCss();
+  const { root, cardArea, row } = vListCss();
+  const { getItemComponent } = useVirtualizedList();
   return (
     <WindowScroller>
       {({ width, height, isScrolling, registerChild, scrollTop }) => {
@@ -39,6 +40,7 @@ const VirtualizedList = ({ itemObj, itemIds, handleFavorite }) => {
         return (
           <div ref={registerChild} className={cardArea}>
             <List
+              className={root}
               autoHeight
               width={width}
               height={height}

@@ -8,8 +8,7 @@ import baseCss from '../../style/base';
 import topCss from '../../style/top';
 
 const Top = () => {
-  const { common, wrapper, main, serviceName, title, siteDescription } =
-    baseCss();
+  const { common, wrapper, main, serviceName, siteDescription } = baseCss();
   const { serviceContainer } = topCss();
   return (
     <>
@@ -18,10 +17,7 @@ const Top = () => {
       <div className={wrapper}>
         <div className={main}>
           <div>
-            <h1 className={serviceName}>
-              {/* <span className={title}>フリマサイト検索・比較</span> */}
-              markets.jp
-            </h1>
+            <h1 className={serviceName}>markets.jp</h1>
             <p className={clsx(siteDescription, common)}>
               フリマサイトを一括検索したり、分析・比較できるサービスです。
             </p>

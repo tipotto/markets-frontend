@@ -2,10 +2,12 @@ import { makeStyles, createStyles } from '@material-ui/core/styles';
 
 const infoBoxCss = makeStyles((theme) =>
   createStyles({
+    header: {
+      fontSize: '1.1rem',
+    },
     infoBox: {
       width: '24.5%',
       marginBottom: '2rem',
-      // flexShrink: 0,
       [theme.breakpoints.only('sm')]: {
         width: '49.5%',
         marginBottom: '.5rem',

@@ -5,7 +5,6 @@ export const platformArray = [
 ];
 
 export const mainCategoryArray = [
-  //   { label: '未選択', value: 'unselected' },
   { label: 'すべて', value: 'all' },
   { label: 'ファッション', value: 'fashion' },
   { label: '食品・飲料・酒類', value: 'food-beverage-alcohol' },

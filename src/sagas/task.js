@@ -7,26 +7,24 @@ import {
   failedSearch,
   failedAnalysis,
 } from '../actions';
-import { fetchItems, analyzeData } from '../api/request';
+import { searchData, analyzeData } from '../api/request';
 import formData from '../constants/formData';
 
 export function* search() {
-  // console.log('saga task search');
   const formName = formData.search.name;
   const formValues = yield select((state) => state.form[formName].values);
-
-  const { result, error } = yield call(fetchItems, formValues);
+  const { result, error } = yield call(searchData, formValues);
   yield put(stopSubmit(formName));
 
-  if (result && !error) {
+  if (result) {
     yield put(succeededSearch(result));
-  } else {
-    yield put(failedSearch(error));
+    return;
   }
+
+  yield put(failedSearch(error));
 }
 
 export function* nextSearch() {
-  // console.log('saga task additionalSearch');
   const formName = formData.search.name;
   const formValues = yield select((state) => state.form[formName].values);
 
@@ -36,34 +34,27 @@ export function* nextSearch() {
     return;
   }
 
-  const { result, error } = yield call(fetchItems, formValues);
+  const { result, error } = yield call(searchData, formValues);
   yield put(stopSubmit(formName));
 
-  if (result && !error) {
+  if (result) {
     yield put(succeededNextSearch(result));
-  } else {
-    yield put(failedSearch(error));
+    return;
   }
+
+  yield put(failedSearch(error));
 }
 
 export function* analyze() {
-  // console.log('saga task analyze');
   const formName = formData.analysis.name;
   const formValues = yield select((state) => state.form[formName].values);
-
-  // if (!(formValues.keyword && formValues.platforms.length > 0)) {
-  //   yield put(succeededSearch([]));
-  //   yield put(stopSubmit(formName));
-  //   return;
-  // }
-
   const { result, error } = yield call(analyzeData, formValues);
   yield put(stopSubmit(formName));
 
-  if (result && !error) {
-    // console.log('analyze result', result);
+  if (result) {
     yield put(succeededAnalysis(result));
-  } else {
-    yield put(failedAnalysis(error));
+    return;
   }
+
+  yield put(failedAnalysis(error));
 }

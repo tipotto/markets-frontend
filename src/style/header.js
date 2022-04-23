@@ -1,5 +1,6 @@
 import { makeStyles, createStyles } from '@material-ui/core/styles';
-import marketsLogo from '../images/markets-logo.png';
+import marketsLogo from '../images/markets-logo-large.png';
+import marketsLogoShort from '../images/markets-logo-short.png';
 
 const headerCss = makeStyles((theme) =>
   createStyles({
@@ -11,6 +12,7 @@ const headerCss = makeStyles((theme) =>
       },
     },
     toolBar: {
+      justifyContent: 'space-between',
       [theme.breakpoints.down('sm')]: {
         height: '100%',
       },
@@ -18,7 +20,13 @@ const headerCss = makeStyles((theme) =>
     logo: {
       width: '13rem',
       height: '3.8rem',
-      background: `url(${marketsLogo}) no-repeat left/70%`,
+      cursor: 'pointer',
+      [theme.breakpoints.up('sm')]: {
+        background: `url(${marketsLogo}) no-repeat left/70%`,
+      },
+      [theme.breakpoints.down('xs')]: {
+        background: `url(${marketsLogoShort}) no-repeat left/18%`,
+      },
     },
   }),
 );

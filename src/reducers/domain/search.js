@@ -44,7 +44,6 @@ const deleteFavoriteItem = (state, data) => {
   const updateItem = byId[data.id];
 
   if (!updateItem) {
-    // console.log('No item to update.');
     return state;
   }
 
@@ -74,7 +73,7 @@ const searchReducer = (state = initState.search, { type, data }) => {
     default:
       return state;
 
-    // 無限スクロール利用時にコメントイン
+    // 以下は、無限スクロール利用時にコメントイン
     // case SUCCEEDED_SEARCH:
     //   return {
     //     ...state,

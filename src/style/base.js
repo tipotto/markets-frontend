@@ -5,21 +5,23 @@ const baseCss = makeStyles((theme) =>
     wrapper: {
       backgroundColor: '#fff',
     },
+    container: {
+      marginTop: '9rem',
+    },
     main: {
-      maxWidth: '80rem',
+      maxWidth: '130rem',
       margin: '0 auto',
-      padding: '6rem 1.5rem 0',
-      // padding: '6rem 1.5rem',
       [theme.breakpoints.down('sm')]: {
         maxWidth: '56rem',
       },
-      // [theme.breakpoints.down('xs')]: {
-      //   // padding: '2.5rem 1.5rem',
-      //   padding: '6rem 1.5rem',
-      // },
+      [theme.breakpoints.up('md')]: {
+        padding: '7rem 10rem',
+      },
       [theme.breakpoints.only('sm')]: {
-        // padding: '6rem 3rem',
-        padding: '6rem 3rem 0',
+        padding: '7rem 3rem',
+      },
+      [theme.breakpoints.down('xs')]: {
+        padding: '7rem 1rem',
       },
     },
     common: {
@@ -70,9 +72,7 @@ const baseCss = makeStyles((theme) =>
     },
     sectionToolLink: {
       fontSize: '1.2rem',
-      // marginTop: '-0.5rem',
       paddingTop: '1.3rem',
-      // paddingBottom: '1.7rem',
       borderTop: '1px solid #e1e6ec',
       [theme.breakpoints.down('sm')]: {
         fontSize: '1rem',
@@ -84,10 +84,6 @@ const baseCss = makeStyles((theme) =>
     },
     aboutContainer: {
       position: 'relative',
-      marginTop: '9rem',
-      // [theme.breakpoints.down('xs')]: {
-      //   marginTop: '6rem',
-      // },
     },
     aboutSection: {
       height: '150px',
@@ -103,7 +99,6 @@ const baseCss = makeStyles((theme) =>
       fontSize: '1.1rem',
       marginTop: '-0.5rem',
       paddingBottom: '1.3rem',
-      // borderBottom: '1px solid #e1e6ec',
       [theme.breakpoints.down('sm')]: {
         fontSize: '1rem',
       },
@@ -117,10 +112,11 @@ const baseCss = makeStyles((theme) =>
       left: 0,
       width: '100%',
       height: '30px',
-      paddingTop: '60px',
+      paddingTop: '100px',
       textAlign: 'center',
       lineHeight: '30px',
-      background: `linear-gradient(180deg, rgb(255, 255, 255, 0) 0%, rgb(255, 255, 255, 1) 70%)`,
+      background:
+        'linear-gradient(180deg, rgb(255, 255, 255, 0) 0%, rgb(255, 255, 255, 1) 70%)',
       cursor: 'pointer',
       transition: 'bottom 0.2s',
       '&.active': {
@@ -128,24 +124,22 @@ const baseCss = makeStyles((theme) =>
         bottom: '-30px',
       },
     },
-    formContainer: {
-      marginTop: '9rem',
-      // [theme.breakpoints.down('xs')]: {
-      //   marginTop: '7rem',
-      // },
-    },
-    toolLinkContainer: {
-      marginTop: '9rem',
-      // [theme.breakpoints.down('xs')]: {
-      //   marginTop: '7rem',
-      // },
+    searchContainer: {
+      [theme.breakpoints.up('md')]: {
+        display: 'flex',
+        justifyContent: 'space-between',
+      },
     },
     resultContainer: {
-      // margin: '10rem 0 9rem',
-      margin: '9rem 0',
+      [theme.breakpoints.down('sm')]: {
+        marginTop: '7rem',
+      },
+      [theme.breakpoints.up('md')]: {
+        width: '80%',
+      },
     },
     result: {
-      padding: '0 1.5rem',
+      padding: '0',
     },
     resultHeader: {
       marginBottom: '3rem',
@@ -153,7 +147,7 @@ const baseCss = makeStyles((theme) =>
     loading: {
       width: '100%',
       textAlign: 'center',
-      paddingTop: '2rem',
+      padding: '2rem 0 1rem',
     },
     loadingText: {
       fontSize: '1.2rem',
@@ -172,26 +166,82 @@ const baseCss = makeStyles((theme) =>
       },
     },
     scrollUpBtn: {
-      width: '2.5rem',
-      height: '2.5rem',
-      background: '#5CC5B6',
-      display: 'none',
-      lineHeight: '2.5rem',
-      padding: '.5rem .5rem .2rem',
-      position: 'fixed',
-      right: '1.5rem',
-      bottom: '-5rem',
-      borderRadius: '.8rem',
-      textAlign: 'center',
-      zIndex: 9999,
-      transition: 'bottom 0.8s',
-      cursor: 'pointer',
+      [theme.breakpoints.up('sm')]: {
+        width: '150px',
+        height: '150px',
+      },
       [theme.breakpoints.down('xs')]: {
+        width: '100px',
+        height: '100px',
+      },
+      right: '10px',
+      bottom: 0,
+      position: 'fixed',
+      opacity: 0,
+      transform: 'none',
+      transition: 'all 1s ease',
+      zIndex: 9999,
+      '&.show': {
+        opacity: 0.8,
+        transform: 'none',
+      },
+      '& a': {
+        [theme.breakpoints.up('sm')]: {
+          width: '150px',
+          height: '150px',
+        },
+        [theme.breakpoints.down('xs')]: {
+          width: '100px',
+          height: '100px',
+        },
+        position: 'relative',
         display: 'block',
+        textDecoration: 'none',
+        '&::before': {
+          [theme.breakpoints.up('sm')]: {
+            width: '70px',
+            height: '70px',
+            top: '-70px',
+            fontSize: '70px',
+          },
+          [theme.breakpoints.down('xs')]: {
+            width: '50px',
+            height: '50px',
+            top: '-140px',
+            fontSize: '50px',
+          },
+          bottom: 0,
+          right: 0,
+          left: 0,
+          fontFamily: "'Font Awesome 5 Free'",
+          fontWeight: 600,
+          content: "'\\f102'",
+          color: '#5CC5B6',
+          position: 'absolute',
+          margin: 'auto',
+          textAlign: 'center',
+        },
+        '&::after': {
+          [theme.breakpoints.up('sm')]: {
+            top: '75px',
+          },
+          [theme.breakpoints.down('xs')]: {
+            top: '5px',
+          },
+          bottom: 0,
+          right: 0,
+          left: 0,
+          fontSize: '25px',
+          fontWeight: 500,
+          content: "'TOP'",
+          position: 'absolute',
+          margin: 'auto',
+          textAlign: 'center',
+          color: '#5CC5B6',
+        },
       },
     },
     showScrollUpBtn: {
-      // bottom: '5rem',
       [theme.breakpoints.down('xs')]: {
         bottom: '2.5rem',
       },

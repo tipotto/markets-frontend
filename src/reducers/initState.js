@@ -31,22 +31,15 @@ const initState = {
     chart: {
       whole: {
         priceLabels: [],
-        likesNums: [],
         itemsNums: [],
       },
       range: {
         priceLabels: [],
-        likesNums: [],
         itemsNums: [],
-        // backgroundColors: [],
-        // borderColors: [],
       },
       detail: {
         priceLabels: [],
-        likesNums: [],
         itemsNums: [],
-        // backgroundColors: [],
-        // borderColors: [],
       },
     },
   },

@@ -5,61 +5,59 @@ import {
   borderColorArr,
 } from '../../constants/chartOptions';
 
-// const getBarColorData = (dataArr) => {
-//   // 念のために確認
-//   if (backgroundColorArr.length !== borderColorArr.length) {
-//     console.log('BackgroundColorArr length is not equal to borderColorArr');
-//     return;
-//   }
+const useHorizontalBarChart = () => {
+  // const getBarColorData = (dataArr) => {
+  //   // 念のために確認
+  //   if (backgroundColorArr.length !== borderColorArr.length) {
+  //     console.log('BackgroundColorArr length is not equal to borderColorArr');
+  //     return;
+  //   }
 
-//   if (dataArr.length === backgroundColorArr.length) {
-//     return {
-//       backgrounds: backgroundColorArr,
-//       borders: borderColorArr,
-//     };
-//   }
+  //   if (dataArr.length === backgroundColorArr.length) {
+  //     return {
+  //       backgrounds: backgroundColorArr,
+  //       borders: borderColorArr,
+  //     };
+  //   }
 
-//   if (dataArr.length < backgroundColorArr.length) {
-//     const borders = [];
-//     const backgrounds = dataArr.map((value, index) => {
-//       borders.push(borderColorArr[index]);
-//       return backgroundColorArr[index];
-//     });
-//     return { backgrounds, borders };
-//   }
+  //   if (dataArr.length < backgroundColorArr.length) {
+  //     const borders = [];
+  //     const backgrounds = dataArr.map((value, index) => {
+  //       borders.push(borderColorArr[index]);
+  //       return backgroundColorArr[index];
+  //     });
+  //     return { backgrounds, borders };
+  //   }
 
-//   // TODO: dataArr.length > backgroundColorArr.length
-//   let borders = [];
-//   let backgrounds = [];
-//   for (var i = 0; i < dataArr.length / backgroundColorArr.length; i++) {
-//     borders = [...borders, ...borderColorArr];
-//     backgrounds = [...backgrounds, ...backgroundColorArr];
-//   }
+  //   // TODO: dataArr.length > backgroundColorArr.length
+  //   let borders = [];
+  //   let backgrounds = [];
+  //   for (var i = 0; i < dataArr.length / backgroundColorArr.length; i++) {
+  //     borders = [...borders, ...borderColorArr];
+  //     backgrounds = [...backgrounds, ...backgroundColorArr];
+  //   }
 
-//   for (var i = 0; i < dataArr.length % backgroundColorArr.length; i++) {
-//     borders.push(borderColorArr[i]);
-//     backgrounds.push(backgroundColorArr[i]);
-//   }
-//   return { backgrounds, borders };
-// };
+  //   for (var i = 0; i < dataArr.length % backgroundColorArr.length; i++) {
+  //     borders.push(borderColorArr[i]);
+  //     backgrounds.push(backgroundColorArr[i]);
+  //   }
+  //   return { backgrounds, borders };
+  // };
 
-const getChartData = (priceLabels, likesNums, itemsNums) => {
-  return {
+  const getChartData = (priceLabels, itemsNums) => ({
     labels: priceLabels,
     datasets: [
       {
-        label: likesNums.length > 0 ? 'いいね数' : '商品数',
-        data: likesNums.length > 0 ? likesNums : itemsNums,
+        label: '商品数',
+        data: itemsNums,
         backgroundColor: backgroundColorArr,
         borderColor: borderColorArr,
         borderWidth: 1,
       },
     ],
-  };
-};
+  });
 
-const getOption = (chartTitle) => {
-  return {
+  const getOption = (chartTitle) => ({
     maintainAspectRatio: false,
     indexAxis: 'y',
     scales: {
@@ -116,19 +114,17 @@ const getOption = (chartTitle) => {
         },
       },
     },
-  };
+  });
+
+  return { getChartData, getOption };
 };
 
-const HorizontalBarChart = ({
-  chartTitle,
-  priceLabels,
-  likesNums,
-  itemsNums,
-}) => {
+const HorizontalBarChart = ({ chartTitle, priceLabels, itemsNums }) => {
+  const { getChartData, getOption } = useHorizontalBarChart();
   return (
     <>
       <Bar
-        data={getChartData(priceLabels, likesNums, itemsNums)}
+        data={getChartData(priceLabels, itemsNums)}
         options={getOption(chartTitle)}
         // height={170}
       />

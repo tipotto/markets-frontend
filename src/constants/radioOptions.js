@@ -3,6 +3,10 @@ const radioOptionsObject = {
     { label: 'メルカリ', value: 'mercari' },
     { label: 'ラクマ', value: 'rakuma' },
     { label: 'PayPayフリマ', value: 'paypay' },
+    { label: 'ヤフオク', value: 'yahoo-auction' },
+    { label: 'Amazon', value: 'amazon' },
+    { label: '楽天', value: 'rakuten' },
+    { label: 'Yahooショッピング', value: 'yahoo-shopping' },
   ],
   searchTarget: [
     { label: '現在の市場', value: 'selling' },
@@ -10,7 +14,7 @@ const radioOptionsObject = {
   ],
   searchRange: [
     { label: '商品名', value: 'title' },
-    { label: '商品名・説明文', value: 'title-desc' },
+    { label: '商品名 + 説明文', value: 'title-desc' },
   ],
   priceType: [
     { label: '相場価格', value: 'market' },
@@ -23,8 +27,7 @@ const radioOptionsObject = {
   ],
   deliveryCost: [
     { label: 'すべて', value: 'all' },
-    { label: '出品者', value: 'free' },
-    { label: '購入者', value: 'required' },
+    { label: '無料', value: 'free' },
   ],
   sortOrder: [
     { label: '安い順', value: 'asc' },

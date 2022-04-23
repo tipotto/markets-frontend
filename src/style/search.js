@@ -9,6 +9,7 @@ const topCss = makeStyles((theme) =>
       marginBottom: '2rem',
       [theme.breakpoints.down('xs')]: {
         flexWrap: 'wrap',
+        marginBottom: '1rem',
       },
     },
     tabs: {
@@ -22,6 +23,14 @@ const topCss = makeStyles((theme) =>
     tab: {
       '&>span.MuiTab-wrapper': {
         textTransform: 'none',
+      },
+    },
+    paginationContainer: {
+      display: 'flex',
+      justifyContent: 'flex-end',
+      marginTop: '1.5rem',
+      [theme.breakpoints.down('xs')]: {
+        marginTop: '2rem',
       },
     },
     pagination: {

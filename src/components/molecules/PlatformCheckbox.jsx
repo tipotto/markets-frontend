@@ -68,6 +68,46 @@ const PlatformCheckbox = ({
           }
           label="PayPayフリマ"
         />
+        <FormControlLabel
+          control={
+            <GreenCheckbox
+              checked={!!arr.includes('yahoo-auction')}
+              onChange={handleChange}
+              name="yahoo-auction"
+            />
+          }
+          label="ヤフオク"
+        />
+        <FormControlLabel
+          control={
+            <GreenCheckbox
+              checked={!!arr.includes('amazon')}
+              onChange={handleChange}
+              name="amazon"
+            />
+          }
+          label="Amazon"
+        />
+        <FormControlLabel
+          control={
+            <GreenCheckbox
+              checked={!!arr.includes('rakuten')}
+              onChange={handleChange}
+              name="rakuten"
+            />
+          }
+          label="楽天"
+        />
+        <FormControlLabel
+          control={
+            <GreenCheckbox
+              checked={!!arr.includes('yahoo-shopping')}
+              onChange={handleChange}
+              name="yahoo-shopping"
+            />
+          }
+          label="Yahooショッピング"
+        />
       </FormGroup>
       {invalid && error && <FormHelperText error>{error}</FormHelperText>}
     </FormControl>

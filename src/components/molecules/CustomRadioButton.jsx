@@ -6,19 +6,16 @@ const CustomRadioButton = ({
   label,
   options,
 }) => {
-  // console.log('value', value);
-
   const handleChange = (e) => {
-    // console.log('event value', e.target.value);
     onChange(e.target.value);
   };
 
   return (
-    <div class="radio-wrapper">
-      <label class="radio-title">{label}</label>
-      <div class="radio-container">
+    <div className="radio-wrapper">
+      <label className="radio-title">{label}</label>
+      <div className="radio-container">
         {options.map((option) => (
-          <span class="radio-button" key={option.value}>
+          <span className="radio-button" key={option.value}>
             <input
               id={`${name}-${option.value}`}
               type="radio"
@@ -27,7 +24,7 @@ const CustomRadioButton = ({
               onChange={handleChange}
               checked={value === option.value}
             />
-            <label class="label" for={`${name}-${option.value}`}>
+            <label className="label" htmlFor={`${name}-${option.value}`}>
               {option.label}
             </label>
           </span>

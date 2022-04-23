@@ -18,7 +18,8 @@ if (( $(date +%s) - $TIMESTAMP < $seconds_in_a_month )); then
   # copy npm dependencies
   echo 'Restoring npm cache'
   tar -xzf /tmp/npm.tgz -C $npm_cache
-  echo "$(ls -pR $npm_cache | grep -v / | wc -l) files restored to $npm_cache"
+  echo "Cached dependencies are restored to $npm_cache"
+#   echo "$(ls -pR $npm_cache | grep -v / | wc -l) files restored to $npm_cache"
 
 else 
   touch $npm_cache_flag/cache_flag.txt

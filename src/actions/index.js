@@ -51,11 +51,6 @@ export const failedAnalysis = (error) => ({
   error,
 });
 
-// export const loadItems = (items) => ({
-//   type: LOAD_ITEMS,
-//   data: items,
-// });
-
 export const addFavoriteItem = (item) => ({
   type: ADD_FAVORITE_ITEM,
   data: item,
@@ -80,6 +75,11 @@ export const changeChartItemType = (itemType) => ({
   type: CHANGE_CHART_ITEM_TYPE,
   data: itemType,
 });
+
+// export const loadItems = (items) => ({
+//   type: LOAD_ITEMS,
+//   data: items,
+// });
 
 // export const resetLoadedItems = (items) => ({
 //   type: RESET_LOADED_ITEMS,

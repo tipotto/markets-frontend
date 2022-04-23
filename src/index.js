@@ -9,15 +9,13 @@ import { Chart } from 'chart.js';
 import zoomPlugin from 'chartjs-plugin-zoom';
 import createBreakpoints from '@material-ui/core/styles/createBreakpoints';
 import * as serviceWorker from './serviceWorker';
-import storeCreator from './store';
+import store from './store';
 import Top from './components/pages/Top';
 import Search from './components/pages/Search';
 import Analytics from './components/pages/Analytics';
 import './index.css';
 
 Chart.register(zoomPlugin);
-
-const store = storeCreator();
 const persistor = persistStore(store);
 
 const customTheme = {
@@ -67,7 +65,7 @@ const breakpoints = {
   xs: 360, // スマホサイズ
   sm: 768, // タブレットサイズ
   md: 1025, // PCサイズ
-  lg: 1000000000,
+  lg: 1200,
   xl: 1000000000,
 };
 
@@ -105,4 +103,3 @@ ReactDOM.render(<App />, document.getElementById('root'));
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
-// serviceWorker.register();
