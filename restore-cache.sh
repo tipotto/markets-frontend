@@ -21,7 +21,10 @@ if (( $(date +%s) - $TIMESTAMP < $seconds_in_a_month )); then
   echo "Cached dependencies are restored to $npm_cache"
 #   echo "$(ls -pR $npm_cache | grep -v / | wc -l) files restored to $npm_cache"
 
-else 
+else
+  if [ ! -d $npm_cache_flag ]; then
+    mkdir $npm_cache_flag
+  fi
   touch $npm_cache_flag/cache_flag.txt
 
   if (( $TIMESTAMP == 0 )); then
