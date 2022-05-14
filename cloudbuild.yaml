@@ -49,7 +49,7 @@ options:
     # Point npm caches to a persistent location
     - npm_cache=/home/cache/.npm
     - npm_cache_flag=/home/cache/flag
-    - npm_cache_bucket=markets-frondend-npm-dependencies
+    - npm_cache_bucket=frontend-node-modules
     - seconds_in_a_month=2629743
   volumes:
     - name: 'cache'
