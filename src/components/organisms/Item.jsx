@@ -9,85 +9,108 @@ import ToggleButton from '@material-ui/lab/ToggleButton';
 import mercariIcon from '../../images/mercari-icon.png';
 import rakumaIcon from '../../images/rakuma-icon.png';
 import paypayIcon from '../../images/paypay-icon.png';
-import itemStyles from '../../style/item';
+import yahooAuctionIcon from '../../images/yahoo-auction-icon.png';
+import amazonIcon from '../../images/amazon-icon.png';
+import rakutenIcon from '../../images/rakuten-icon.png';
+import yahooShoppingIcon from '../../images/yahoo-shopping-icon.png';
+import itemCss from '../../style/item';
 
-// const moldTitle = () => {
-//   const MAX_LENGTH = 18;
-//   if (!title) return "";
-//   if (title.length <= MAX_LENGTH) return title;
-//   return `${title.substr(0, MAX_LENGTH)}...`;
-// };
+const useItem = () => {
+  // const moldTitle = () => {
+  //   const MAX_LENGTH = 18;
+  //   if (!title) return "";
+  //   if (title.length <= MAX_LENGTH) return title;
+  //   return `${title.substr(0, MAX_LENGTH)}...`;
+  // };
 
-// TODO: フロントエンドよりも、バックエンドで処理した方が良さそう
-// const moldPrice = (price) => {
-//   return String(price).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
-// };
+  // TODO: フロントエンドよりも、バックエンドで処理した方が良さそう
+  // const moldPrice = (price) => {
+  //   return String(price).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+  // };
 
-// TODO: フロントエンドよりも、バックエンドで処理した方が良さそう
-const setIcon = (service) => {
-  let icon;
-  let alt;
-  if (service === 'mercari') {
-    icon = mercariIcon;
-    alt = 'mercari icon';
-  } else if (service === 'rakuma') {
-    icon = rakumaIcon;
-    alt = 'rakuma icon';
-  } else {
-    icon = paypayIcon;
-    alt = 'paypay icon';
-  }
+  const setIcon = (service) => {
+    let icon;
+    let alt;
+    if (service === 'mercari') {
+      icon = mercariIcon;
+      alt = 'mercari icon';
+    } else if (service === 'rakuma') {
+      icon = rakumaIcon;
+      alt = 'rakuma icon';
+    } else if (service === 'paypay') {
+      icon = paypayIcon;
+      alt = 'paypay icon';
+    } else if (service === 'yahoo-auction') {
+      icon = yahooAuctionIcon;
+      alt = 'yahoo-auction icon';
+    } else if (service === 'amazon') {
+      icon = amazonIcon;
+      alt = 'amazon icon';
+    } else if (service === 'rakuten') {
+      icon = rakutenIcon;
+      alt = 'rakuten icon';
+    } else if (service === 'yahoo-shopping') {
+      icon = yahooShoppingIcon;
+      alt = 'yahoo-shopping icon';
+    }
 
-  return <Avatar alt={alt} src={icon} />;
+    return <Avatar alt={alt} src={icon} />;
+  };
+
+  return { setIcon };
 };
 
 const Item = ({ item, isFavorite, handleFavorite, empty }) => {
-  // console.log('Item is rendered.');
   const {
     root,
     emptyBox,
     header,
-    fav,
+    imageContainer,
     favButton,
     favIcon,
     link,
     media,
     priceBox,
     priceLabel,
-  } = itemStyles();
+  } = itemCss();
+  const { setIcon } = useItem();
 
   if (empty) return <Card className={clsx(root, emptyBox)} />;
-
   const { title, price, imageUrl, detailUrl, platform } = item;
+
   return (
     <Card className={root}>
       <CardHeader className={header} avatar={setIcon(platform)} title={title} />
-      <div className={fav}>
-        <ToggleButton
-          className={favButton}
-          value={{ ...item, isFavorite: !isFavorite }}
-          selected={isFavorite}
-          onClick={handleFavorite}
+      <div className={imageContainer}>
+        {handleFavorite && (
+          <ToggleButton
+            className={favButton}
+            value={{ ...item, isFavorite: !isFavorite }}
+            selected={isFavorite}
+            onClick={handleFavorite}
+          >
+            <FavoriteIcon
+              className={favIcon}
+              style={{
+                color: isFavorite
+                  ? 'rgb(242, 16, 90, 0.8)'
+                  : 'rgb(231, 149, 176, 0.7)',
+              }}
+            />
+          </ToggleButton>
+        )}
+        <a
+          className={link}
+          href={detailUrl}
+          target="_blank"
+          rel="noopener noreferrer"
         >
-          <FavoriteIcon
-            className={favIcon}
-            style={{
-              color: isFavorite ? '#F2105A' : '#E795B0',
-            }}
-          />
-        </ToggleButton>
+          <CardMedia className={media} image={imageUrl} title={title} />
+          <div className={priceBox}>
+            <div className={priceLabel}>¥{price.str}</div>
+          </div>
+        </a>
       </div>
-      <a
-        className={link}
-        href={detailUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <CardMedia className={media} image={imageUrl} title={title} />
-        <div className={priceBox}>
-          <div className={priceLabel}>¥{price.str}</div>
-        </div>
-      </a>
     </Card>
   );
 };

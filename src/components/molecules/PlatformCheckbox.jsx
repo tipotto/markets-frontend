@@ -20,11 +20,12 @@ const PlatformCheckbox = ({
   rootClass = {},
 }) => {
   const arr = [...value];
+
   const handleChange = (e) => {
     if (e.target.checked) {
-      arr.push(e.target.value);
+      arr.push(e.target.name);
     } else {
-      arr.splice(arr.indexOf(e.target.value), 1);
+      arr.splice(arr.indexOf(e.target.name), 1);
     }
     return onChange(arr);
   };
@@ -36,24 +37,76 @@ const PlatformCheckbox = ({
       component="fieldset"
     >
       <FormLabel component="legend">{label}</FormLabel>
-      <FormGroup row value={value} onChange={handleChange}>
+      <FormGroup row>
         <FormControlLabel
-          value="mercari"
-          control={<GreenCheckbox />}
+          control={
+            <GreenCheckbox
+              checked={!!arr.includes('mercari')}
+              onChange={handleChange}
+              name="mercari"
+            />
+          }
           label="メルカリ"
-          checked={!!arr.includes('mercari')}
         />
         <FormControlLabel
-          value="rakuma"
-          control={<GreenCheckbox />}
+          control={
+            <GreenCheckbox
+              checked={!!arr.includes('rakuma')}
+              onChange={handleChange}
+              name="rakuma"
+            />
+          }
           label="ラクマ"
-          checked={!!arr.includes('rakuma')}
         />
         <FormControlLabel
-          value="paypay"
-          control={<GreenCheckbox />}
+          control={
+            <GreenCheckbox
+              checked={!!arr.includes('paypay')}
+              onChange={handleChange}
+              name="paypay"
+            />
+          }
           label="PayPayフリマ"
-          checked={!!arr.includes('paypay')}
+        />
+        <FormControlLabel
+          control={
+            <GreenCheckbox
+              checked={!!arr.includes('yahoo-auction')}
+              onChange={handleChange}
+              name="yahoo-auction"
+            />
+          }
+          label="ヤフオク"
+        />
+        <FormControlLabel
+          control={
+            <GreenCheckbox
+              checked={!!arr.includes('amazon')}
+              onChange={handleChange}
+              name="amazon"
+            />
+          }
+          label="Amazon"
+        />
+        <FormControlLabel
+          control={
+            <GreenCheckbox
+              checked={!!arr.includes('rakuten')}
+              onChange={handleChange}
+              name="rakuten"
+            />
+          }
+          label="楽天"
+        />
+        <FormControlLabel
+          control={
+            <GreenCheckbox
+              checked={!!arr.includes('yahoo-shopping')}
+              onChange={handleChange}
+              name="yahoo-shopping"
+            />
+          }
+          label="Yahooショッピング"
         />
       </FormGroup>
       {invalid && error && <FormHelperText error>{error}</FormHelperText>}

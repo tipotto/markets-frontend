@@ -3,7 +3,6 @@ import { Field } from 'redux-form';
 import MenuItem from '@material-ui/core/MenuItem';
 
 export default class SelectOptions extends Component {
-  // eslint-disable-next-line class-methods-use-this
   fetchCategoryOptions({ options }) {
     const categoryOptions = options.map((category) => (
       <MenuItem key={category.value} value={category.value}>

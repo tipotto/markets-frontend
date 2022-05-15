@@ -1,20 +1,34 @@
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 
-const itemStyles = makeStyles((theme) =>
+const itemCss = makeStyles((theme) =>
   createStyles({
     root: {
-      width: '250px',
-      height: '285px',
-      boxSizing: 'border-box',
+      maxWidth: '215px',
+      [theme.breakpoints.up('md')]: {
+        width: '250px',
+      },
+      [theme.breakpoints.only('sm')]: {
+        width: '160px',
+      },
       [theme.breakpoints.down('xs')]: {
         width: '120px',
-        height: '137px',
+      },
+      height: '96%',
+      boxSizing: 'border-box',
+      marginLeft: '2.5px',
+      marginRight: '2.5px',
+      '&:first-child': {
+        marginLeft: 0,
+      },
+      '&:last-child': {
+        marginRight: 0,
       },
     },
     emptyBox: {
       boxShadow: 'none',
     },
     link: {
+      position: 'relative',
       display: 'block',
       width: '100%',
       height: '100%',
@@ -22,8 +36,15 @@ const itemStyles = makeStyles((theme) =>
       color: '#757575',
     },
     header: {
-      [theme.breakpoints.down('xs')]: {
+      padding: '.6rem',
+      [theme.breakpoints.down('sm')]: {
         display: 'none',
+      },
+      '&>div.MuiCardHeader-avatar': {
+        marginRight: '.6rem',
+        '&>div.MuiAvatar-root': {
+          borderRadius: 0,
+        },
       },
       '&>div.MuiCardHeader-content': {
         '&>span.MuiTypography-root': {
@@ -34,38 +55,55 @@ const itemStyles = makeStyles((theme) =>
           WebkitLineClamp: 2,
           overflow: 'hidden',
           textOverflow: 'ellipsis',
+          textAlign: 'left',
         },
       },
     },
-    fav: {
-      width: '100%',
-      // display: "flex",
-      // justifyContent: "space-between",
-      marginBottom: '-1.5rem',
+    imageContainer: {
+      position: 'relative',
+      [theme.breakpoints.down('sm')]: {
+        height: '100%',
+      },
+    },
+    favButton: {
+      position: 'absolute',
+      top: 0,
+      right: 0,
       background: 'transparent',
-      textAlign: 'right',
+      padding: '.4rem',
+      zIndex: 9999,
+      border: 'none',
+      '&:hover': {
+        backgroundColor: 'rgba(0, 0, 0, 0)',
+      },
+      '&.Mui-selected': {
+        backgroundColor: 'rgba(0, 0, 0, 0)',
+        '&:hover': {
+          backgroundColor: 'rgba(0, 0, 0, 0)',
+        },
+      },
+    },
+    favIcon: {
+      fontSize: '2.2rem',
+      [theme.breakpoints.down('xs')]: {
+        fontSize: '1.5rem',
+      },
     },
     media: {
-      height: '5rem',
-      paddingTop: '56.25%', // 16:9
+      [theme.breakpoints.down('sm')]: {
+        height: '100%',
+      },
+      [theme.breakpoints.up('md')]: {
+        paddingTop: '95%',
+      },
     },
-    // content: {
-    //   [theme.breakpoints.up("sm")]: {
-    //     paddingBottom: 0,
-    //   },
-    //   [theme.breakpoints.down("xs")]: {
-    //     display: "none",
-    //   },
-    // },
-    // typography: {
-    //   fontSize: "17px",
-    //   textAlign: "center",
-    // },
     priceBox: {
+      position: 'absolute',
+      bottom: 0,
+      left: 0,
       width: '100%',
       display: 'flex',
       justifyContent: 'space-between',
-      marginTop: '-2.5rem',
       background: 'transparent',
     },
     priceLabel: {
@@ -81,41 +119,7 @@ const itemStyles = makeStyles((theme) =>
         fontSize: '1rem',
       },
     },
-    favButton: {
-      background: 'transparent !important',
-      padding: 0,
-      marginRight: '.5rem',
-      marginBottom: '-1.3rem',
-      border: 'none',
-      [theme.breakpoints.down('xs')]: {
-        marginRight: '.3rem',
-        marginBottom: '-0.5rem',
-      },
-    },
-    favIcon: {
-      fontSize: '2.2rem',
-      [theme.breakpoints.down('xs')]: {
-        fontSize: '1.5rem',
-      },
-    },
-    // deleteButton: {
-    //   background: "transparent !important",
-    //   padding: 0,
-    //   marginRight: ".3rem",
-    //   marginBottom: "-1.5rem",
-    //   border: "none",
-    //   [theme.breakpoints.down("xs")]: {
-    //     marginRight: ".1rem",
-    //     marginBottom: "-0.7rem",
-    //   },
-    // },
-    // deleteIcon: {
-    //   fontSize: "2.5rem",
-    //   [theme.breakpoints.down("xs")]: {
-    //     fontSize: "1.8rem",
-    //   },
-    // },
   }),
 );
 
-export default itemStyles;
+export default itemCss;

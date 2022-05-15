@@ -1,31 +1,14 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import footerCss from '../../style/footer';
 
-const useStyles = makeStyles(() => ({
-  appBar: {
-    backgroundColor: '#57C5B6',
-    padding: '20px',
-    flexGrow: 1,
-  },
-  text: {
-    color: 'white',
-    fontSize: '1.0rem',
-    fontWeight: '200',
-    letterSpacing: '0.12em',
-    textAlign: 'center',
-    flexGrow: 1,
-    textTransform: 'lowercase',
-  },
-}));
-
-const Header = () => {
-  const classes = useStyles();
+const Footer = () => {
+  const { appBar, text } = footerCss();
   return (
-    <footer className={classes.appBar}>
+    <footer className={appBar}>
       <Toolbar>
-        <Typography variant="overline" className={classes.text}>
+        <Typography variant="overline" className={text}>
           ©︎ markets.jp
         </Typography>
       </Toolbar>
@@ -33,4 +16,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default Footer;

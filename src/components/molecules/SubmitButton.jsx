@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 const useStyles = makeStyles(() =>
   createStyles({
     button: {
+      marginTop: '5rem',
       backgroundColor: '#57C5B6',
       '&:hover': {
         backgroundColor: '#57C5B6',
@@ -14,11 +15,11 @@ const useStyles = makeStyles(() =>
 );
 
 const SubmitButton = ({ disabled }) => {
-  const classes = useStyles();
+  const { button } = useStyles();
   return (
     <Button
       id="submit"
-      className={classes.button}
+      className={button}
       type="submit"
       size="medium"
       variant="contained"

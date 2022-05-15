@@ -1,53 +1,33 @@
-/* eslint-disable no-plusplus */
 import React, { memo } from 'react';
 import { List, WindowScroller } from 'react-virtualized';
-import { makeStyles } from '@material-ui/core/styles';
 import Item from './Item';
 import {
-  ROW_HEIGHT_MARGIN,
   getItemSize,
   getItemsPerRow,
-} from '../../constants/VirtualizedList';
+  getRowHeightMargin,
+} from '../../constants/virtualizedList';
+import vListCss from '../../style/virtualizedList';
 
-const useStyles = makeStyles(() => ({
-  cardArea: {
-    marginTop: 10,
-    '&>div.ReactVirtualized__List': {
-      outline: 'none',
-    },
-  },
-  row: {
-    display: 'flex',
-    justifyContent: 'center',
-    '&>div.MuiPaper-root': {
-      marginLeft: '5px',
-      marginRight: '5px',
-      '&:first-child': {
-        marginLeft: '10px',
-      },
-      '&:last-child': {
-        marginRight: '10px',
-      },
-    },
-  },
-}));
-
-const getItemComponent = (itemObj, itemId, handleFavorite) => {
-  const item = itemObj[itemId];
-  if (!item) return null;
-  return (
-    <Item
-      key={item.id}
-      item={item}
-      isFavorite={item.isFavorite}
-      handleFavorite={handleFavorite}
-    />
-  );
+const useVirtualizedList = () => {
+  const getItemComponent = (item, handleFavorite) => {
+    if (!handleFavorite) {
+      return <Item key={item.id} item={item} />;
+    }
+    return (
+      <Item
+        key={item.id}
+        item={item}
+        isFavorite={item.isFavorite}
+        handleFavorite={handleFavorite}
+      />
+    );
+  };
+  return { getItemComponent };
 };
 
 const VirtualizedList = ({ itemObj, itemIds, handleFavorite }) => {
-  // console.log('VirtualizedList is rendered.');
-  const { cardArea, row } = useStyles();
+  const { root, cardArea, row } = vListCss();
+  const { getItemComponent } = useVirtualizedList();
   return (
     <WindowScroller>
       {({ width, height, isScrolling, registerChild, scrollTop }) => {
@@ -60,14 +40,15 @@ const VirtualizedList = ({ itemObj, itemIds, handleFavorite }) => {
         return (
           <div ref={registerChild} className={cardArea}>
             <List
+              className={root}
               autoHeight
               width={width}
               height={height}
               isScrolling={isScrolling}
               scrollTop={scrollTop}
               rowCount={rowCount}
-              rowHeight={itemHeight + ROW_HEIGHT_MARGIN}
-              overscanRowCount={10}
+              rowHeight={itemHeight + getRowHeightMargin(width)}
+              overscanRowCount={5}
               rowRenderer={({ index, key, style }) => {
                 const itemList = [];
                 const fromIndex = index * itemsPerRow;
@@ -77,9 +58,14 @@ const VirtualizedList = ({ itemObj, itemIds, handleFavorite }) => {
                 );
                 for (let i = fromIndex; i < toIndex; i++) {
                   const itemId = itemIds[i];
-                  itemList.push(
-                    getItemComponent(itemObj, itemId, handleFavorite),
-                  );
+                  const item = itemObj[itemId];
+                  if (!item) continue;
+
+                  // 画像のプリロード
+                  const img = new Image();
+                  img.src = item.imageUrl;
+
+                  itemList.push(getItemComponent(item, handleFavorite));
                 }
                 const emptySize = itemsPerRow - itemList.length;
                 for (let i = 0; i < emptySize; i++) {

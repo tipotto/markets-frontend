@@ -1,0 +1,58 @@
+steps:
+  # Restore dependencies cache
+  - id: 'Restore dependencies'
+    name: 'gcr.io/google.com/cloudsdktool/cloud-sdk:alpine'
+    entrypoint: 'bash'
+    args: ['-c', './restore-cache.sh']
+
+  - id: 'Create env file'
+    name: 'ubuntu'
+    entrypoint: 'bash'
+    args:
+      - -c
+      - |
+        echo PORT=443 >> .env &&
+        echo REACT_APP_BACKEND_SEARCH_API="https://www.markets-jp.com/api/v1/search" >> .env &&
+        echo REACT_APP_BACKEND_ANALYZE_API="https://www.markets-jp.com/api/v1/analyze" >> .env
+
+  - id: 'Build files and prerender'
+    name: 'ubuntu'
+    entrypoint: 'bash'
+    args: ['-c', './build.sh']
+
+  - id: 'Transfer built files with scp'
+    name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      [
+        'compute',
+        'scp',
+        '--project',
+        'markets-jp',
+        '--zone',
+        'asia-northeast1-b',
+        '--port',
+        '49152',
+        '--recurse',
+        './html',
+        'markets-jp:/var/www',
+      ]
+
+  # Backup dependencies into the cache for the next run
+  - id: 'Backup dependencies'
+    name: 'gcr.io/google.com/cloudsdktool/cloud-sdk:alpine'
+    entrypoint: 'bash'
+    args: ['-c', './save-cache.sh']
+
+options:
+  env:
+    # Point npm caches to a persistent location
+    - npm_cache=/home/cache/.npm
+    - npm_cache_flag=/home/cache/flag
+    - npm_cache_bucket=frontend-node-modules
+    - seconds_in_a_month=2629743
+  volumes:
+    - name: 'cache'
+      path: '/home/cache'
+
+timeout: 1800s
