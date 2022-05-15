@@ -18,5 +18,4 @@ if [ -f $npm_cache_flag/cache_flag.txt ]; then
   
   echo "Saving timestamp to gs://$npm_cache_bucket/timestamp"
   date +%s | gsutil -q cp - gs://$npm_cache_bucket/timestamp
-
 fi

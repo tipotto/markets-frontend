@@ -24,7 +24,6 @@ else
   npm i --force
   npm i puppeteer
   cp -R ./node_modules $npm_cache
-
 fi
 
 npm run build

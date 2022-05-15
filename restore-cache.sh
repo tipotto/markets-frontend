@@ -10,14 +10,15 @@ set -e -u
 
 # If there is a cache and the content is not older than a month
 TIMESTAMP=$(gsutil cat gs://$npm_cache_bucket/timestamp || echo 0)
+echo "timestamp fetched: $TIMESTAMP"
 
 if (( $(date +%s) - $TIMESTAMP < $seconds_in_a_month )); then
   gsutil -q -m cp gs://$npm_cache_bucket/npm.tgz /tmp 
-  mkdir -p $npm_cache
+  mkdir -p $npm_cache/node_modules
 
   # copy npm dependencies
   echo 'Restoring npm cache'
-  tar -xzf /tmp/npm.tgz -C $npm_cache
+  tar -xzf /tmp/npm.tgz -C $npm_cache/node_modules
   echo "Cached dependencies are restored to $npm_cache"
 #   echo "$(ls -pR $npm_cache | grep -v / | wc -l) files restored to $npm_cache"
 
@@ -32,5 +33,4 @@ else
   else
     echo "Skipping cache restore: timestamp at gs://$npm_cache_bucket/timestamp is older than a month"
   fi
-
 fi
