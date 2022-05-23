@@ -35,7 +35,7 @@ steps:
         '49152',
         '--recurse',
         './html',
-        'markets-vm-1:/var/www',
+        'markets-jp:/var/www',
       ]
 
   # Backup dependencies into the cache for the next run
