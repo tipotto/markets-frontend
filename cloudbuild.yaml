@@ -38,9 +38,15 @@ steps:
         'markets-jp:/var/www',
       ]
 
+  - id: 'Backup dependencies'
+    name: 'gcr.io/google.com/cloudsdktool/cloud-sdk:alpine'
+    entrypoint: 'bash'
+    args: ['-c', './save-cache.sh']
+
 options:
   env:
-    - npm_cache=/home/cache/node_modules
+    - volume_path=/home/cache
+    - npm_cache_path=/home/cache/node_modules
     - npm_cache_bucket=frontend-node-modules
     - seconds_in_a_month=2629743
   volumes:
