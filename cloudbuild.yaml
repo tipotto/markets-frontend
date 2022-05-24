@@ -15,7 +15,7 @@ steps:
         echo REACT_APP_BACKEND_SEARCH_API="https://www.markets-jp.com/api/v1/search" >> .env &&
         echo REACT_APP_BACKEND_ANALYZE_API="https://www.markets-jp.com/api/v1/analyze" >> .env
 
-  - id: 'Build files and prerender'
+  - id: 'Build files and save cache'
     name: 'ubuntu'
     entrypoint: 'bash'
     args: ['-c', './build.sh']
@@ -38,17 +38,9 @@ steps:
         'markets-jp:/var/www',
       ]
 
-  # Backup dependencies into the cache for the next run
-  - id: 'Backup dependencies'
-    name: 'gcr.io/google.com/cloudsdktool/cloud-sdk:alpine'
-    entrypoint: 'bash'
-    args: ['-c', './save-cache.sh']
-
 options:
   env:
-    # Point npm caches to a persistent location
-    - npm_cache=/home/cache/.npm
-    - npm_cache_flag=/home/cache/flag
+    - npm_cache=/home/cache/node_modules
     - npm_cache_bucket=frontend-node-modules
     - seconds_in_a_month=2629743
   volumes:

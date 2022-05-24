@@ -14,20 +14,13 @@ echo "timestamp fetched: $TIMESTAMP"
 
 if (( $(date +%s) - $TIMESTAMP < $seconds_in_a_month )); then
   gsutil -q -m cp gs://$npm_cache_bucket/npm.tgz /tmp 
-  mkdir -p $npm_cache/node_modules
 
-  # copy npm dependencies
   echo 'Restoring npm cache'
-  tar -xzf /tmp/npm.tgz -C $npm_cache/node_modules
+  tar -xzf /tmp/npm.tgz -C $npm_cache
   echo "Cached dependencies are restored to $npm_cache"
 #   echo "$(ls -pR $npm_cache | grep -v / | wc -l) files restored to $npm_cache"
 
 else
-  if [ ! -d $npm_cache_flag ]; then
-    mkdir $npm_cache_flag
-  fi
-  touch $npm_cache_flag/cache_flag.txt
-
   if (( $TIMESTAMP == 0 )); then
     echo "Skipping cache restore: timestamp not found at gs://$npm_cache_bucket/timestamp"
   else
