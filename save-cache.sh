@@ -8,14 +8,17 @@
 
 set -e -u
 
-if [ -e $volume_path/cache_flag.txt ]; then
-  tar -czf /tmp/npm.tgz -C $npm_cache_path .
-  echo "Cached dependencies are copied from $npm_cache_path"
-#   echo "$(tar -tvzf /tmp/npm.tgz | wc -l) files copied from $npm_cache"
+echo "Working dir: $(pwd)"
 
-  echo "Saving dependencies to gs://$npm_cache_bucket/"
-  gsutil -q -m cp /tmp/npm.tgz gs://$npm_cache_bucket/
+if [ -e $CACHE_FLAG_PATH ]; then
+  # tar -czf /tmp/npm.tgz -C $CACHE_DIR_PATH .
+  tar -czf /tmp/npm.tgz -C ./node_modules .
+  echo "Cached dependencies are copied from $CACHE_DIR_PATH"
+  # echo "$(tar -tvzf /tmp/npm.tgz | wc -l) files copied from $npm_cache"
+
+  echo "Saving dependencies to gs://$CACHE_BUCKET_NAME/"
+  gsutil -q -m cp /tmp/npm.tgz gs://$CACHE_BUCKET_NAME/
   
-  echo "Saving timestamp to gs://$npm_cache_bucket/timestamp"
-  date +%s | gsutil -q cp - gs://$npm_cache_bucket/timestamp
+  echo "Saving timestamp to gs://$CACHE_BUCKET_NAME/timestamp"
+  date +%s | gsutil -q cp - gs://$CACHE_BUCKET_NAME/timestamp
 fi

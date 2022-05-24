@@ -45,12 +45,9 @@ steps:
 
 options:
   env:
-    - volume_path=/home/cache
-    - npm_cache_path=/home/cache/node_modules
-    - npm_cache_bucket=frontend-node-modules
-    - seconds_in_a_month=2629743
-  volumes:
-    - name: 'cache'
-      path: '/home/cache'
+    - CACHE_FLAG_PATH=/workspace/cache_flag.txt
+    - CACHE_DIR_PATH=/workspace/node_modules
+    - CACHE_BUCKET_NAME=frontend-node-modules
+    - SECONDS_IN_A_MONTH=2629743
 
 timeout: 1800s

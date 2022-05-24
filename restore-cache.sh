@@ -8,20 +8,23 @@
 
 set -e -u
 
+echo "Working dir: $(pwd)"
+
 # If there is a cache and the content is not older than a month
-TIMESTAMP=$(gsutil cat gs://$npm_cache_bucket/timestamp || echo 0)
+TIMESTAMP=$(gsutil cat gs://$CACHE_BUCKET_NAME/timestamp || echo 0)
 echo "timestamp fetched: $TIMESTAMP"
 
-if (( $(date +%s) - $TIMESTAMP < $seconds_in_a_month )); then
-  gsutil -q -m cp gs://$npm_cache_bucket/npm.tgz /tmp 
+if (( $(date +%s) - $TIMESTAMP < $SECONDS_IN_A_MONTH )); then
+  gsutil -q -m cp gs://$CACHE_BUCKET_NAME/npm.tgz /tmp 
 
   echo 'Restoring npm cache'
-  tar -xzf /tmp/npm.tgz -C $npm_cache_path
-  echo "Cached dependencies are restored to $npm_cache_path"
+  mkdir $CACHE_DIR_PATH
+  tar -xzf /tmp/npm.tgz -C $CACHE_DIR_PATH
+  echo "Cached dependencies are restored to $CACHE_DIR_PATH"
 #   echo "$(ls -pR $npm_cache | grep -v / | wc -l) files restored to $npm_cache"
 
 else
-  touch $volume_path/cache_flag.txt
+  touch $CACHE_FLAG_PATH
 
   if (( $TIMESTAMP == 0 )); then
     echo "Skipping cache restore. Timestamp not found."
