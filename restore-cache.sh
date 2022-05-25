@@ -1,6 +1,5 @@
 #!/bin/bash
 # restore-cache: Restore the npm cache from GCS.
-# $npm_cache = /home/cache/.npm
 # GCSのバケットからタイムスタンプを取得（存在しない場合は0）
 # タイムスタンプが1ヶ月未満の場合、バケットからtgzファイルをコピーし、tmpフォルダ以下に配置
 # ボリュームにキャッシュ保存用のディレクトリ（/home/cache/.npm）を作成
@@ -8,11 +7,7 @@
 
 set -e -u
 
-echo "Working dir: $(pwd)"
-
-# If there is a cache and the content is not older than a month
 TIMESTAMP=$(gsutil cat gs://$CACHE_BUCKET_NAME/timestamp || echo 0)
-echo "timestamp fetched: $TIMESTAMP"
 
 if (( $(date +%s) - $TIMESTAMP < $SECONDS_IN_A_MONTH )); then
   gsutil -q -m cp gs://$CACHE_BUCKET_NAME/npm.tgz /tmp 
@@ -21,7 +16,6 @@ if (( $(date +%s) - $TIMESTAMP < $SECONDS_IN_A_MONTH )); then
   mkdir $CACHE_DIR_PATH
   tar -xzf /tmp/npm.tgz -C $CACHE_DIR_PATH
   echo "Cached dependencies are restored to $CACHE_DIR_PATH"
-#   echo "$(ls -pR $npm_cache | grep -v / | wc -l) files restored to $npm_cache"
 
 else
   touch $CACHE_FLAG_PATH

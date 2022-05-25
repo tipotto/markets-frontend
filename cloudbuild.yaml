@@ -21,8 +21,8 @@ steps:
     args: ['-c', './build.sh']
 
   - id: 'Transfer built files with scp'
-    name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-    entrypoint: gcloud
+    name: 'gcr.io/google.com/cloudsdktool/cloud-sdk:alpine'
+    entrypoint: 'gcloud'
     args:
       [
         'compute',
