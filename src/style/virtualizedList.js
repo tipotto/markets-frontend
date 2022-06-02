@@ -4,10 +4,11 @@ const vListCss = makeStyles((theme) =>
   createStyles({
     root: {
       width: '100% !important',
+      backgroundColor: '#fff',
     },
     cardArea: {
       padding: 0,
-      backgroundColor: '#fff',
+      // backgroundColor: '#fff',
     },
     row: {
       display: 'flex',

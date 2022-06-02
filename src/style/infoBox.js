@@ -4,17 +4,24 @@ const infoBoxCss = makeStyles((theme) =>
   createStyles({
     header: {
       fontSize: '1.1rem',
+      backgroundColor: '#fff',
     },
     infoBox: {
       width: '24.5%',
-      marginBottom: '2rem',
+      margin: '0 .2rem 2rem',
+      '&:first-of-type': {
+        margin: '0 .2rem 2rem 0',
+      },
+      '&:last-of-type': {
+        margin: '0 0 2rem .2rem',
+      },
       [theme.breakpoints.only('sm')]: {
         width: '49.5%',
-        marginBottom: '.5rem',
+        margin: '0 0 .5rem',
       },
       [theme.breakpoints.down('xs')]: {
         width: '100%',
-        marginBottom: '.5rem',
+        margin: '0 0 .5rem',
       },
     },
     priceBox: {

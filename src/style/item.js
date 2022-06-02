@@ -17,10 +17,10 @@ const itemCss = makeStyles((theme) =>
       boxSizing: 'border-box',
       marginLeft: '2.5px',
       marginRight: '2.5px',
-      '&:first-child': {
+      '&:first-of-type': {
         marginLeft: 0,
       },
-      '&:last-child': {
+      '&:last-of-type': {
         marginRight: 0,
       },
     },
